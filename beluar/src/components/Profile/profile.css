@@ -1,11 +1,11 @@
 .profile-container {
   display: flex;
   align-items: center;
-  background-color: #E4E6E8;
   padding-inline: 10px;
   padding-block: 3px;
   border-radius: 20px;
   margin-right: 15px;
+  
 }
 
 .profile-bell {

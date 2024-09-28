@@ -3,7 +3,8 @@
     align-items: center;
     background-color: #E4E6E8;
     border-radius: 20px;
-    padding: 5px 10px;
+    padding-inline: 10px;
+    outline: 1px solid #703FD0;
 }
 
 .searchbar-input {

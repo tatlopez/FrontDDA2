@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import DashboardHoteles from './pages/DashboardHoteles'; 
+import DashboardHoteles from './pages/DashboardHotelesPage'; 
 import SignInPage from './pages/SignInPage';
 import LoginPage from './pages/LoginPage';
+import DashboardHabitaciones from './pages/DashboardHabitacionesPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<DashboardHoteles />} />
           <Route path="/signup" element={<SignInPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/DashboardHabitaciones" element={<DashboardHabitaciones />} />
         </Routes>
       </div>
     </Router>
