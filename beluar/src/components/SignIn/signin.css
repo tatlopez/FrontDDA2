@@ -2,6 +2,7 @@
 
 body {
     font-family: 'DM Sans', sans-serif;
+    background-color: #F0F2F6;
 }
 
 .signin-container {
@@ -9,14 +10,15 @@ body {
     flex-direction: column;
     align-items: center;
     margin: auto;
-    max-width: 50%;
+    max-width: 90%;
     padding: 20px;
     border-radius: 10px;
-    background-color: #fff;
 }
 
 .signin-logo {
-    width: 300px;
+    width: 80%;
+    max-width: 300px;
+    margin: 30px;
 }
 
 .signin-form {
@@ -35,7 +37,7 @@ body {
     padding: 10px;
     color: #B2B1B1;
     border-radius: 10px;
-    border: 1px solid #B2B1B1;
+    border: 1px solid #BB84E8;
 }
 
 .password-container {
@@ -51,7 +53,7 @@ body {
 }
 
 .signin-form button {
-    background-color: #6200ee; 
+    background-color: #6E28F5; 
     color: white;
     border: none;
     cursor: pointer;
@@ -63,15 +65,15 @@ body {
     font-size: large;
 }
 
-
 .signin-form button:hover {
-    background-color: #8A2BE2;
+    background-color: #703FD0;
 }
 
 .signin-form h1 {
-    color: #6200ee;
+    color: #6E28F5;
     font-size: 24px;
     line-height: 32px;
+    margin-top: 10px;
 }
 
 .signin-form label {
@@ -80,10 +82,23 @@ body {
 }
 
 .signin-form a {
-    color: #6200ee;
+    color: #6E28F5;
     text-decoration: none;
 }
 
 .signin-form a:hover {
     text-decoration: underline;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .signin-container {
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .signin-container {
+        max-width: 35%;
+    }
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import '../../styles/signin.css';
-import beluarLogo from '../../assets/beluar.png'; 
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './signin.css';
+import logo from '../../assets/logo.png'; 
 
 function SignInForm() {
     const [email, setEmail] = useState('');
@@ -16,7 +15,7 @@ function SignInForm() {
 
     return (
         <div className="signin-container">
-            <img src={beluarLogo} alt="Beluar" className="signin-logo"/>
+            <img src={logo} alt="logo" className="signin-logo"/>
             <form onSubmit={handleSubmit} className="signin-form">
                 <h1>Crear cuenta</h1>
                 <label htmlFor="name">¿Cómo deberíamos llamarte?</label>

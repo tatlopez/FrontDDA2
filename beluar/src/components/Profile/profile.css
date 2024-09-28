@@ -1,0 +1,58 @@
+.profile-container {
+  display: flex;
+  align-items: center;
+  background-color: #E4E6E8;
+  padding-inline: 10px;
+  padding-block: 3px;
+  border-radius: 20px;
+  margin-right: 15px;
+}
+
+.profile-bell {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 20px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: #703FD0;
+}
+
+.profile-role {
+  font-family: 'DM Sans', sans-serif;
+  color: #000000;
+}
+
+.profile-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #703FD0;
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+@media (max-width: 600px) {
+  .profile-container {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+  }
+
+  .profile-bell {
+      margin: 0 0 10px 0;
+  }
+
+  .profile-button {
+      align-self: flex-end;
+      margin-left: 0;
+  }
+}

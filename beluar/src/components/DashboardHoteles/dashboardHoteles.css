@@ -1,0 +1,92 @@
+.dashboard-container {
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 40px;
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+.signin-logo {
+    width: 200px;
+}
+
+h1 {
+    color: #703FD0;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: -10px;
+}
+
+.hoteles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    max-height: 400px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto;
+}
+
+.hotel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E4E8F5;
+    padding: 20px; 
+    border-radius: 12px;
+}
+
+.hotel-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.hotel-info {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.hotel-info h2 {
+    color: #703FD0;
+    margin: 0;
+    font-size: 1.5rem; 
+}
+
+.hotel-info p {
+    color: #000000;
+    margin: 5px 0;
+}
+
+.hotel-stars {
+    font-size: 1.2rem; 
+    color: #703FD0;
+}
+
+.hotel-actions {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-image, .trash-image {
+    width: 20px;
+    height: 20px;
+}

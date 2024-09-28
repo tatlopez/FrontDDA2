@@ -1,0 +1,27 @@
+.searchbar-container {
+    display: flex;
+    align-items: center;
+    background-color: #E4E6E8;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.searchbar-input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 10px;
+    font-family: 'DM Sans', sans-serif;
+    flex-grow: 1;
+}
+
+.searchbar-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.searchbar-icon {
+    width: 20px;
+    height: 20px;
+}

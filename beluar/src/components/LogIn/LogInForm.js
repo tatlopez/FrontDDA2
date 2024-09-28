@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import '../../styles/login.css';
-import beluarLogo from '../../assets/beluar.png'; 
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './login.css';
+import logo from '../../assets/logo.png'; 
 
 function LoginForm() {
     const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -15,7 +14,7 @@ function LoginForm() {
 
     return (
         <div className="login-container">
-            <img src={beluarLogo} alt="Beluar" className="login-logo"/>
+            <img src={logo} alt="logo" className="login-logo"/>
             <form onSubmit={handleSubmit} className="login-form">
                 <h1>Log in</h1>
                 <label htmlFor="emailOrUsername">Email o nombre de usuario</label>
