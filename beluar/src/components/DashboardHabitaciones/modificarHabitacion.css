@@ -1,15 +1,17 @@
 .room-detail {
-    background-color: #F0F2E6;
+    background-color: #F0F2F6;
     padding: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    font-size: large;
   }
   
   .room-number {
     color: #6E28F5;
+    font-size: larger;
     margin-bottom: 15px;
+    align-items: flex-start;
   }
   
   .detail-image {
@@ -22,20 +24,21 @@
   
   .editable-fields {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
   }
   
   .editable-fields label {
     color: #703FD0;
-    display: block;
-    margin-bottom: 5px;
   }
   
   .editable-input {
-    width: 100%;
+    width: calc(100% - 16px); 
     padding: 8px;
+    margin-top: 5px;
+    margin-right: 8px; 
     border: 1px solid #703FD0;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #E4E6E8;
     color: black;
   }
@@ -43,10 +46,8 @@
   .room-status {
     font-size: 14px;
     font-weight: bold;
-    padding: 2px 5px;
+    padding: 5px;
     border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
   }
   
   .room-status.disponible {
@@ -66,21 +67,25 @@
   
   .status-button {
     background-color: #703FD0;
+    width: 100%;
     color: #fff;
-    padding: 10px;
+    padding: 8px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     margin-top: 10px;
+    align-self: center;
   }
   
   .delete-button {
     background-color: #E01300;
+    width: 100%;
     color: #fff;
-    padding: 10px;
+    padding: 8px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     margin-top: 10px;
+    align-self: center;
   }
   

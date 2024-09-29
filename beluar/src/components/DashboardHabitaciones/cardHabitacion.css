@@ -4,13 +4,14 @@
     justify-content: space-between;
     padding: 10px;
     background-color: #E4E6E8; 
-    border: 2px solid #703FD0; 
+    border: 1px solid #703FD0; 
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    width: 100%;
 }
     
 .room-image {
-    width: 60px;
+    width: 150px;
     height: 60px;
     border-radius: 8px;
     object-fit: cover;
@@ -23,17 +24,15 @@
     
 .room-number {
     color: #703FD0;
-    font-size: 18px;
     margin: 0;
 }
+
     
 .room-status {
-    font-size: 14px;
+    font-size: larger;
     font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 5px;
+    border-radius: 10px !important;
     display: inline-block;
-    margin-top: 5px;
 }
     
 .room-status.disponible {
@@ -58,13 +57,13 @@
 }
     
 .room-price {
-    font-size: 18px;
+    font-size: 25px;
     color: #BB84E8;
 }
     
 .edit-icon {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
     margin-top: 5px;
 }

@@ -6,12 +6,14 @@ import Menu from '../Menu/Menu';
 import CardHabitacion from './CardHabitacion';
 import ModificarHabitacion from './ModificarHabitacion';
 import editIcon from '../../assets/edit-icon.png'; 
+import signoMas from '../../assets/signo-mas.png'; 
 
 
 const roomsData = [
   { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
   { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg' },
   { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
+  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
   { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
 ];
 
@@ -34,18 +36,18 @@ function DashboardHabitaciones() {
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
-                        <h2>Habitaciones</h2>
-                        <div className="search-and-add">
-                            <SearchBar />
-                            <button className="add-room-button">
-                            <span className="plus-icon">+</span>
-                            </button>
-                        </div>
+                            <h2>Habitaciones</h2>
+                            <div className="search-and-add">
+                                <SearchBar />
+                                <button className="add-room-button">
+                                    <img src={signoMas} alt="Add Room Icon" />
+                                </button>
+                            </div>
                         </div>
                         <div className="rooms-list">
-                        {roomsData.map((room) => (
-                            <CardHabitacion key={room.number} room={room} />
-                        ))}
+                            {roomsData.map((room) => (
+                                <CardHabitacion key={room.number} room={room} />
+                            ))}
                         </div>
                     </div>
                     <div className="room-detail-section">

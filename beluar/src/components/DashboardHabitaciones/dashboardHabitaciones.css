@@ -1,12 +1,12 @@
 .page-container {
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #F0F2F6;
 }
 
 .content-container {
-  margin-left: 300px; /* ESTO ES POR EL PUTO MENU */
-  width: calc(100% - 260px); 
-  background-color: #FFFFFF; 
+  margin-left: 300px; 
+  width: calc(100% - 300px); 
+  background-color: #F0F2F6; 
 }
 
 .dashboard-header {
@@ -17,13 +17,29 @@
   background-color: #F0F2F6;
   border-radius: 10px;
   margin: 20px;
+  border: 1px solid #703FD0;
+}
+
+.hotel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.edit-icon {
+  margin: 0; 
+  margin-left: 20px;
 }
 
 .hotel-name {
-  color: #703FD0;
-  font-size: 24px;
-  align-self: flex-end;
+  margin: 0; 
+  line-height: 24px; 
+  display: flex;
+  align-items: center; 
+  font-size: large;
+  color: black;
 }
+
 
 .header-right {
   display: flex;
@@ -36,27 +52,55 @@
 }
 
 .rooms-section {
-  width: 60%;
-  padding: 20px;
+  width: 70%;
+  padding-inline: 20px;
   background-color: #F0F2F6;
   border-radius: 10px;
   margin-right: 20px;
+  border: 1px solid #703FD0;
 }
 
 .room-detail-section {
   width: 40%;
-  background-color: #F0F2F6;
   border-radius: 10px;
+  border: 1px solid #703FD0;
+}
+
+.rooms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  color: #703FD0;
+  margin-bottom: 10px;
+}
+
+.search-and-add {
+  display: flex;
+  align-items: center;
 }
 
 .rooms-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 5px;
 }
 
-.pagination {
-  margin-top: 20px;
-  text-align: center;
+.add-room-button {
+  background-color: #703FD0;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.add-room-button img {
+  width: 15px; 
+  height: 15px;
 }
 
 @media (max-width: 768px) {
