@@ -15,21 +15,23 @@ const Menu = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const isMobileView = window.innerWidth <= 768;
+      setIsMobile(isMobileView);
       
-      if (window.innerWidth > 768) {
-        setIsOpen(true);
-      } else {
-        setIsOpen(false); 
+      if (!isMobileView) {
+        setIsOpen(true);  
       }
     };
-
+  
     window.addEventListener('resize', handleResize);
-
+  
+    handleResize();
+  
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  
 
   return (
     <div>

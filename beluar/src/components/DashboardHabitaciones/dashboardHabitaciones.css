@@ -1,0 +1,80 @@
+.page-container {
+  display: flex;
+  background-color: #FFFFFF;
+}
+
+.content-container {
+  margin-left: 300px; /* ESTO ES POR EL PUTO MENU */
+  width: calc(100% - 260px); 
+  background-color: #FFFFFF; 
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 5px;
+  background-color: #F0F2F6;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.hotel-name {
+  color: #703FD0;
+  font-size: 24px;
+  align-self: flex-end;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-body {
+  display: flex;
+  padding: 20px;
+}
+
+.rooms-section {
+  width: 60%;
+  padding: 20px;
+  background-color: #F0F2F6;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.room-detail-section {
+  width: 40%;
+  background-color: #F0F2F6;
+  border-radius: 10px;
+}
+
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .dashboard-header {
+    justify-content: space-between; 
+    flex-wrap: wrap;
+  }
+
+  .dashboard-body {
+    flex-direction: column;
+  }
+
+  .rooms-section, .room-detail-section {
+    width: 100%;
+  }
+}
