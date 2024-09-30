@@ -1,0 +1,35 @@
+.dashboard-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 5px;
+    background-color: #E4E6E8;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  .hotel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+  }
+  
+  .edit-icon {
+    margin: 0; 
+    margin-left: 20px;
+  }
+  
+  .hotel-name {
+    margin: 0; 
+    line-height: 24px; 
+    display: flex;
+    align-items: center; 
+    font-size: large;
+    color: black;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
