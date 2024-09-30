@@ -21,7 +21,7 @@ const ModificarHabitacion = ({ room }) => {
         <input type="text" value={room.price} className="editable-input" />
       </div>
       <div className="editable-fields">
-        <label>Estado</label>
+        <label>Estado:</label>
         <span className={`room-status ${room.status.toLowerCase()}`}>{room.status}</span>      
       </div>
       <button className="status-button">Cambiar estado</button>

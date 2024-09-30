@@ -33,7 +33,7 @@ const hoteles = [
 function DashboardHoteles() {
     return (
         <div>
-            <header className="dashboard-header">
+            <header className="dashboard-headerHotel">
                 <img src={logo} alt="logo" className="signin-logo" /> 
                 <div className="header-right">
                     <SearchBar />

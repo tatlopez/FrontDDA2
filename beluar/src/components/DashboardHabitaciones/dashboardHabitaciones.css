@@ -14,10 +14,9 @@
   justify-content: space-between; 
   align-items: center; 
   padding: 5px;
-  background-color: #F0F2F6;
+  background-color: #E4E6E8;
   border-radius: 10px;
   margin: 20px;
-  border: 1px solid #703FD0;
 }
 
 .hotel-title {
@@ -40,7 +39,6 @@
   color: black;
 }
 
-
 .header-right {
   display: flex;
   align-items: center;
@@ -54,16 +52,14 @@
 .rooms-section {
   width: 70%;
   padding-inline: 20px;
-  background-color: #F0F2F6;
+  background-color: #E4E6E8;
   border-radius: 10px;
   margin-right: 20px;
-  border: 1px solid #703FD0;
 }
 
 .room-detail-section {
   width: 40%;
   border-radius: 10px;
-  border: 1px solid #703FD0;
 }
 
 .rooms-header {
@@ -99,8 +95,8 @@
 }
 
 .add-room-button img {
-  width: 15px; 
-  height: 15px;
+  width: 20px; 
+  height: 20px;
 }
 
 @media (max-width: 768px) {

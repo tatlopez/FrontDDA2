@@ -1,12 +1,11 @@
 .sidebar {
-  background-color: #F0F2F6;
+  background-color: #E4E6E8;
   width: 250px;
   padding: 20px;
   position: fixed;
   height: 100%;
   transition: transform 0.3s ease;
   transform: translateX(-100%); 
-  border: 1px solid #703FD0;
 }
 
 .sidebar.open {
