@@ -5,6 +5,7 @@ import Profile from '../Profile/Profile';
 import Menu from '../Menu/Menu';
 import CardHabitacion from './CardHabitacion';
 import ModificarHabitacion from './ModificarHabitacion';
+import CrearHabitacion from './CrearHabitacion';
 import editIcon from '../../assets/edit-icon.png'; 
 import signoMas from '../../assets/signo-mas.png'; 
 
