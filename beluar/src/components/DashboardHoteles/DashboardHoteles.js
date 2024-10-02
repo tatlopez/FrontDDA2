@@ -1,11 +1,12 @@
 import React from 'react';
 import './dashboardHoteles.css';
-import SearchBar from '../SearchBar/SearchBar';
 import Profile from '../Profile/Profile';
 import logo from '../../assets/logo.png'; 
 import hotelIcon from '../../assets/hotel-icon.png'; 
 import trashIcon from '../../assets/trash-icon.png'; 
-import editIcon from '../../assets/edit-icon.png'; 
+import editIcon from '../../assets/edit-icon.png';
+import addIcon from '../../assets/signo-mas.png';
+import searchIcon from '../../assets/search-icon-white.svg';
 
 const hoteles = [
     {
@@ -32,16 +33,21 @@ const hoteles = [
 
 function DashboardHoteles() {
     return (
-        <div>
+        <div style={{backgroundColor: '#FEFBFF'}}>
             <header className="dashboard-headerHotel">
                 <img src={logo} alt="logo" className="signin-logo" /> 
                 <div className="header-right">
-                    <SearchBar />
                     <Profile />
                 </div>
             </header>
             <main className="dashboard-container">
-                <h1>Tus hoteles</h1>
+                <div className='hoteles-title'>
+                    <h1 style={{textAlign: 'left'}}>Tus hoteles</h1>
+                    <div className='hoteles-buttons'>
+                        <button className='hoteles-circleButton'><img src={addIcon} alt='Agregar hotel'></img></button>
+                        <button className='hoteles-circleButton'><img src={searchIcon} alt='Buscar hotel'></img></button>
+                    </div>
+                </div>
                 <div className="hoteles-list">
                     {hoteles.map((hotel, index) => (
                         <div key={index} className="hotel-item">

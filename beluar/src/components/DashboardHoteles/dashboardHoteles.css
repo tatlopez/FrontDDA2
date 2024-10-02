@@ -1,3 +1,8 @@
+html,body {
+    overflow: hidden;
+    height: 100%;
+}
+
 .dashboard-container {
     font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
@@ -18,6 +23,7 @@
     align-items: center;
     gap: 10px; 
     flex-wrap: wrap;
+    margin-right: 30px;
 }
 
 .signin-logo {
@@ -25,10 +31,30 @@
 }
 
 h1 {
-    color: #703FD0;
+    color: #6E28F5;
     text-align: center;
     font-size: 2rem;
     margin-top: -10px;
+}
+
+.hoteles-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.hoteles-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.hoteles-circleButton{
+    background-color: #703FD0;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border-width: 0;
+    cursor: pointer;
 }
 
 .hoteles-list {
@@ -39,20 +65,32 @@ h1 {
     overflow-y: auto;
 }
 
+.hoteles-list::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.hoteles-list::-webkit-scrollbar-thumb{
+    width: 10px;
+    background-color: #703FD0;
+    border-radius: 10px;
+}
+
 .hotel-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #E4E8F5;
+    background-color: #F0F2F6;
     padding: 10px; 
     border-radius: 12px;
 }
 
 .hotel-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
+    width: 120px;
+    height: 85px;
+    object-fit: fill;
     border-radius: 10px;
 }
 
