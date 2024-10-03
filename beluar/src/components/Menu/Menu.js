@@ -4,6 +4,13 @@ import './menu.css';
 import logo from '../../assets/logo.png';
 import editIcon from '../../assets/edit-icon.png';
 import menuIcon from '../../assets/menu-icon.png';
+import estadisticasIcon from '../../assets/estadisticas-icon.svg';
+import habitacionesIcon from '../../assets/habitaciones-icon.svg';
+import reservasIcon from '../../assets/reservas-icon.svg';
+import serviciosIcon from '../../assets/servicios-icon.svg';
+import homeIcon from '../../assets/home-icon.svg';
+import hotelesIcon from '../../assets/hoteles-icon.svg';
+
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,38 +49,34 @@ const Menu = () => {
       )}
       
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <div className="logo-container">
-          <img src={logo} alt="Logo" className="logo" />
-        </div>
-        <div className="menu-items">
+        <img src={logo} alt="Logo" className="logo" />
+        <div className="menu-stackItems">
           <Link to="/" className="menu-item">
-            <img src={editIcon} alt="Home Icon" className="icon" />
+            <img src={homeIcon} alt="Home Icon" className="icon" />
             <span>Home</span>
           </Link>
           <Link to="/reservas" className="menu-item">
-            <img src={editIcon} alt="Reservas Icon" className="icon" />
+            <img src={reservasIcon} alt="Reservas Icon" className="icon" />
             <span>Reservas</span>
           </Link>
           <Link to="/habitaciones" className="menu-item">
-            <img src={editIcon} alt="Habitaciones Icon" className="icon" />
+            <img src={habitacionesIcon} alt="Habitaciones Icon" className="icon" />
             <span>Habitaciones</span>
           </Link>
           <Link to="/servicios" className="menu-item">
-            <img src={editIcon} alt="Servicios Icon" className="icon" />
+            <img src={serviciosIcon} alt="Servicios Icon" className="icon" />
             <span>Servicios</span>
           </Link>
-          <Link to="/clientes" className="menu-item">
-            <img src={editIcon} alt="Clientes Icon" className="icon" />
-            <span>Clientes</span>
-          </Link>
           <Link to="/estadisticas" className="menu-item">
-            <img src={editIcon} alt="Estadísticas Icon" className="icon" />
+            <img src={estadisticasIcon} alt="Estadísticas Icon" className="icon" />
             <span>Estadísticas</span>
           </Link>
+        <div className='menu-hotels'>
           <Link to="/hoteles" className="menu-item">
-            <img src={editIcon} alt="Hoteles Icon" className="icon" />
+            <img src={hotelesIcon} alt="Hoteles Icon" className="icon" />
             <span>Hoteles</span>
           </Link>
+        </div>
         </div>
       </div>
     </div>

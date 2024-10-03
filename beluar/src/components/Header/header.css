@@ -1,11 +1,10 @@
 .dashboard-header {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-end; 
     padding: 5px;
-    background-color: #E4E6E8;
     border-radius: 10px;
-    margin: 20px;
   }
   
   .hotel-title {
@@ -31,5 +30,6 @@
   .header-right {
     display: flex;
     align-items: center;
+    margin: 0;
   }
   

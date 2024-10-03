@@ -1,23 +1,25 @@
 .page-container {
   display: flex;
-  background-color: #F0F2E6;
+  background-color: #FEFBFF;
 }
 
 .content-container {
-  margin-left: 300px; 
-  width: calc(100% - 300px); 
-  background-color: #F0F2E6; 
+  width: 100%;
+  background-color: #FEFBFF;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .dashboard-body {
   display: flex;
-  padding: 20px;
 }
 
 .rooms-section {
   width: 70%;
   padding-inline: 20px;
-  background-color: #E4E6E8;
+  background-color: #F0F2F6;
   border-radius: 10px;
   margin-right: 20px;
 }
