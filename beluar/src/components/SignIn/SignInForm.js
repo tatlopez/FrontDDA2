@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './signin.css';
 import logo from '../../assets/logo.png'; 
+import signup from '../../services/signup.js';
 
 function SignInForm() {
     const [email, setEmail] = useState('');
@@ -10,7 +11,13 @@ function SignInForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Name:', name, 'Email:', email, 'Password:', password);
+        signup(email, name, password)
+            .then(data => {
+                console.log('Success:', data);
+                if(data.access) {
+                    localStorage.setItem('token', data.access);
+                }
+            })
     };
 
     return (

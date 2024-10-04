@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 import logo from '../../assets/logo.png'; 
+import login from '../../services/login.js';
 
 function LoginForm() {
     const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -9,7 +10,13 @@ function LoginForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Email or Username:', emailOrUsername, 'Password:', password);
+        login(emailOrUsername, password)
+            .then(data => {
+                console.log('Success:', data);
+                if(data.access) {
+                    localStorage.setItem('token', data.access);
+                }
+            })
     };
 
     return (
