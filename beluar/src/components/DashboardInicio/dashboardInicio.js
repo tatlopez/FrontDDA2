@@ -67,53 +67,60 @@ function DashboardInicio() {
                 <Header />
                 <div className="dashboard-body">
                     <div className="dashboard-top">
+                        {/* Resumen de tu día*/}
                         <div className="dashboard-resume">
                             <p className="title">Resumen de tu día</p>
                             <div className="cards">
                                 <div className="cards-row">
-                                    <div className="card">
+                                    <div className="resume-card" style={{backgroundColor: 'rgba(135,191,112,0.5)', color: '#4C8732'}}>
                                         <div className="card-title">
-                                            <img src={calendarCheck} className="card-icon"/>
+                                            <img src={calendarCheck} className="card-icon" alt="Check-ins"/>
                                             <p className="resume-title">Check-ins</p>
                                         </div>
                                         <p className="resume-number">15</p>
                                     </div>
-                                    <div className="card">
+                                    <div className="resume-card" style={{backgroundColor: 'rgba(251,139,129,0.5)', color: '#E01300'}}>
                                         <div className="card-title">
-                                            <img src={calendarCross} className="card-icon"/>
+                                            <img src={calendarCross} className="card-icon" alt="Check-outs"/>
                                             <p className="resume-title">Check-outs</p>
                                         </div>
                                         <p className="resume-number">12</p>
                                     </div>
                                 </div>
                                 <div className="cards-row">
-                                    <div className="card">
+                                    <div className="resume-card" style={{backgroundColor: 'rgba(62,174,226,0.5)', color: '#317CF5'}}>
                                         <div className="card-title">
-                                            <img src={coupon1} className="card-icon"/>
+                                            <img src={coupon1} className="card-icon" alt="coupon 1"/>
                                             <p className="resume-title">Servicios reservados</p>
                                         </div>
                                         <p className="resume-number">7</p>
                                     </div>
-                                    <div className="card">
+                                    <div className="resume-card" style={{backgroundColor: 'rgba(226,221,80,0.5)', color: '#E19110'}}>
                                         <div className="card-title">
-                                            <img src={coupon2} className="card-icon"/>
+                                            <img src={coupon2} className="card-icon" alt="coupon 2"/>
                                             <p className="resume-title">Servicios libres</p>
                                         </div>
-                                    <p className="resume-number">13</p>
-                                </div>
+                                        <p className="resume-number">13</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        {/* Fin resumen de tu día*/}
+                        {/* Check ins rapidos */}
                         <div className="dashboard-checkIn">
                             <p className="title">Check-in/check out</p>
                             <div className="buttons">
-                                <button className="button">Check-in</button>
-                                <button className="button">Check-out</button>
+                                <button className="button" style={{backgroundColor: '#E4E6E8', color: '#000000', border: '1px solid #BB84E8'}}>Check-in</button>
+                                <button className="button" style={{backgroundColor: '#E4E6E8', color: '#000000', border: '1px solid #BB84E8'}}>Check-out</button>
                             </div>
                             <div className="fields">
                                 <div className="field">
-                                    <label htmlFor="name">N° habitación</label>
-                                    <input type="text" id="habitacion" name="habitacion"/>
+                                    <label htmlFor="room">N° habitación</label>
+                                    <select name="habitaciones" id="room">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
                                 </div>
                                 <div className="field">
                                     <label htmlFor="room">Apellido y nombre</label>
@@ -124,13 +131,15 @@ function DashboardInicio() {
                                     <p className="balance-title">Saldo restante</p>
                                     <p className="balance-number">$$$$</p>
                                 </div>
-                                <div className="payment-buttons">
-                                    <button className="payment-button">Abonar total</button>
-                                    <button className="ticket-button">Descargar factura</button>
+                                <div className="buttons">
+                                    <button className="button" style={{backgroundColor: '#6E28F5', color: '#FEFBFF', border: 'none'}}>Abonar total</button>
+                                    <button className="button" style={{backgroundColor: '#BB84E8', color: '#FEFBFF', border: 'none'}}>Descargar factura</button>
                                 </div>
                             </div>
                         </div>
+                        {/* Fin check ins rapidos */}
                     </div>
+                    {/* Tabla de reservas */}
                     <div className="dashboard-reservations">
                         <p className="title">Próximas reservas</p>
                         <table className="reservations-table">
@@ -143,21 +152,22 @@ function DashboardInicio() {
                                     <th>Servicios extra</th>
                                     <th>A abonar</th>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                    {reservations.map((reservation, index) => (
-                                        <tr key={index}>
+                            </thead>
+                            <tbody>
+                                {reservations.map((reservation, index)=> (
+                                    <tr key={index}>
                                         <td>{reservation.name}</td>
                                         <td>{reservation.checkIn}</td>
                                         <td>{reservation.checkOut}</td>
                                         <td className="room-number">{reservation.room}</td>
                                         <td>{reservation.extraServices} <span className="dropdown-icon">▾</span></td>
                                         <td>{reservation.amount}</td>
-                                        </tr>
-                                    ))}
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
+                    {/* Fin tabla de reservas */}
                 </div>
             </div>
         </div>

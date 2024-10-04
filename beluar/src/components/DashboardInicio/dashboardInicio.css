@@ -5,7 +5,7 @@
 
 .content-container {
     width: 100%;
-    padding: 15px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -23,17 +23,24 @@
 .dashboard-top {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    justify-content: space-between;
     width: 100%;
+    height: 100%;
+    align-items: stretch;
+    gap: 20px;
 }
 
-.dashboard-resume {
-    width: 480px;
-    padding: 30px;
+
+.dashboard-resume,
+.dashboard-checkIn {
+    height: auto;
+    flex: 1;
+    padding: 40px;
     background-color: #F0F2F6;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .title {
@@ -46,39 +53,127 @@
 .cards {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
 }
 
 .cards-row {
     display: flex;
     flex-direction: row;
     gap: 20px;
-
+    margin: 0;
+    box-sizing: border-box;
+    width: fit-content;
 }
 
-.card {
+.resume-card {
+    width: 185px;
+    min-height: 116px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: self-start;
     gap: 10px;
     padding: 15px;
     border-radius: 10px;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .card-title {
     display: flex;
     flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.card-title img {
+    width: 22px;
+    height: 25px;
+}
+
+.card-title p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.resume-number {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0;
+    align-self: self-end;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    padding: 5px 20px;
+    border-radius: 20px;
+    width: 240px;
+    cursor: pointer;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-.dashboard-checkIn {
-    width: 580px;
-    padding: 30px;
-    background-color: #F0F2F6;
-    border-radius: 25px;
+.field label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.field input, .field select {
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #6E28F5;
+    font-family: 'DM Sans', sans-serif;
+    padding: 5px;
+}
+
+.divisor {
+    width: 100%;
+    height: 1px;
+    background-color: #BB84E8;
+    margin: 0;
+}
+
+.balance {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.balance-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.balance-number {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #BB84E8;
 }
 
 .dashboard-reservations {
@@ -87,4 +182,49 @@
     border-radius: 25px;
     display: flex;
     flex-direction: column;
+}
+
+.reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reservations-table thead {
+    background-color: #F0F2F6;
+    color: #6E28F5;
+    text-align: left;
+}
+
+.reservations-table tbody tr {
+    border-bottom: 1px solid #BB84E8;
+    align-items: center;
+}
+
+.reservations-table th, .reservations-table td {
+    padding: 15px 10px;
+    font-size: 16px;
+}
+
+.reservations-table th {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.reservations-table tbody tr:hover {
+    background-color: #E0E7FF;
+}
+
+.room-number{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    color: #6E28F5;
+}
+
+.dropdown-icon {
+    font-size: 12px;
+    color: #6E28F5;
+    cursor: pointer;
 }
