@@ -2,7 +2,7 @@ import React from 'react';
 import './dashboardHoteles.css';
 import Profile from '../Profile/Profile';
 import logo from '../../assets/logo.png'; 
-import hotelIcon from '../../assets/hotel-icon.png'; 
+import hotelIcon from '../../assets/default-hotel.jpg'; 
 import trashIcon from '../../assets/trash-icon.png'; 
 import editIcon from '../../assets/edit-icon.png';
 import addIcon from '../../assets/signo-mas.png';

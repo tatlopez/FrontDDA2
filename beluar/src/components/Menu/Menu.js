@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './menu.css';
 import logo from '../../assets/logo.png';
-import editIcon from '../../assets/edit-icon.png';
 import menuIcon from '../../assets/menu-icon.png';
 import estadisticasIcon from '../../assets/estadisticas-icon.svg';
 import habitacionesIcon from '../../assets/habitaciones-icon.svg';

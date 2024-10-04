@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './dashboardHabitaciones.css';
 import SearchBar from '../SearchBar/SearchBar';
-import Profile from '../Profile/Profile';
 import Menu from '../Menu/Menu';
 import Listas from '../Listas/Lista';
-import Modificar from '../Cards/Card';
+import InfoCard from '../Cards/infoCard';
 import Header from '../Header/Header';
 import signoMas from '../../assets/signo-mas.png'; 
 
@@ -26,7 +25,7 @@ function DashboardHabitaciones() {
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
-                            <h2>Habitaciones</h2>
+                            <p>Habitaciones</p>
                             <div className="search-and-add">
                                 <SearchBar />
                                 <button className="add-room-button">
@@ -41,7 +40,7 @@ function DashboardHabitaciones() {
                         </div>
                     </div>
                     <div className="room-detail-section">
-                        <Modificar item={selectedRoom} />
+                        <InfoCard item={selectedRoom} />
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     background-color: #E4E6E8;
     border-radius: 20px;
     padding-inline: 10px;
-    outline: 1px solid #703FD0;
+    outline: 1px solid #6E28F5;
 }
 
 .searchbar-input {
@@ -23,6 +23,6 @@
 }
 
 .searchbar-icon {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 }

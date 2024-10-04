@@ -10,12 +10,14 @@
   .hotel-title {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
+    cursor: default;
   }
   
   .edit-icon {
     margin: 0; 
     margin-left: 20px;
+    cursor: default;
   }
   
   .hotel-name {

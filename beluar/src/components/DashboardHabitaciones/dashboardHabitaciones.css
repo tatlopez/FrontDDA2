@@ -6,22 +6,40 @@
 .content-container {
   width: 100%;
   background-color: #FEFBFF;
-  padding: 35px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
+  max-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.content-container::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.content-container::-webkit-scrollbar-thumb{
+  width: 10px;
+  background-color: #703FD0;
+  border-radius: 10px;
 }
 
 .dashboard-body {
   display: flex;
+  gap: 20px;
 }
 
 .rooms-section {
   width: 70%;
-  padding-inline: 20px;
+  padding: 20px;
   background-color: #F0F2F6;
   border-radius: 10px;
-  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .room-detail-section {
@@ -33,8 +51,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center; 
-  color: #703FD0;
+  color: #6E28F5;
   margin-bottom: 10px;
+}
+
+.rooms-header p {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
 }
 
 .search-and-add {
@@ -46,7 +70,7 @@
   display: flex;
   flex-wrap: wrap; 
   justify-content: center; 
-  gap: 5px;
+  gap: 15px;
 }
 
 .add-room-button {

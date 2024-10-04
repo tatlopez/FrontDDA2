@@ -1,20 +1,22 @@
 import React from 'react';
 import './lista.css';
-import editIcon from '../../assets/edit-icon.png'; 
-import defaultImage from '../../assets/hotel-icon.png'; 
+import editIcon from '../../assets/edit-icon.svg'; 
+import defaultImage from '../../assets/default-hotel.jpg'; 
 
 const Card = ({ item, image = defaultImage }) => {
   return (
     <div className="card">
-      <img src={image} alt={`Item ${item.number}`} className="card-image" />
-      <div className="card-info">
-        <h4 className="card-number">{item.number}</h4>
-        <span className={`card-status ${item.status.toLowerCase()}`}>
-          {item.status}
-        </span>
+      <div className='card-left'>
+        <img src={image} alt={`Item ${item.number}`} className="card-image" />
+        <div className="card-info">
+          <p className="card-number">#{item.number}</p>
+          <span className={`card-status ${item.status.toLowerCase()}`}>
+            {item.status}
+          </span>
+        </div>
       </div>
       <div className="card-actions">
-        <div className="card-price">${item.price}</div>
+        <p className="card-price">${item.price}</p>
         <img src={editIcon} alt="Edit" className="edit-icon" />
       </div>
     </div>
