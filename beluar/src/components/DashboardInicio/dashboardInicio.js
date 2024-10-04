@@ -60,6 +60,13 @@ function DashboardInicio() {
         }
     ];
 
+    const rooms = [
+        { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
+        { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg' },
+        { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
+        { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
+    ];
+
     return (
         <div className="page-container">
             <Menu />
@@ -117,9 +124,11 @@ function DashboardInicio() {
                                 <div className="field">
                                     <label htmlFor="room">N° habitación</label>
                                     <select name="habitaciones" id="room">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        {rooms.map((room, index) => (
+                                            <option key={index} value={room.number}>
+                                                {room.number} - {room.status}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="field">

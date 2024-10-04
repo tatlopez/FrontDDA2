@@ -198,6 +198,7 @@
 .reservations-table tbody tr {
     border-bottom: 1px solid #BB84E8;
     align-items: center;
+    transition: all 0.2s ease;
 }
 
 .reservations-table th, .reservations-table td {
@@ -211,7 +212,7 @@
 }
 
 .reservations-table tbody tr:hover {
-    background-color: #E0E7FF;
+    background-color: rgba(187,132,232,0.3);
 }
 
 .room-number{
