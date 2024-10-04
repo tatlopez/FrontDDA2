@@ -1,0 +1,90 @@
+.page-container {
+    display: flex;
+    background-color: #FEFBFF;
+}
+
+.content-container {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.dashboard-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-top {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+.dashboard-resume {
+    width: 480px;
+    padding: 30px;
+    background-color: #F0F2F6;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #6E28F5;
+    margin: 0;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.dashboard-checkIn {
+    width: 580px;
+    padding: 30px;
+    background-color: #F0F2F6;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-reservations {
+    padding: 30px;
+    background-color: #F0F2F6;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
