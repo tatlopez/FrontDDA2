@@ -70,9 +70,9 @@ function DashboardInicio() {
     return (
         <div className="page-container">
             <Menu />
-            <div className="content-container">
+            <div className="content-container1">
                 <Header />
-                <div className="dashboard-body">
+                <div className="dashboard-body1">
                     <div className="dashboard-top">
                         {/* Resumen de tu día*/}
                         <div className="dashboard-resume">

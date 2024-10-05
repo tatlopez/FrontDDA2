@@ -2,12 +2,12 @@
 
 import React from 'react';
 import './card.css';
-import defaultImage from '../../assets/default-hotel.jpg';
+import cargarImagen from '../../assets/cargar-imagen.png';
 
 const Modificar = ({ item, type }) => {
   return (
     <div className="item-detail">
-      <img src={defaultImage} alt={`Item ${item.number || item.name}`} className="detail-image" />
+      <img src={cargarImagen} alt={`Item ${item.number || item.name}`} className="detail-image" />
       <div className='fields'>
 
         <div className="editable-fields">

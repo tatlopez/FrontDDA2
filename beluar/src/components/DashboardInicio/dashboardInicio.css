@@ -3,7 +3,7 @@
     background-color: #FEFBFF;
 }
 
-.content-container {
+.content-container1 {
     width: 100%;
     padding: 30px;
     display: flex;
@@ -14,7 +14,7 @@
     box-sizing: border-box;
 }
 
-.dashboard-body {
+.dashboard-body1 {
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardHabitaciones from './pages/DashboardHabitacionesPage';
 import DashboardInicio from './pages/DashboardInicioPage';
 import DashboardServicios from './pages/DashboardServiciosPage';
+import DashboardReservas from './pages/DashboardReservasPage';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path="/DashboardHabitaciones" element={<DashboardHabitaciones />} />
           <Route path="/DashboardHoteles" element={<DashboardHoteles />} />
           <Route path="/DashboardServicios" element={<DashboardServicios />} />
+          <Route path="/DashboardReservas" element={<DashboardReservas />} />
+
         </Routes>
       </div>
     </Router>
