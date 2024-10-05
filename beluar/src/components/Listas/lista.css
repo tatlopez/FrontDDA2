@@ -66,6 +66,17 @@
   background-color: rgb(226,221,80,0.5);
 }
 
+.card-duration {
+  display: inline-block;
+  margin-inline: 10px;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: #4C8732;
+  background-color: rgb(135,191,112,0.5);
+}
+
 .card-actions {
   display: flex;
   flex-direction: column;

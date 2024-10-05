@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import './dashboardHabitaciones.css';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
 import Listas from '../Listas/Lista';
-import InfoCard from '../Cards/editableCard';
+import InfoCard from '../Cards/infoCard';
 import Header from '../Header/Header';
 import signoMas from '../../assets/signo-mas.png'; 
 
 const roomsData = [
-  { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
-  { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg' },
-  { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
-  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
+  { name: 'Acceso a salon VIP', duration: '24hs', price: 300, image: 'room1.jpg' },
+  { name: 'Clase de tenis privada', duration: '60min', price: 250, image: 'room2.jpg' },
+  { name: 'Traslado al aeropuerto', duration: '24hs', price: 250, image: 'room4.jpg' },
+  { name: 'Room Service', duration: '24hs', price: 100, image: 'room5.jpg' },
 ];
 
 function DashboardHabitaciones() {
@@ -25,7 +24,7 @@ function DashboardHabitaciones() {
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
-                            <p>Habitaciones</p>
+                            <p>Servicios</p>
                             <div className="search-and-add">
                                 <SearchBar />
                                 <button className="add-room-button">
@@ -35,12 +34,12 @@ function DashboardHabitaciones() {
                         </div>
                         <div className="rooms-list">
                             {roomsData.map((room) => (
-                                <Listas key={room.number} item={room} type={'habitacion'}/>
+                                <Listas key={room.number} item={room} type={'servicio'}/>
                             ))}
                         </div>
                     </div>
                     <div className="room-detail-section">
-                        <InfoCard item={selectedRoom} type={'habitacion'}/>
+                        <InfoCard item={selectedRoom} type={'servicio'}/>
                     </div>
                 </div>
             </div>

@@ -30,16 +30,17 @@
 .dashboard-body {
   display: flex;
   gap: 20px;
+  flex-direction: row !important;
 }
 
 .rooms-section {
-  width: 70%;
   padding: 20px;
   background-color: #F0F2F6;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 60%;
 }
 
 .room-detail-section {

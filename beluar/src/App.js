@@ -4,7 +4,8 @@ import DashboardHoteles from './pages/DashboardHotelesPage';
 import SignInPage from './pages/SignInPage';
 import LoginPage from './pages/LoginPage';
 import DashboardHabitaciones from './pages/DashboardHabitacionesPage';
-import DashboardInicio from './components/DashboardInicio/dashboardInicio';
+import DashboardInicio from './pages/DashboardInicioPage';
+import DashboardServicios from './pages/DashboardServiciosPage';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
           <Route path="/" element={<DashboardInicio />} />
           <Route path="/signup" element={<SignInPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/DashboardHabitaciones" element={<DashboardHoteles />} />
+          <Route path="/DashboardHabitaciones" element={<DashboardHabitaciones />} />
+          <Route path="/DashboardHoteles" element={<DashboardHoteles />} />
+          <Route path="/DashboardServicios" element={<DashboardServicios />} />
         </Routes>
       </div>
     </Router>

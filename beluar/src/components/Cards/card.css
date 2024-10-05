@@ -77,6 +77,16 @@
   background-color: rgb(226,221,80,0.5);
 }
 
+.item-duration {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 15px;
+  border-radius: 15px;
+  max-width: fit-content;
+  color: #4C8732;
+  background-color: rgb(135,191,112,0.5);
+}
+
 .buttons {
   display: flex;
   flex-direction: column;

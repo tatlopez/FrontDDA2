@@ -58,11 +58,11 @@ const Menu = () => {
             <img src={reservasIcon} alt="Reservas Icon" className="icon" />
             <span>Reservas</span>
           </Link>
-          <Link to="/habitaciones" className="menu-item">
+          <Link to="/DashboardHabitaciones" className="menu-item">
             <img src={habitacionesIcon} alt="Habitaciones Icon" className="icon" />
             <span>Habitaciones</span>
           </Link>
-          <Link to="/servicios" className="menu-item">
+          <Link to="/DashboardServicios" className="menu-item">
             <img src={serviciosIcon} alt="Servicios Icon" className="icon" />
             <span>Servicios</span>
           </Link>
@@ -71,7 +71,7 @@ const Menu = () => {
             <span>Estadísticas</span>
           </Link>
         <div className='menu-hotels'>
-          <Link to="/hoteles" className="menu-item">
+          <Link to="/DashboardHoteles" className="menu-item">
             <img src={hotelesIcon} alt="Hoteles Icon" className="icon" />
             <span>Hoteles</span>
           </Link>
