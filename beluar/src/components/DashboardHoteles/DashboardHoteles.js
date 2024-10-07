@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './dashboardHoteles.css';
 import Profile from '../Profile/Profile';
-import logo from '../../assets/logo.png'; 
-import hotelIcon from '../../assets/default-hotel.jpg'; 
-import trashIcon from '../../assets/trash-icon.png'; 
+import logo from '../../assets/logo.png';
+import hotelIcon from '../../assets/default-hotel.jpg';
+import trashIcon from '../../assets/trash-icon.png';
 import editIcon from '../../assets/edit-icon.png';
 import addIcon from '../../assets/signo-mas.png';
 import searchIcon from '../../assets/search-icon-white.svg';
+import EditarHotelModal from './EditarHotel';
+import cargarImagen from '../../assets/cargar-imagen.png';
 
-const hoteles = [
+const hotelesData = [
     {
         nombre: 'Palacio del Sol',
         direccion: 'Av. Alvear 1661, Recoleta, CABA, Buenos Aires.',
@@ -32,20 +34,61 @@ const hoteles = [
 ];
 
 function DashboardHoteles() {
+    const [hoteles, setHoteles] = useState(hotelesData);
+    const [selectedHotel, setSelectedHotel] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
+    // Abrir modal para editar un hotel existente
+    const openModal = (hotel) => {
+        setSelectedHotel(hotel);
+        setShowModal(true);
+    };
+
+    // Abrir modal para agregar un hotel nuevo
+    const addNewHotel = () => {
+        const emptyHotel = {
+            nombre: '',
+            direccion: '',
+            estrellas: 0,
+            imagen: cargarImagen
+        };
+        setSelectedHotel(emptyHotel);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
+    // Guardar o actualizar los datos del hotel
+    const handleSaveHotel = (updatedHotel) => {
+        if (hoteles.some(hotel => hotel.nombre === updatedHotel.nombre)) {
+            // Editar hotel existente
+            setHoteles(hoteles.map(hotel => hotel.nombre === updatedHotel.nombre ? updatedHotel : hotel));
+        } else {
+            // Agregar nuevo hotel
+            setHoteles([...hoteles, updatedHotel]);
+        }
+    };
+
     return (
-        <div style={{backgroundColor: '#FEFBFF'}}>
+        <div style={{ backgroundColor: '#FEFBFF' }}>
             <header className="dashboard-headerHotel">
-                <img src={logo} alt="logo" className="signin-logo" /> 
+                <img src={logo} alt="logo" className="signin-logo" />
                 <div className="header-right">
                     <Profile />
                 </div>
             </header>
             <main className="dashboard-container">
                 <div className='hoteles-title'>
-                    <h1 style={{textAlign: 'left'}}>Tus hoteles</h1>
+                    <h1 style={{ textAlign: 'left' }}>Tus hoteles</h1>
                     <div className='hoteles-buttons'>
-                        <button className='hoteles-circleButton'><img src={addIcon} alt='Agregar hotel'></img></button>
-                        <button className='hoteles-circleButton'><img src={searchIcon} alt='Buscar hotel'></img></button>
+                        <button className='hoteles-circleButton' onClick={addNewHotel}>
+                            <img src={addIcon} alt='Agregar hotel' />
+                        </button>
+                        <button className='hoteles-circleButton'>
+                            <img src={searchIcon} alt='Buscar hotel' />
+                        </button>
                     </div>
                 </div>
                 <div className="hoteles-list">
@@ -61,13 +104,25 @@ function DashboardHoteles() {
                                 </div>
                             </div>
                             <div className="hotel-actions">
-                                <button className="edit-btn"><img src={editIcon} alt={hotel.nombre} className="edit-image" /></button>
-                                <button className="delete-btn"><img src={trashIcon} alt={hotel.nombre} className="trash-image" /></button>
+                                <button className="edit-btn" onClick={() => openModal(hotel)}>
+                                    <img src={editIcon} alt="Edit" className="edit-image" />
+                                </button>
+                                <button className="delete-btn">
+                                    <img src={trashIcon} alt="Delete" className="trash-image" />
+                                </button>
                             </div>
                         </div>
                     ))}
                 </div>
             </main>
+
+            {showModal && (
+                <EditarHotelModal
+                    hotel={selectedHotel}
+                    onClose={closeModal}
+                    onSave={handleSaveHotel}
+                />
+            )}
         </div>
     );
 }
