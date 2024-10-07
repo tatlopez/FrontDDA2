@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardServicios from '../components/DashboardServicios/DashboardServicios';
+import DashboardServicios from '../components/DashboardServicios/DashboardServicios.js';
 
 function DashboardServiciosPage() {
     return (
