@@ -6,6 +6,7 @@
   height: 50px;
   width: 200px;
   padding: 10px 15px;
+  position: relative;
 }
 
 .profile-bell {
@@ -39,6 +40,45 @@
   font-size: 1.2rem;
   margin-left: 10px;
 }
+
+.profile-container {
+  position: relative; /* Para que el dropdown se posicione relativo a este contenedor */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 70px; /* Ajusta según la altura del contenedor */
+  right: 0;
+  background-color: #F0F2F6; /* Fondo del menú */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el menú */
+  z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+  border-radius: 15px; /* Esquinas redondeadas */
+}
+
+.profile-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px; /* Espaciado dentro de cada opción */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+}
+
+.option-icon {
+  width: 20px;
+  height: 20px;
+  stroke: #703FD0;
+}
+
+.profile-option:hover {
+  background-color: #E4E6E8;
+  border-radius: 15px;
+
+  p {
+    color: #6E28F5;
+  }
+}
+
+
 
 @media (max-width: 600px) {
   .profile-container {
