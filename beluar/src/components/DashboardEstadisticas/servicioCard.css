@@ -1,0 +1,33 @@
+.servicio-card {
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .servicio-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .servicio-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .servicio-name {
+    font-size: 18px;
+    color: #000000;
+  }
+  
+  .servicio-percentage {
+    font-size: 14px;
+    color: #703FD0;
+  }
+  
+  .servicio-period {
+    font-size: 12px;
+    color: #666666;
+  }
+  

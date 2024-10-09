@@ -1,0 +1,32 @@
+.mini-card {
+    padding: 15px;
+    border-radius: 15px;
+    flex: 1;
+  }
+  
+  .mini-card-title {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .mini-card-percentage {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .mini-card-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mini-card-number {
+    font-size: 18px;
+    color: #000000;
+  }
+  
+  .mini-card-period {
+    font-size: 12px;
+    color: #666666;
+  }
+  

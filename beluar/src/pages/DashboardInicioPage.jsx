@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardInicio from '../components/DashboardInicio/dashboardInicio.js'
+import DashboardInicio from '../components/DashboardInicio/DashboardInicio.js'
 
 function DashboardInicioPage() {
     return (
