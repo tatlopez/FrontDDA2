@@ -51,6 +51,33 @@ const reservaData = [
             { name: 'Desayuno incluido', price: 20 }
         ],
         abonar: 85
+    },
+    { 
+        number: '689', 
+        date: '18 Sep', 
+        name: 'Gomez, Luis', 
+        price: 65, 
+        room: '#5C',
+        services: [{ name: 'Spa', price: 40 }] ,
+        abonar: 85
+    },
+    { 
+        number: '689', 
+        date: '18 Sep', 
+        name: 'Gomez, Luis', 
+        price: 65, 
+        room: '#5C',
+        services: [{ name: 'Spa', price: 40 }] ,
+        abonar: 85
+    },
+    { 
+        number: '689', 
+        date: '18 Sep', 
+        name: 'Gomez, Luis', 
+        price: 65, 
+        room: '#5C',
+        services: [{ name: 'Spa', price: 40 }] ,
+        abonar: 85
     }
 ];
 
@@ -71,7 +98,7 @@ function DashboardReservas() {
                                 <SearchBar />
                             </div>
                         </div>
-                        <div className="rooms-list">
+                        <div className="rooms-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                             {reservaData.map((reserva) => (
                                 <Reserva key={reserva.number} item={reserva}/>
                             ))}

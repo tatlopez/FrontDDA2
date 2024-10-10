@@ -12,6 +12,10 @@ const roomsData = [
   { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg' },
   { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
   { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
+  { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
+  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
+  { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
+  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
 ];
 
 function DashboardHabitaciones() {
@@ -33,8 +37,8 @@ function DashboardHabitaciones() {
                                 </button>
                             </div>
                         </div>
-                        <div className="rooms-list">
-                            {roomsData.map((room) => (
+                        <div className="rooms-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                        {roomsData.map((room) => (
                                 <Listas key={room.number} item={room} type={'habitacion'}/>
                             ))}
                         </div>

@@ -32,7 +32,7 @@ function DashboardHabitaciones() {
                                 </button>
                             </div>
                         </div>
-                        <div className="rooms-list">
+                        <div className="rooms-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                             {roomsData.map((room) => (
                                 <Listas key={room.number} item={room} type={'servicio'}/>
                             ))}
