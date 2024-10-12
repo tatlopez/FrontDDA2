@@ -1,6 +1,8 @@
 .dashboard-estadisticas {
     background-color: #F0F2F6;
     padding: 20px;
+    width: 100%;
+    border-radius: 15px;
   }
   
   .section-title {
@@ -52,9 +54,10 @@
     display: flex;
     gap: 15px;
     padding-top: 20px;
-    border-top: 2px solid #6E28F5;
+    background-color: #E4E6E8;
   }
-  
+
+
   .servicios-ingresos {
     flex: 1;
     display: flex;

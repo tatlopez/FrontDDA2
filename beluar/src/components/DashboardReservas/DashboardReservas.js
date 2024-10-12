@@ -81,25 +81,29 @@ const reservaData = [
     }
 ];
 
-
 function DashboardReservas() {
-    const [selectedReserva, setSelectedReserva] = useState(reservaData[0]); 
+    const [selectedReserva, setSelectedReserva] = useState(reservaData[0]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredReserva = reservaData.filter(reserva =>
+        reserva.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="page-container">
             <Menu />
             <div className="content-container">
-                <Header /> 
+                <Header />
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
                             <p>Reservas</p>
                             <div className="search-bar-and-add">
-                                <SearchBar />
+                                <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar reserva..." />
                             </div>
                         </div>
-                        <div className="rooms-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                            {reservaData.map((reserva) => (
+                        <div className="rooms-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+                            {filteredReserva.map((reserva) => (
                                 <Reserva key={reserva.number} item={reserva}/>
                             ))}
                         </div>

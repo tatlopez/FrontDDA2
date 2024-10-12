@@ -5,7 +5,7 @@ import Menu from '../Menu/Menu';
 import Listas from '../Listas/Lista';
 import InfoCard from '../Cards/editableCard';
 import Header from '../Header/Header';
-import signoMas from '../../assets/signo-mas.png'; 
+import signoMas from '../../assets/signo-mas.png';
 
 const roomsData = [
   { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
@@ -19,32 +19,37 @@ const roomsData = [
 ];
 
 function DashboardHabitaciones() {
-    const [selectedRoom, setSelectedRoom] = useState(roomsData[0]); 
+    const [selectedRoom, setSelectedRoom] = useState(roomsData[0]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredRooms = roomsData.filter(room =>
+        room.number.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="page-container">
             <Menu />
             <div className="content-container">
-                <Header /> 
+                <Header />
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
                             <p>Habitaciones</p>
                             <div className="search-and-add">
-                                <SearchBar />
+                                <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar habitacion..." />
                                 <button className="add-room-button">
                                     <img src={signoMas} alt="Add Icon" />
                                 </button>
                             </div>
                         </div>
-                        <div className="rooms-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                        {roomsData.map((room) => (
-                                <Listas key={room.number} item={room} type={'habitacion'}/>
+                        <div className="rooms-list" style={{ maxHeight: '530px', overflowY: 'auto' }}>
+                            {filteredRooms.map((room) => (
+                                <Listas key={room.number} item={room} type={'habitacion'} />
                             ))}
                         </div>
                     </div>
                     <div className="room-detail-section">
-                        <InfoCard item={selectedRoom} type={'habitacion'}/>
+                        <InfoCard item={selectedRoom} type={'habitacion'} />
                     </div>
                 </div>
             </div>
