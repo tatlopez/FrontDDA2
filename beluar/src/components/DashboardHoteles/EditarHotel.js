@@ -17,6 +17,8 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [imagen, setImagen] = useState(hotel.imagen || hotelIcon);
     const [file, setFile] = useState(null);
 
+    const esNuevoHotel = !hotel.nombre; 
+
     const handleSave = () => {
         const updatedHotel = { 
             ...hotel, 
@@ -31,8 +33,10 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
             longitud, 
             imagen 
         };
-        
-        create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
+
+        if (esNuevoHotel) {
+
+            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
             .then((response) => {
                 const id = response.id;
 
@@ -42,6 +46,9 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
            
                 attach_image(id, formData);
             })
+
+        }
+    
         onSave(updatedHotel);
         onClose();
     };
@@ -60,7 +67,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
         <div className="modal-overlay">
             <div className="modal">
                 <button className="close-modal" onClick={onClose}>X</button>
-                <h2 className="modal-title">{hotel.nombre ? 'Editar hotel' : 'Agregar hotel'}</h2>
+                <h2 className="modal-title">{esNuevoHotel ? 'Agregar hotel' : 'Editar hotel'}</h2>
                 <div className="modal-content">
                     <div className="modal-image-section">
                         <label className="image-label">Imagen</label>
@@ -155,9 +162,9 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                     </div>
                 </div>
                 <div className="modal-buttons">
-                    <button className="btn-confirm" onClick={handleSave}>
-                        Confirmar cambios
-                    </button>
+                <button className="btn-confirm" onClick={handleSave}>
+                        {esNuevoHotel ? 'Agregar Hotel' : 'Guardar Cambios'}
+                </button>
                 </div>
             </div>
         </div>
