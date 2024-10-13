@@ -8,7 +8,7 @@ import editIcon from '../../assets/edit-icon.png';
 import addIcon from '../../assets/signo-mas.png';
 import searchIcon from '../../assets/search-icon-white.svg';
 import EditarHotelModal from './EditarHotel';
-import DeleteHotelModal from './EliminarHotel';
+import ConfirmActionModal from '../PopUp/ConfirmActionModal'; 
 import cargarImagen from '../../assets/cargar-imagen.png';
 import SearchBar from '../SearchBar/SearchBar';
 
@@ -61,6 +61,7 @@ function DashboardHoteles() {
 
     const handleDeleteHotel = (hotelToDelete) => {
         setHoteles(hoteles.filter(hotel => hotel.id !== hotelToDelete.id));
+        closeDeleteModal(); // Aseguramos que el modal se cierre después de eliminar el hotel
     };
 
     const toggleSearchBar = () => {
@@ -126,10 +127,10 @@ function DashboardHoteles() {
                 />
             )}
             {showDeleteModal && (
-                <DeleteHotelModal
-                    hotel={selectedHotel}
+                <ConfirmActionModal
+                    actionType="eliminarHotel"
                     onClose={closeDeleteModal}
-                    onDelete={handleDeleteHotel}
+                    onConfirm={() => handleDeleteHotel(selectedHotel)}
                 />
             )}
         </div>

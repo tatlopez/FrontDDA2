@@ -25,15 +25,21 @@ const reservaData = [
 ];
 
 function DashboardReservas() {
-    const [selectedReserva, setSelectedReserva] = useState(reservaData[0]);
+    const [reservas, setReservas] = useState(reservaData);
+    const [selectedReserva, setSelectedReserva] = useState(reservaData);
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filteredReserva = reservaData.filter(reserva =>
+    const filteredReserva = reservas.filter(reserva =>
         reserva.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const handleReservaClick = (reserva) => {
         setSelectedReserva(reserva);
+    };
+
+    const handleCancelReserva = (reservaToCancel) => {
+        setReservas(reservas.filter(reserva => reserva.number !== reservaToCancel.number));
+        setSelectedReserva(null); // Clear the selected reservation
     };
 
     return (
@@ -56,7 +62,9 @@ function DashboardReservas() {
                         </div>
                     </div>
                     <div className="room-detail-section">
-                        <ReservaCard item={selectedReserva} />
+                        {selectedReserva && (
+                            <ReservaCard item={selectedReserva} onCancelReserva={handleCancelReserva} />
+                        )}
                     </div>
                 </div>
             </div>
