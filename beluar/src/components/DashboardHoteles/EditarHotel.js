@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './hotel.css';
 import hotelIcon from '../../assets/default-hotel.jpg';
+import create_hotel from '../../services/hotels/create_hotel.js';
+import attach_image from '../../services/hotels/attach_image.js';
 
 const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [nombre, setNombre] = useState(hotel.nombre || '');
@@ -13,6 +15,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [latitud, setLatitud] = useState(hotel.latitud || '');
     const [longitud, setLongitud] = useState(hotel.longitud || '');
     const [imagen, setImagen] = useState(hotel.imagen || hotelIcon);
+    const [file, setFile] = useState(null);
 
     const handleSave = () => {
         const updatedHotel = { 
@@ -28,6 +31,17 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
             longitud, 
             imagen 
         };
+        
+        create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
+            .then((response) => {
+                const id = response.id;
+
+                const formData = new FormData();
+                
+                formData.append('image', file);
+           
+                attach_image(id, formData);
+            })
         onSave(updatedHotel);
         onClose();
     };
@@ -37,7 +51,8 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
         if (file) {
             const reader = new FileReader();
             reader.onload = () => setImagen(reader.result);
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file); 
+            setFile(file);
         }
     };
 
