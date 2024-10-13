@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './signin.css';
 import logo from '../../assets/logo.png'; 
-import signup from '../../services/signup.js';
+import signup from '../../services/authentication/signup.js';
 
 function SignInForm() {
     const [email, setEmail] = useState('');

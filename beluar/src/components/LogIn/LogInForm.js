@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 import logo from '../../assets/logo.png'; 
-import login from '../../services/login.js';
+import login from '../../services/authentication/login';
 
 function LoginForm() {
     const [emailOrUsername, setEmailOrUsername] = useState('');
