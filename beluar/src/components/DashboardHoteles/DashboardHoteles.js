@@ -52,11 +52,7 @@ function DashboardHoteles() {
     };
 
     const handleSaveHotel = (updatedHotel) => {
-        if (hoteles.some(hotel => hotel.id === updatedHotel.id)) {
-            setHoteles(hoteles.map(hotel => hotel.id === updatedHotel.id ? updatedHotel : hotel));
-        } else {
-            setHoteles([...hoteles, updatedHotel]);
-        }
+        
     };
 
     const handleDeleteHotel = (hotelToDelete) => {
