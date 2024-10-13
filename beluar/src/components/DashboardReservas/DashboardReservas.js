@@ -6,79 +6,22 @@ import Reserva from './Reserva';
 import ReservaCard from './ReservaCard';
 
 const reservaData = [
-    { 
-        number: '145', 
-        date: '15 Sep', 
-        name: 'Fernandez, Martin', 
-        price: 120, 
-        room: '#3B',
-        services: [
-            { name: 'Desayuno incluido', price: 20 },
-            { name: 'Acceso al gimnasio', price: 10 }
-        ],
-        abonar: 85,
-        checkIn: '18/09/2024',
-        checkOut: '21/09/2024'
-    },
-    { 
-        number: '467', 
-        date: '16 Sep', 
-        name: 'Rodriguez, Carla', 
-        price: 85, 
-        room: '#7J',
-        services: [
-            { name: 'Spa', price: 40 }
-        ],
-        abonar: 85
-    },
-    { 
-        number: '689', 
-        date: '18 Sep', 
-        name: 'Gomez, Luis', 
-        price: 65, 
-        room: '#5C',
-        services: [{ name: 'Spa', price: 40 }] ,
-        abonar: 85
-    },
-    { 
-        number: '999', 
-        date: '20 Sep', 
-        name: 'Suares, Natalia', 
-        price: 95, 
-        room: '#6A',
-        services: [
-            { name: 'Traslado al aeropuerto', price: 50 },
-            { name: 'Desayuno incluido', price: 20 }
-        ],
-        abonar: 85
-    },
-    { 
-        number: '689', 
-        date: '18 Sep', 
-        name: 'Gomez, Luis', 
-        price: 65, 
-        room: '#5C',
-        services: [{ name: 'Spa', price: 40 }] ,
-        abonar: 85
-    },
-    { 
-        number: '689', 
-        date: '18 Sep', 
-        name: 'Gomez, Luis', 
-        price: 65, 
-        room: '#5C',
-        services: [{ name: 'Spa', price: 40 }] ,
-        abonar: 85
-    },
-    { 
-        number: '689', 
-        date: '18 Sep', 
-        name: 'Gomez, Luis', 
-        price: 65, 
-        room: '#5C',
-        services: [{ name: 'Spa', price: 40 }] ,
-        abonar: 85
-    }
+    { number: '145', date: '15 Sep', name: 'Fernandez, Martin', price: 120, room: '#3B',
+        services: [{ name: 'Desayuno incluido', price: 20 }, { name: 'Acceso al gimnasio', price: 10 }],
+        abonar: 85, checkIn: '18/09/2024', checkOut: '21/09/2024' },
+    { number: '467', date: '16 Sep', name: 'Rodriguez, Carla', price: 85, room: '#7J',
+        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
+    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
+        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
+    { number: '999', date: '20 Sep', name: 'Suares, Natalia', price: 95, room: '#6A',
+        services: [{ name: 'Traslado al aeropuerto', price: 50 }, { name: 'Desayuno incluido', price: 20 }],
+        abonar: 85 },
+    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
+        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
+    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
+        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
+    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
+        services: [{ name: 'Spa', price: 40 }], abonar: 85 }
 ];
 
 function DashboardReservas() {
@@ -88,6 +31,10 @@ function DashboardReservas() {
     const filteredReserva = reservaData.filter(reserva =>
         reserva.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const handleReservaClick = (reserva) => {
+        setSelectedReserva(reserva);
+    };
 
     return (
         <div className="page-container">
@@ -104,12 +51,12 @@ function DashboardReservas() {
                         </div>
                         <div className="rooms-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
                             {filteredReserva.map((reserva) => (
-                                <Reserva key={reserva.number} item={reserva}/>
+                                <Reserva key={reserva.number} item={reserva} onClick={() => handleReservaClick(reserva)} />
                             ))}
                         </div>
                     </div>
                     <div className="room-detail-section">
-                        <ReservaCard item={selectedReserva}/>
+                        <ReservaCard item={selectedReserva} />
                     </div>
                 </div>
             </div>

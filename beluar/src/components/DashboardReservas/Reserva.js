@@ -1,9 +1,9 @@
 import React from 'react';
-import './reserva.css'; 
+import './reserva.css';
 
-const Reserva = ({ item }) => {
+const Reserva = ({ item, onClick }) => {
   return (
-    <div className="reserva-card">
+    <div className="reserva-card" onClick={onClick} style={{ cursor: 'pointer' }}>
       <div className="reserva-left">
         <div className="reserva-date">
           <p className="reserva-day">{item.date.split(' ')[0]}</p>
