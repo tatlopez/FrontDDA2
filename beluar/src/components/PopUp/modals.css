@@ -1,3 +1,14 @@
+:root {
+    --primary-color: #703FD0;
+    --secondary-color: #E4E6E8;
+    --accent-color: #BB84E8;
+    --danger-color: #E01300;
+    --success-color: #4C8732;
+    --warning-color: #E19110;
+    --text-color: black;
+    --background-color: #F0F2F6;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -12,7 +23,7 @@
 }
 
 .modal {
-    background-color: #FFFFFF;
+    background-color: var(--background-color);
     padding: 40px;
     border-radius: 15px;
     width: 500px;
@@ -37,16 +48,16 @@
     font-size: 18px;
     cursor: pointer;
     background: none;
-    color: #703FD0;
+    color: var(--primary-color);
     transition: color 0.2s;
 }
 
 .close-modal:hover {
-    color: #BB84E8;
+    color: var(--accent-color);
 }
 
 .modal-title {
-    color: #703FD0;
+    color: var(--primary-color);
     font-size: 26px;
     margin: 0;
     margin-bottom: 20px;
@@ -59,7 +70,70 @@
     gap: 25px;
     text-align: center;
     font-size: 18px;
-    color: #333;
+    color: var(--text-color);
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border 0.3s;
+    border-bottom: 1px solid var(--primary-color); /* Línea divisora */
+}
+
+.service-item.selected {
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.service-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 10px 0;
+}
+
+.service-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.service-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.service-price {
+    font-size: 18px;
+    color: var(--accent-color);
+}
+
+.service-duration {
+    font-size: 16px;
+    color: var(--success-color);
 }
 
 .modal-buttons {
@@ -70,7 +144,7 @@
 }
 
 .btn-confirm {
-    background-color: #703FD0;
+    background-color: var(--primary-color);
     color: white;
     padding: 12px 20px;
     border-radius: 30px;
@@ -82,13 +156,5 @@
 }
 
 .btn-confirm:hover {
-    background-color: #BB84E8;
-}
-
-.btn-confirm.cancelar, .btn-confirm.eliminarHotel {
-    background-color: #E01300;
-}
-
-.btn-confirm.cancelar:hover, .btn-confirm.eliminarHotel:hover {
-    background-color: #FF4C4C;
+    background-color: var(--accent-color);
 }

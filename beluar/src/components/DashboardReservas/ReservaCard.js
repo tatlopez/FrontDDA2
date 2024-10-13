@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './reserva.css';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal';
+import AgregarServicioModal from '../PopUp/AgregarServicioModal';
 
 const ReservaCard = ({ item, onCancelReserva }) => {
     const [modalActionType, setModalActionType] = useState(null);
+    const [showAgregarServicioModal, setShowAgregarServicioModal] = useState(false);
+    const [services, setServices] = useState(item.services || []);
 
     const handleAbonarClick = () => {
         setModalActionType('abonar');
@@ -13,19 +16,29 @@ const ReservaCard = ({ item, onCancelReserva }) => {
         setModalActionType('cancelar');
     };
 
+    const handleAgregarServicioClick = () => {
+        setShowAgregarServicioModal(true);
+    };
+
     const handleCloseModal = () => {
         setModalActionType(null);
+        setShowAgregarServicioModal(false);
     };
 
     const handleConfirmAction = () => {
         if (modalActionType === 'abonar') {
-            // Lógica para abonar el total
             console.log('Abonar total confirmado');
         } else if (modalActionType === 'cancelar') {
-            // Lógica para cancelar la reserva
             onCancelReserva(item);
             console.log('Cancelar reserva confirmado');
         }
+        handleCloseModal();
+    };
+
+    const handleConfirmAgregarServicio = (selectedServices) => {
+        // Actualizar los servicios de la reserva
+        setServices((prevServices) => [...prevServices, ...selectedServices]);
+        console.log('Servicios agregados:', selectedServices);
         handleCloseModal();
     };
 
@@ -54,11 +67,11 @@ const ReservaCard = ({ item, onCancelReserva }) => {
                     <input type="text" value={item.checkOut} className="reserva-input" readOnly />
                 </div>
 
-                {item.services && item.services.length > 0 && (
+                {services.length > 0 && (
                     <div className="reserva-field">
                         <label>Servicios contratados</label>
                         <ul className="reserva-services">
-                            {item.services.map((service, index) => (
+                            {services.map((service, index) => (
                                 <li key={index}>{service.name} <span className="service-price">USD {service.price}</span></li>
                             ))}
                         </ul>
@@ -79,7 +92,7 @@ const ReservaCard = ({ item, onCancelReserva }) => {
 
             <div className="reserva-buttons">
                 <button className="btn-reserva abonar" onClick={handleAbonarClick}>Abonar total</button>
-                <button className="btn-reserva agregar-servicio">Agregar servicio</button>
+                <button className="btn-reserva agregar-servicio" onClick={handleAgregarServicioClick}>Agregar servicio</button>
                 <button className="btn-reserva cancelar" onClick={handleCancelarClick}>Cancelar reserva</button>
             </div>
 
@@ -88,6 +101,19 @@ const ReservaCard = ({ item, onCancelReserva }) => {
                     actionType={modalActionType}
                     onClose={handleCloseModal}
                     onConfirm={handleConfirmAction}
+                />
+            )}
+
+            {showAgregarServicioModal && (
+                <AgregarServicioModal
+                    servicios={[
+                        { name: 'Desayuno incluido', price: 20, duration: '1 día' },
+                        { name: 'Acceso al gimnasio', price: 10, duration: '1 día' },
+                        { name: 'Spa', price: 40, duration: '1 hora' },
+                        { name: 'Traslado al aeropuerto', price: 50, duration: '1 viaje' }
+                    ]}
+                    onClose={handleCloseModal}
+                    onConfirm={handleConfirmAgregarServicio}
                 />
             )}
         </div>
