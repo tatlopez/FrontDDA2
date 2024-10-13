@@ -10,6 +10,10 @@ const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
                 return '¿Está seguro de que desea cancelar la reserva?';
             case 'eliminarHotel':
                 return '¿Está seguro de que desea eliminar este hotel?';
+            case 'eliminarHabitacion':
+                return '¿Está seguro de que desea eliminar esta habitación?';
+            case 'eliminarServicio':
+                return '¿Está seguro de que desea eliminar este servicio?';
             default:
                 return '';
         }
@@ -23,6 +27,10 @@ const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
                 return 'Cancelar Reserva';
             case 'eliminarHotel':
                 return 'Eliminar Hotel';
+            case 'eliminarHabitacion':
+                return 'Eliminar Habitación';
+            case 'eliminarServicio':
+                return 'Eliminar Servicio';
             default:
                 return '';
         }
@@ -34,6 +42,8 @@ const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
                 return 'btn-confirm';
             case 'cancelar':
             case 'eliminarHotel':
+            case 'eliminarHabitacion':
+            case 'eliminarServicio':
                 return 'btn-confirm cancelar';
             default:
                 return 'btn-confirm';

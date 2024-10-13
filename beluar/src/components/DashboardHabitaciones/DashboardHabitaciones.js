@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import './dashboardHabitaciones.css';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
 import Listas from '../Listas/Lista';
 import InfoCard from '../Cards/infoCard';
 import EditableCard from '../Cards/editableCard';
+import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
 import signoMas from '../../assets/signo-mas.png';
 
@@ -21,9 +22,10 @@ const roomsData = [
 
 function DashboardHabitaciones() {
   const [rooms, setRooms] = useState(roomsData);
-  const [selectedRoom, setSelectedRoom] = useState(roomsData[0]);
+  const [selectedRoom, setSelectedRoom] = useState(null);
   const [editingRoom, setEditingRoom] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const filteredRooms = rooms.filter(room =>
     room.number.toLowerCase().includes(searchTerm.toLowerCase())
@@ -39,6 +41,11 @@ function DashboardHabitaciones() {
     setEditingRoom(true);
   };
 
+  const handleDeleteClick = (room) => {
+    setSelectedRoom(room);
+    setShowConfirmModal(true);
+  };
+
   const handleSave = (updatedRoom) => {
     const updatedRooms = rooms.map(room =>
       room.number === updatedRoom.number ? updatedRoom : room
@@ -46,6 +53,13 @@ function DashboardHabitaciones() {
     setRooms(updatedRooms);
     setSelectedRoom(updatedRoom);
     setEditingRoom(false);
+  };
+
+  const handleConfirmDelete = () => {
+    const updatedRooms = rooms.filter(room => room.number !== selectedRoom.number);
+    setRooms(updatedRooms);
+    setSelectedRoom(updatedRooms[0] || null);  
+    setShowConfirmModal(false);
   };
 
   return (
@@ -66,7 +80,7 @@ function DashboardHabitaciones() {
             </div>
             <div className="rooms-list" style={{ maxHeight: '530px', overflowY: 'auto' }}>
               {filteredRooms.map((room) => (
-                <Listas key={room.number} item={room} type={'habitacion'} onEditClick={handleEditClick} onRoomClick={handleRoomClick} />
+                <Listas key={room.number} item={room} type={'habitacion'} onEditClick={handleEditClick} onRoomClick={handleRoomClick} onDeleteClick={handleDeleteClick} />
               ))}
             </div>
           </div>
@@ -74,11 +88,18 @@ function DashboardHabitaciones() {
             {editingRoom ? (
               <EditableCard item={selectedRoom} type={selectedRoom.type} onSave={handleSave} />
             ) : (
-              <InfoCard item={selectedRoom} type={selectedRoom.type} />
+              <InfoCard item={selectedRoom} type={selectedRoom?.type} onEdit={handleEditClick} onDelete={() => setShowConfirmModal(true)} />
             )}
           </div>
         </div>
       </div>
+      {showConfirmModal && (
+        <ConfirmActionModal
+          actionType="eliminarHabitacion"
+          onClose={() => setShowConfirmModal(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
     </div>
   );
 }

@@ -2,7 +2,9 @@ import React from 'react';
 import './card.css';
 import defaultImage from '../../assets/default-hotel.jpg';
 
-const InfoCard = ({ item, type }) => {
+const InfoCard = ({ item, type, onEdit, onDelete }) => {
+  if (!item) return null;
+
   return (
     <div className="item-detail">
       <p className="item-number">Número: {item.number || item.name}</p>
@@ -35,8 +37,12 @@ const InfoCard = ({ item, type }) => {
         </div>
       </div>
       <div className='buttons'>
-        <button className="status-button">{type === 'habitacion' ? 'Cambiar estado' : 'Cambiar precio'}</button>
-        <button className="delete-button">{type === 'habitacion' ? 'Eliminar habitacion' : 'Eliminar servicio'}</button>
+        <button className="status-button" onClick={() => onEdit(item)}>
+          {type === 'habitacion' ? 'Cambiar estado' : 'Cambiar precio'}
+        </button>
+        <button className="delete-button" onClick={onDelete}>
+          {type === 'habitacion' ? 'Eliminar habitación' : 'Eliminar servicio'}
+        </button>
       </div>
     </div>
   );
