@@ -105,7 +105,13 @@ function DashboardHoteles() {
                 <div className="hoteles-list">
                     {filteredHoteles.map((hotel) => (
                         <div key={hotel.id} className="hotel-item">
-                            <img src={`${API_URL}${hotel.images[0].image}`} alt={hotel.name} className="hotel-image" />
+                        <img src={hotel.images && hotel.images.length > 0 
+                                    ? `${API_URL}${hotel.images[0].image}` 
+                                    : hotelIcon // Usa la imagen predeterminada si no hay imágenes
+                        } 
+                alt={hotel.name} 
+                className="hotel-image" 
+            />
                             <div className="hotel-info">
                                 <h2>{hotel.name}</h2>
                                 <p>{hotel.address + ', ' + hotel.city}</p>
