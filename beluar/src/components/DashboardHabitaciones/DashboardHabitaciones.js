@@ -8,6 +8,7 @@ import EditableCard from '../Cards/editableCard';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
 import signoMas from '../../assets/signo-mas.png';
+import AgregarHabitacionModal from './CrearHabitacion';
 
 const roomsData = [
   { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg', type: 'habitacion' },
@@ -26,6 +27,7 @@ function DashboardHabitaciones() {
   const [editingRoom, setEditingRoom] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showAddRoomModal, setShowAddRoomModal] = useState(false);
 
   const filteredRooms = rooms.filter(room =>
     room.number.toLowerCase().includes(searchTerm.toLowerCase())
@@ -62,6 +64,10 @@ function DashboardHabitaciones() {
     setShowConfirmModal(false);
   };
 
+  const handleAddRoom = (newRoom) => {
+    setRooms([...rooms, newRoom]);
+  };
+
   return (
     <div className="page-container">
       <Menu />
@@ -73,7 +79,7 @@ function DashboardHabitaciones() {
               <p>Habitaciones</p>
               <div className="search-and-add">
                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar habitación..." />
-                <button className="add-room-button">
+                <button className="add-room-button" onClick={() => setShowAddRoomModal(true)}>
                   <img src={signoMas} alt="Add Icon" />
                 </button>
               </div>
@@ -93,6 +99,12 @@ function DashboardHabitaciones() {
           </div>
         </div>
       </div>
+      {showAddRoomModal && (
+        <AgregarHabitacionModal
+          onClose={() => setShowAddRoomModal(false)}
+          onSave={handleAddRoom}
+        />
+      )}
       {showConfirmModal && (
         <ConfirmActionModal
           actionType="eliminarHabitacion"

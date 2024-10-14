@@ -6,6 +6,7 @@ import InfoCard from '../Cards/infoCard';
 import EditableCard from '../Cards/editableCard';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
+import AgregarServicioModal from './CrearServicio';
 import signoMas from '../../assets/signo-mas.png';
 
 const servicesData = [
@@ -21,6 +22,7 @@ function DashboardServicios() {
     const [editingService, setEditingService] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [showAgregarModal, setShowAgregarModal] = useState(false); // Estado para mostrar el modal de agregar
 
     // Filtrar los servicios según el término de búsqueda
     const filteredServices = services.filter(service =>
@@ -63,6 +65,11 @@ function DashboardServicios() {
         setShowConfirmModal(false);
     };
 
+    // Agregar un nuevo servicio
+    const handleAgregarServicio = (nuevoServicio) => {
+        setServices([...services, nuevoServicio]);
+    };
+
     return (
         <div className="page-container">
             <Menu />
@@ -74,7 +81,7 @@ function DashboardServicios() {
                             <p>Servicios</p>
                             <div className="search-and-add">
                                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar servicio..." />
-                                <button className="add-room-button">
+                                <button className="add-room-button" onClick={() => setShowAgregarModal(true)}>
                                     <img src={signoMas} alt="Add Icon" />
                                 </button>
                             </div>
@@ -106,6 +113,16 @@ function DashboardServicios() {
                     </div>
                 </div>
             </div>
+
+            {/* Modal para agregar servicio */}
+            {showAgregarModal && (
+                <AgregarServicioModal
+                    onClose={() => setShowAgregarModal(false)}
+                    onSave={handleAgregarServicio}
+                />
+            )}
+
+            {/* Modal de confirmación de eliminación */}
             {showConfirmModal && (
                 <ConfirmActionModal
                     actionType="eliminarServicio"
