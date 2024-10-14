@@ -11,6 +11,9 @@ import EditarHotelModal from './EditarHotel';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal'; 
 import cargarImagen from '../../assets/cargar-imagen.png';
 import SearchBar from '../SearchBar/SearchBar';
+import { useEffect } from 'react';
+import get_hotels from '../../services/hotels/get_hotels';
+import { API_URL } from '../../config';
 
 const hotelesData = [
     { id: 1, nombre: 'Palacio del Sol', direccion: 'Av. Alvear 1661, Recoleta, CABA, Buenos Aires.', estrellas: 5 },
@@ -19,13 +22,21 @@ const hotelesData = [
     { id: 4, nombre: 'Resort Las Águilas', direccion: 'Av. Bustillo km 25, San Carlos de Bariloche, Río Negro.', estrellas: 4 }
 ];
 
+
 function DashboardHoteles() {
-    const [hoteles, setHoteles] = useState(hotelesData);
+    const [hoteles, setHoteles] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+
+    useEffect(() => {
+        get_hotels().then((res) => {
+            console.log('Hoteles cargados:', res);
+            setHoteles(res);
+        })
+    }, []);  
 
     const openModal = (hotel) => {
         setSelectedHotel(hotel);
@@ -65,7 +76,7 @@ function DashboardHoteles() {
     };
 
     const filteredHoteles = hoteles.filter(hotel =>
-        hotel.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -94,13 +105,13 @@ function DashboardHoteles() {
                 <div className="hoteles-list">
                     {filteredHoteles.map((hotel) => (
                         <div key={hotel.id} className="hotel-item">
-                            <img src={hotelIcon} alt={hotel.nombre} className="hotel-image" />
+                            <img src={`${API_URL}${hotel.images[0].image}`} alt={hotel.name} className="hotel-image" />
                             <div className="hotel-info">
-                                <h2>{hotel.nombre}</h2>
-                                <p>{hotel.direccion}</p>
+                                <h2>{hotel.name}</h2>
+                                <p>{hotel.address + ', ' + hotel.city}</p>
                                 <div className="hotel-stars">
-                                    {'★'.repeat(hotel.estrellas)}
-                                    {'☆'.repeat(5 - hotel.estrellas)}
+                                    {'★'.repeat(hotel.stars)}
+                                    {'☆'.repeat(5 - hotel.stars)}
                                 </div>
                             </div>
                             <div className="hotel-actions">
