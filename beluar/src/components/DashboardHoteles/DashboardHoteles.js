@@ -44,7 +44,7 @@ function DashboardHoteles() {
     };
 
     const addNewHotel = () => {
-        const emptyHotel = { id: Date.now(), nombre: '', direccion: '', estrellas: 0, imagen: cargarImagen };
+        const emptyHotel = { id: Date.now(), name: '', address: '', stars: 0, phone: '', email: '', description: '', latitude: '', longitude: '',imagen: cargarImagen };
         setSelectedHotel(emptyHotel);
         setShowModal(true);
     };

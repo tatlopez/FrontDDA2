@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import './hotel.css';
 import hotelIcon from '../../assets/default-hotel.jpg';
+import cargarImagen from '../../assets/cargar-imagen.png';
 import create_hotel from '../../services/hotels/create_hotel.js';
 import attach_image from '../../services/hotels/attach_image.js';
+import { API_URL } from '../../config.js';
 
 const EditarHotelModal = ({ hotel, onClose, onSave }) => {
-    const [nombre, setNombre] = useState(hotel.nombre || '');
-    const [direccion, setDireccion] = useState(hotel.direccion || '');
-    const [ciudad, setCiudad] = useState(hotel.ciudad || '');
-    const [telefono, setTelefono] = useState(hotel.telefono || '');
+    const [nombre, setNombre] = useState(hotel.name || '');
+    const [direccion, setDireccion] = useState(hotel.address || '');
+    const [ciudad, setCiudad] = useState(hotel.city || '');
+    const [telefono, setTelefono] = useState(hotel.phone || '');
     const [email, setEmail] = useState(hotel.email || '');
-    const [descripcion, setDescripcion] = useState(hotel.descripcion || '');
-    const [estrellas, setEstrellas] = useState(hotel.estrellas || 0);
-    const [latitud, setLatitud] = useState(hotel.latitud || '');
-    const [longitud, setLongitud] = useState(hotel.longitud || '');
-    const [imagen, setImagen] = useState(hotel.imagen || hotelIcon);
+    const [descripcion, setDescripcion] = useState(hotel.description || '');
+    const [estrellas, setEstrellas] = useState(hotel.stars || 0);
+    const [latitud, setLatitud] = useState(hotel.latitude || '');
+    const [longitud, setLongitud] = useState(hotel.longitude || '');
+    const [imagen, setImagen] = useState(
+        hotel.images && hotel.images.length > 0 ? hotel.images[0].image : cargarImagen
+    );
     const [file, setFile] = useState(null);
 
-    const esNuevoHotel = !hotel.nombre; 
+    const esNuevoHotel = !hotel.name; 
 
     const handleSave = () => {
         const updatedHotel = { 
@@ -71,7 +75,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                 <div className="modal-content">
                     <div className="modal-image-section">
                         <label className="image-label">Imagen</label>
-                        <img src={imagen} alt="Hotel" className="hotel-image-preview" />
+                        <img src={imagen.startsWith('data:') ? imagen : `${API_URL}${imagen}`} alt="Hotel" className="hotel-image-preview" />
                         <label htmlFor="imagen-input" className="btn-change-image">Cambiar imagen</label>
                         <input 
                             type="file"
