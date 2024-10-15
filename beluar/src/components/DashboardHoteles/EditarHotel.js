@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './hotel.css';
-import hotelIcon from '../../assets/default-hotel.jpg';
 import cargarImagen from '../../assets/cargar-imagen.png';
 import create_hotel from '../../services/hotels/create_hotel.js';
 import attach_image from '../../services/hotels/attach_image.js';
+import modify_hotel from '../../services/hotels/modify_hotel.js';
 import { API_URL } from '../../config.js';
 
 const EditarHotelModal = ({ hotel, onClose, onSave }) => {
@@ -20,41 +20,65 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
         hotel.images && hotel.images.length > 0 ? hotel.images[0].image : cargarImagen
     );
     const [file, setFile] = useState(null);
+    const [imageResponse, setImageResponse] = useState(null);
 
     const esNuevoHotel = !hotel.name; 
 
     const handleSave = () => {
         const updatedHotel = { 
             ...hotel, 
-            nombre, 
-            direccion, 
-            ciudad, 
-            telefono, 
+            name: nombre, 
+            address: direccion, 
+            city: ciudad, 
+            phone: telefono, 
             email, 
-            descripcion, 
-            estrellas, 
-            latitud, 
-            longitud, 
-            imagen 
+            description: descripcion, 
+            stars: estrellas, 
+            latitude: latitud, 
+            longitude: longitud, 
         };
-
+    
         if (esNuevoHotel) {
-
             create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
-            .then((response) => {
-                const id = response.id;
-
-                const formData = new FormData();
-                
-                formData.append('image', file);
-           
-                attach_image(id, formData);
-            })
-
+                .then((response) => {
+                    const id = response.id;
+                    if (file) {
+                        const formData = new FormData();
+                        formData.append('image', file);
+                        attach_image(id, formData).then(() => {
+                            updatedHotel.id = id;
+                            updatedHotel.images = [{ image: imagen }]; 
+                            onSave(updatedHotel); 
+                        });
+                    } else {
+                        updatedHotel.id = id;
+                        onSave(updatedHotel);
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error al crear hotel:', err);
+                });
+    
+        } else {
+            
+            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
+                .then(() => {
+                    
+                    if (file) {
+                        const formData = new FormData();
+                        formData.append('image', file);
+                        attach_image(updatedHotel.id, formData).then((imageResponse) => {setImageResponse(imageResponse)});
+                        updatedHotel.images = [{ image: imageResponse.image }];
+                    } else {
+                        onSave(updatedHotel); 
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error al modificar hotel:', err);
+                });
         }
     
-        onSave(updatedHotel);
-        onClose();
+        onClose(); // Cerramos el modal
     };
 
     const handleImageChange = (event) => {

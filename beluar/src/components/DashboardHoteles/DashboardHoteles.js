@@ -73,7 +73,11 @@ function DashboardHoteles() {
     };
 
     const handleSaveHotel = (updatedHotel) => {
-        // Lógica para guardar el hotel actualizado
+        if (hoteles.some(h => h.id === updatedHotel.id)) {
+            setHoteles(hoteles.map(h => h.id === updatedHotel.id ? updatedHotel : h));
+        } else {
+            setHoteles([...hoteles, updatedHotel]);
+        }
     };
 
     const handleDeleteHotel = (hotelToDelete) => {
@@ -129,15 +133,18 @@ function DashboardHoteles() {
                     ) : (
                         filteredHoteles.map((hotel) => (
                             <div key={hotel.id} className="hotel-item">
-                                <img
-                                    src={
-                                        hotel.images && hotel.images.length > 0
-                                            ? `${API_URL}${hotel.images[0].image}`
-                                            : hotelIcon 
-                                    }
-                                    alt={hotel.name}
-                                    className="hotel-image"
-                                />
+                            <img
+                                src={
+                                    hotel.images && hotel.images.length > 0
+                                        ? hotel.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
+                                            ? hotel.images[0].image // Usamos directamente la cadena base64
+                                            : `${API_URL}${hotel.images[0].image}` // Usamos la URL normal
+                                        : hotelIcon
+                                }
+                                alt={hotel.name}
+                                className="hotel-image"
+                            />
+                                {console.log(hotel)}
                                 <div className="hotel-info">
                                     <h2>{hotel.name}</h2>
                                     <p>{hotel.address + ', ' + hotel.city}</p>
