@@ -5,7 +5,7 @@ function delete_hotel(id, name, address, city, phone, email, description, stars,
 
     return (
 
-        fetch(`${API_URL}/delete-hotel/${id}`, {
+        fetch(`${API_URL}/delete-hotel/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
