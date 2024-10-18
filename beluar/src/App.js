@@ -14,16 +14,14 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/DashboardServicios" element={<DashboardServicios />} />
-          <Route path="/" element={<DashboardInicio />} />
           <Route path="/signup" element={<SignInPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/DashboardHabitaciones" element={<DashboardHabitaciones />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/DashboardHoteles" element={<DashboardHoteles />} />
+          <Route path="/DashboardInicio" element={<DashboardInicio />} />
+          <Route path="/DashboardHabitaciones" element={<DashboardHabitaciones />} />
           <Route path="/DashboardServicios" element={<DashboardServicios />} />
           <Route path="/DashboardReservas" element={<DashboardReservas />} />
           <Route path="/DashboardEstadisticas" element={<DashboardEstadisticas />} />
-
         </Routes>
       </div>
     </Router>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import './dashboardHoteles.css';
 import Profile from '../Profile/Profile';
 import logo from '../../assets/logo.png';
@@ -24,6 +25,7 @@ function DashboardHoteles() {
     const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         get_hotels()
@@ -100,6 +102,10 @@ function DashboardHoteles() {
         hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) : [];
 
+    const handleHotelClick = (hotel) => {
+        navigate(`/DashboardInicio`, { state: { hotel } }); 
+    };
+
     return (
         <div style={{ backgroundColor: '#FEFBFF' }}>
             <header className="dashboard-headerHotel">
@@ -132,7 +138,7 @@ function DashboardHoteles() {
                         <p>No se encontraron hoteles.</p> 
                     ) : (
                         filteredHoteles.map((hotel) => (
-                            <div key={hotel.id} className="hotel-item">
+                            <div key={hotel.id} className="hotel-item" onClick={() => handleHotelClick(hotel)}>
                             <img
                                 src={
                                     hotel.images && hotel.images.length > 0

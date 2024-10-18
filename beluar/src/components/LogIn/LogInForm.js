@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 import logo from '../../assets/logo.png'; 
 import login from '../../services/authentication/login';
@@ -7,6 +8,7 @@ function LoginForm() {
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -15,6 +17,7 @@ function LoginForm() {
                 console.log('Success:', data);
                 if(data.access) {
                     localStorage.setItem('token', data.access);
+                    navigate('/DashboardHoteles'); 
                 }
             })
     };

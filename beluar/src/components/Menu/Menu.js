@@ -50,7 +50,7 @@ const Menu = () => {
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
         <img src={logo} alt="Logo" className="logo" />
         <div className="menu-stackItems">
-          <Link to="/" className="menu-item">
+          <Link to="/DashboardInicio" className="menu-item">
             <img src={homeIcon} alt="Home Icon" className="icon" />
             <span>Home</span>
           </Link>
