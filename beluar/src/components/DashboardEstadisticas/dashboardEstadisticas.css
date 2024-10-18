@@ -1,78 +1,92 @@
 .dashboard-estadisticas {
-    background-color: #F0F2F6;
-    padding: 20px;
-    width: 100%;
-    border-radius: 15px;
-  }
-  
-  .section-title {
-    color: #6E28F5;
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  
-  .row {
-    display: flex;
-    gap: 25px;
-    margin-bottom: 30px;
-  }
-  
-  .card {
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1;
-  }
-  
-  .mini-cards-container {
-    display: flex;
-    gap: 25px;
-  }
-  
-  .facturacion {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 10px;
-    padding: 20px;
-  }
-  
-  .facturacion h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .facturacion-valor {
-    font-size: 36px;
-    color: #703FD0;
-  }
-  
-  .servicios {
-    background-color: #E4E6E8;
-  }
-  
-  .servicios-container {
-    display: flex;
-    gap: 15px;
-    padding-top: 20px;
-    background-color: #E4E6E8;
-  }
+  background-color: #F0F2F6;
+  padding: 20px;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.section-title {
+  color: #6E28F5;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start; /* Align items at the start */
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.card-habitaciones, .card-servicios, .card-huespedes, .card-reservas {
+  flex: 1; /* Allow cards to take equal space */
+  background-color: #E4E6E8;
+  padding: 10px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.mini-cards-container {
+  display: flex;
+  gap: 25px;
+}
+
+.charts-container {
+  display: flex;
+  flex-direction: row; /* Cambiar a fila para que los gráficos se alineen horizontalmente */
+  gap: 50px; /* Espacio entre gráficos */
+  margin: 0;
+  padding: 10px;
+}
 
 
-  .servicios-ingresos {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 20px;
-  }
-  
-  .servicios-ingresos h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .ingresos-valor {
-    font-size: 36px;
-    color: #703FD0;
-  }
-  
+.chart {
+  flex: 1; /* Allow charts to take equal space */
+}
+
+.facturacion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.facturacion h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.facturacion-valor {
+  font-size: 36px;
+  color: #703FD0;
+}
+
+.servicios {
+  background-color: #E4E6E8;
+}
+
+.servicios-container {
+  display: flex;
+  gap: 15px;
+  padding-top: 20px;
+  background-color: #E4E6E8;
+}
+
+.servicios-ingresos {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.servicios-ingresos h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.ingresos-valor {
+  font-size: 36px;
+  color: #703FD0;
+}
