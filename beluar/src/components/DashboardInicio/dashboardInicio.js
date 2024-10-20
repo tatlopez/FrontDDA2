@@ -6,12 +6,10 @@ import calendarCheck from "../../assets/calendar-check.svg";
 import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
-import { useLocation } from 'react-router-dom';
 
 function DashboardInicio() {
 
-    const location = useLocation();  // Hook para acceder al estado de navegación
-    const hotel = location.state?.hotel;
+    const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
     const reservations = [
         {

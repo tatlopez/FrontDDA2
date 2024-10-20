@@ -103,7 +103,8 @@ function DashboardHoteles() {
     ) : [];
 
     const handleHotelClick = (hotel) => {
-        navigate(`/DashboardInicio`, { state: { hotel } }); 
+        localStorage.setItem('selectedHotel', JSON.stringify(hotel));
+        navigate('/DashboardInicio'); 
     };
 
     return (
