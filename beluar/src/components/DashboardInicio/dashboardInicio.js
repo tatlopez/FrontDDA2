@@ -6,8 +6,12 @@ import calendarCheck from "../../assets/calendar-check.svg";
 import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
+import { useLocation } from 'react-router-dom';
 
 function DashboardInicio() {
+
+    const location = useLocation();  // Hook para acceder al estado de navegación
+    const hotel = location.state?.hotel;
 
     const reservations = [
         {
@@ -71,7 +75,7 @@ function DashboardInicio() {
         <div className="page-container">
             <Menu />
             <div className="content-container1">
-                <Header />
+                <Header hotelName={hotel.name}/>
                 <div className="dashboard-body1">
                     <div className="dashboard-top">
                         {/* Resumen de tu día*/}
