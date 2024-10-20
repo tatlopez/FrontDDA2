@@ -23,7 +23,7 @@ function Profile() {
         <div className="profile-container">
             <img src={bell} alt="Notificaciones" className="profile-bell" />
             <div className="profile-info">
-                <span className="profile-name">Juan Pérez</span>
+                <span className="profile-name">{localStorage.getItem('first_name')}</span>
                 <span className="profile-role">Staff</span>
             </div>
             <button className="profile-button" onClick={toggleDropdown}>

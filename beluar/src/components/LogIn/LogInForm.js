@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import logo from '../../assets/logo.png'; 
 import login from '../../services/authentication/login';
+import {jwtDecode} from 'jwt-decode';
 
 function LoginForm() {
     const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -17,6 +18,8 @@ function LoginForm() {
                 console.log('Success:', data);
                 if(data.access) {
                     localStorage.setItem('token', data.access);
+                    const decodedToken = jwtDecode(data.access);
+                    localStorage.setItem('first_name', decodedToken.first_name);
                     navigate('/DashboardHoteles'); 
                 }
             })

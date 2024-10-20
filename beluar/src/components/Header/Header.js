@@ -3,6 +3,7 @@ import './header.css';
 import Profile from '../Profile/Profile';
 import hotelIcon from '../../assets/single-hotel-icon.svg';
 
+
 const Header = ({ hotelName }) => {
   return (
     <header className="dashboard-header">

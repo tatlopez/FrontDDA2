@@ -3,8 +3,6 @@ import { API_URL } from '../../config.js';
 
 function signup(email, name, password) {
 
-    const username = email;
-
     return (
 
         fetch(`${API_URL}/signup/`, {
