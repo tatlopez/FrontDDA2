@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import './dashboardHabitaciones.css';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
@@ -9,8 +9,9 @@ import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
 import signoMas from '../../assets/signo-mas.png';
 import AgregarHabitacionModal from './CrearHabitacion';
+import get_rooms from '../../services/rooms/get_rooms';
 
-const roomsData = [
+/* const roomsData = [
   { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg', type: 'habitacion' },
   { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg', type: 'habitacion' },
   { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg', type: 'habitacion' },
@@ -19,18 +20,31 @@ const roomsData = [
   { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg', type: 'habitacion' },
   { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg', type: 'habitacion' },
   { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg', type: 'habitacion' },
-];
+]; */
 
 function DashboardHabitaciones() {
-  const [rooms, setRooms] = useState(roomsData);
+  const [rooms, setRooms] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [editingRoom, setEditingRoom] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showAddRoomModal, setShowAddRoomModal] = useState(false);
 
+  const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+  
+  useEffect(() => {
+    get_rooms(hotel.id)
+      .then((res) => {
+        console.log('Rooms:', res);
+        setRooms(res || []);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+      });
+  }, []);
+
   const filteredRooms = rooms.filter(room =>
-    room.number.toLowerCase().includes(searchTerm.toLowerCase())
+    String(room.floor).toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleRoomClick = (room) => {
