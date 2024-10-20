@@ -86,7 +86,7 @@ function DashboardHabitaciones() {
     <div className="page-container">
       <Menu />
       <div className="content-container">
-        <Header />
+        <Header hotelName={hotel.name}/>
         <div className="dashboard-body">
           <div className="rooms-section">
             <div className="rooms-header">
@@ -100,15 +100,15 @@ function DashboardHabitaciones() {
             </div>
             <div className="rooms-list" style={{ maxHeight: '530px', overflowY: 'auto' }}>
               {filteredRooms.map((room) => (
-                <Listas key={room.number} item={room} type={'habitacion'} onEditClick={handleEditClick} onRoomClick={handleRoomClick} onDeleteClick={handleDeleteClick} />
+                <Listas key={room.id} item={room} type={'habitacion'} onEditClick={handleEditClick} onRoomClick={handleRoomClick} onDeleteClick={handleDeleteClick} />
               ))}
             </div>
           </div>
           <div className="room-detail-section">
             {editingRoom ? (
-              <EditableCard item={selectedRoom} type={selectedRoom.type} onSave={handleSave} />
+              <EditableCard item={selectedRoom} type={'habitacion'} onSave={handleSave} />
             ) : (
-              <InfoCard item={selectedRoom} type={selectedRoom?.type} onEdit={handleEditClick} onDelete={() => setShowConfirmModal(true)} />
+              <InfoCard item={selectedRoom} type={'habitacion'} onEdit={handleEditClick} onDelete={() => setShowConfirmModal(true)} />
             )}
           </div>
         </div>

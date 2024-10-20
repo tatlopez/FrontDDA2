@@ -3,6 +3,15 @@ import './card.css';
 import defaultImage from '../../assets/default-hotel.jpg';
 
 const InfoCard = ({ item, type, onEdit, onDelete }) => {
+
+  const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+
+  const roomStateMapping = {
+    'A': 'Disponible',
+    'B': 'Reservada',
+    'M': 'Mantenimiento'
+  };
+
   if (!item) return null;
 
   return (
@@ -12,7 +21,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
-          <div className="editable-input">{item.hotel}</div>
+          <div className="editable-input">{hotel.name}</div>
         </div>
         {type === 'habitacion' ? (
           <div className="editable-fields">
@@ -31,8 +40,8 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
         </div>
         <div className="editable-fields">
           <label>{type === 'habitacion' ? 'Estado' : 'Duración'}</label>
-          <span className={type === 'habitacion' ? `item-status ${item.status.toLowerCase()}` : `item-duration`}>
-            {type === 'habitacion' ? item.status : item.duration}
+          <span className={type === 'habitacion' ? `item-status ${item.state.toLowerCase()}` : `item-duration`}>
+            {type === 'habitacion' ? roomStateMapping[item.state] || item.state : item.duration}
           </span>
         </div>
       </div>
