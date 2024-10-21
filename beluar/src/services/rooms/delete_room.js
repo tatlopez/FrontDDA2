@@ -1,11 +1,11 @@
 
 import { API_URL } from '../../config';
 
-function delete_hotel(id) {
+function delete_room(id) {
 
     return (
 
-        fetch(`${API_URL}/delete-hotel/${id}/`, {
+        fetch(`${API_URL}/delete-room/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,4 +19,4 @@ function delete_hotel(id) {
     
 }
 
-export default delete_hotel;
+export default delete_room;
