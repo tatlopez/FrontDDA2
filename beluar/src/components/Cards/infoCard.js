@@ -1,6 +1,7 @@
 import React from 'react';
 import './card.css';
 import defaultImage from '../../assets/default-hotel.jpg';
+import { API_URL } from '../../config';
 
 const InfoCard = ({ item, type, onEdit, onDelete }) => {
 
@@ -17,7 +18,15 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
   return (
     <div className="item-detail">
       <p className="item-number">Número: {item.number || item.name}</p>
-      <img src={defaultImage} alt={`Item ${item.number || item.name}`} className="detail-image" />
+      <img src={
+
+        item.images && item.images.length > 0
+          ? item.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
+            ? item.images[0].image // Usamos directamente la cadena base64
+            : `${API_URL}${item.images[0].image}` // Usamos la URL normal
+          : defaultImage
+
+      } alt={`Item ${item.number || item.name}`} className="detail-image" />
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
