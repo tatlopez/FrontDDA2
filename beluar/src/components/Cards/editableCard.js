@@ -3,17 +3,19 @@ import './card.css';
 import cargarImagen from '../../assets/cargar-imagen.png';
 
 const EditableCard = ({ item, type, onSave }) => {
-  const [hotel, setHotel] = useState(item.hotel || '');
   const [floor, setFloor] = useState(item.floor || '');
-  const [letter, setLetter] = useState(item.letter || '');
+  const [name, setName] = useState(item.name || '');
   const [price, setPrice] = useState(item.price || '');
-  const [status, setStatus] = useState(item.status || '');
+  const [state, setState] = useState(item.state || '');
+
   const [serviceName, setServiceName] = useState(item.serviceName || '');
   const [details, setDetails] = useState(item.details || '');
   const [duration, setDuration] = useState(item.duration || '');
 
+  const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+
   const handleSave = () => {
-    const updatedItem = { ...item, hotel, floor, letter, price, status, serviceName, details, duration };
+    const updatedItem = { ...item, hotel, floor, name, price, state, serviceName, details, duration };
     onSave(updatedItem);
   };
 
@@ -23,7 +25,7 @@ const EditableCard = ({ item, type, onSave }) => {
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
-          <input type="text" value={hotel} onChange={(e) => setHotel(e.target.value)} className="editable-input" />
+          <input type="text" value={hotel.name}  className="editable-input" />
         </div>
         {type === 'habitacion' && (
           <>
@@ -33,7 +35,7 @@ const EditableCard = ({ item, type, onSave }) => {
             </div>
             <div className="editable-fields">
               <label>Letra</label>
-              <input type="text" value={letter} onChange={(e) => setLetter(e.target.value)} className="editable-input" />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="editable-input" />
             </div>
             <div className="editable-fields">
               <label>Precio</label>
@@ -41,7 +43,7 @@ const EditableCard = ({ item, type, onSave }) => {
             </div>
             <div className="editable-fields">
               <label>Estado</label>
-              <input type="text" value={status} onChange={(e) => setStatus(e.target.value)} className="editable-input" />
+              <input type="text" value={state} onChange={(e) => setState(e.target.value)} className="editable-input" />
             </div>
           </>
         )}

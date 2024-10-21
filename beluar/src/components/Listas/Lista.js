@@ -31,7 +31,7 @@ const Listas = ({ item, type, onEditClick, onRoomClick, image = defaultImage }) 
             <p className="card-number">{item.name}</p>
           )}
           {type === 'habitacion' ? (
-            <span className={`card-status ${item.state.toLowerCase()}`}>
+            <span className={`card-status ${roomStateMapping[item.state]}`}>
             {roomStateMapping[item.state] || item.state}
           </span>
           ) : (
@@ -41,7 +41,7 @@ const Listas = ({ item, type, onEditClick, onRoomClick, image = defaultImage }) 
                 {item.duration}
               </span>
             </div>
-          )}
+          )} 
         </div>
       </div>
       <div className="card-actions">

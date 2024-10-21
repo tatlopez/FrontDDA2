@@ -49,7 +49,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
         </div>
         <div className="editable-fields">
           <label>{type === 'habitacion' ? 'Estado' : 'Duración'}</label>
-          <span className={type === 'habitacion' ? `item-status ${item.state.toLowerCase()}` : `item-duration`}>
+          <span className={type === 'habitacion' ? `item-status ${roomStateMapping[item.state]}` : `item-duration`}>
             {type === 'habitacion' ? roomStateMapping[item.state] || item.state : item.duration}
           </span>
         </div>

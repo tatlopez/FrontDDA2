@@ -63,17 +63,17 @@
   max-width: fit-content;
 }
 
-.item-status.disponible {
+.item-status.Disponible {
   color: #4C8732;
   background-color: rgb(135,191,112,0.5);
 }
 
-.item-status.ocupada {
+.item-status.Reservada {
   color: #E01300;
   background-color: rgb(251,139,129,0.5);
 }
 
-.item-status.limpieza {
+.item-status.Mantenimiento {
   color: #E19110;
   background-color: rgb(226,221,80,0.5);
 }
