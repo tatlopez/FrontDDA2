@@ -16,6 +16,14 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
 
   const handleSave = () => {
 
+    const room = {
+        hotel: hotel.id,
+        floor: floor,
+        name: name,
+        state: state,
+        price: price
+    }
+
     create_room(hotel.id, floor, name, price, state)
     .then((response) => {
         const id = response.id;
@@ -23,7 +31,7 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
             const formData = new FormData();
             formData.append('image', file);
             attach_image_room(id, formData).then(() => {
-                onSave(); 
+                onSave(room); 
             });
         } 
     })
