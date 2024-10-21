@@ -11,16 +11,6 @@ import signoMas from '../../assets/signo-mas.png';
 import AgregarHabitacionModal from './CrearHabitacion';
 import get_rooms from '../../services/rooms/get_rooms';
 
-/* const roomsData = [
-  { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg', type: 'habitacion' },
-  { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg', type: 'habitacion' },
-  { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg', type: 'habitacion' },
-  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg', type: 'habitacion' },
-  { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg', type: 'habitacion' },
-  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg', type: 'habitacion' },
-  { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg', type: 'habitacion' },
-  { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg', type: 'habitacion' },
-]; */
 
 function DashboardHabitaciones() {
   const [rooms, setRooms] = useState([]);

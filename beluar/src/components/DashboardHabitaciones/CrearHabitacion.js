@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './dashboardHabitaciones.css';
 import hotelIcon from '../../assets/default-hotel.jpg';
 import create_room from '../../services/rooms/create_room.js';
-
+import attach_image_room from '../../services/rooms/attach_image_room.js';
 
 const AgregarHabitacionModal = ({ onClose, onSave }) => {
   const [floor, setFloor] = useState('');
@@ -17,7 +17,16 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
   const handleSave = () => {
 
     create_room(hotel.id, floor, name, price, state)
-    
+    .then((response) => {
+        const id = response.id;
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            attach_image_room(id, formData).then(() => {
+                onSave(); 
+            });
+        } 
+    })
   };
 
   const handleImageChange = (event) => {
