@@ -14,7 +14,7 @@ function create_room(hotel, floor, name, price, state) {
             body: JSON.stringify({hotel: hotel, floor: floor, name: name, price: price, state: state}),
         })
         .then(response => response.json())
-        .then((res) => res)
+        .then((res) => console.log(res))
         .catch(error => console.error('Error:', error))
     );
     

@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import './dashboardHabitaciones.css';
 import hotelIcon from '../../assets/default-hotel.jpg';
+import create_room from '../../services/rooms/create_room.js';
 
 
 const AgregarHabitacionModal = ({ onClose, onSave }) => {
-  const [number, setNumber] = useState('');
-  const [piso, setPiso] = useState('');
-  const [letra, setLetra] = useState('');
-  const [status, setStatus] = useState('Disponible');
+  const [floor, setFloor] = useState('');
+  const [name, setName] = useState('');
+  const [state, setState] = useState('A');
   const [price, setPrice] = useState('');
   const [imagen, setImagen] = useState(hotelIcon);
   const [file, setFile] = useState(null);
 
+  const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+
   const handleSave = () => {
-    const nuevaHabitacion = {
-      number,
-      piso,
-      letra,
-      status,
-      price: parseFloat(price),
-      imagen,  
-      type: 'habitacion'
-    };
-    onSave(nuevaHabitacion);
-    onClose();
+
+    create_room(hotel.id, floor, name, price, state)
+    
   };
 
   const handleImageChange = (event) => {
@@ -57,26 +51,26 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
             <label>Piso</label>
             <input
               type="text"
-              value={piso}
-              onChange={(e) => setPiso(e.target.value)}
+              value={floor}
+              onChange={(e) => setFloor(e.target.value)}
             />
           </div>
           <div className="modal-field">
             <label>Letra</label>
             <input
               type="text"
-              value={letra}
-              onChange={(e) => setLetra(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
-          {/*<div className="modal-field">
+          <div className="modal-field">
             <label>Estado</label>
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <option value="Disponible">Disponible</option>
-              <option value="Ocupada">Ocupada</option>
-              <option value="Limpieza">Limpieza</option>
+            <select value={state} onChange={(e) => setState(e.target.value)}>
+              <option value="A">Disponible</option>
+              <option value="B">Ocupada</option>
+              <option value="M">Mantenimiento</option>
             </select>
-          </div>*/}
+          </div>
           <div className="modal-field">
             <label>Precio</label>
             <input
