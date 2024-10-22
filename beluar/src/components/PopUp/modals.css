@@ -33,6 +33,7 @@
     font-family: 'DM Sans', sans-serif;
     overflow-y: auto;
     animation: fadeIn 0.3s ease-in-out;
+    align-items: center;
 }
 
 @keyframes fadeIn {

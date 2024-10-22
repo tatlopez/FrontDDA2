@@ -20,7 +20,7 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
       floor: floor,
       name: name,
       state: state,
-      price: price
+      price: price,
     };
   
     create_room(hotel.id, floor, name, price, state)
@@ -32,6 +32,7 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
           formData.append('image', file);
           attach_image_room(id, formData)
             .then(() => {
+              room.images = [{ image: imagen }];
               onSave(room); 
               onClose(); 
             })
@@ -93,7 +94,7 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
           </div>
           <div className="modal-field">
             <label>Estado</label>
-            <select value={state} onChange={(e) => setState(e.target.value)}>
+            <select value={state} onChange={(e) => setState(e.target.value)} className="editable-select">
               <option value="A">Disponible</option>
               <option value="B">Ocupada</option>
               <option value="M">Mantenimiento</option>

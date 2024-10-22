@@ -26,7 +26,13 @@ function DashboardHabitaciones() {
   useEffect(() => {
     get_rooms(hotel.id)
       .then((res) => {
-        setRooms(res || []);
+        const loadedRooms = res || []
+        setRooms(loadedRooms);
+
+        if (loadedRooms.length > 0) {
+          setSelectedRoom(loadedRooms[0]);
+        }
+
       })
       .catch((err) => {
         console.error('Error:', err);
