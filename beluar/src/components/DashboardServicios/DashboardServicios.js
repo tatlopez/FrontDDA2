@@ -26,6 +26,8 @@ function DashboardServicios() {
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
+    
+
     // Filtrar los servicios según el término de búsqueda
     const filteredServices = services.filter(service =>
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
