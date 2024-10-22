@@ -1,10 +1,7 @@
 import { API_URL } from '../../config';
 
 function modify_service(id, hotel, name, detail, is_available, price) {
-
     return (
-    
-
         fetch(`${API_URL}/modify-service/${id}/`, {
             method: 'PUT',
             headers: {

@@ -13,7 +13,7 @@ const EditableCard = ({ item, type, onSave }) => {
 
   const [serviceName, setServiceName] = useState(item.name || '');
   const [detail, setDetail] = useState(item.detail || '');
-  const [is_available, setIsAvailable] = useState(item.is_available || '');
+  const [is_available, setIsAvailable] = useState(item.is_available || 'true');
 
   const [imagen, setImagen] = useState(
     item.images && item.images.length > 0 ? item.images[0].image : cargarImagen
