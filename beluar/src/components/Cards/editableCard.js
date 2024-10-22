@@ -55,13 +55,13 @@ const EditableCard = ({ item, type, onSave }) => {
               <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} className="editable-input" />
             </div>
             <div className="editable-fields">
-              <label>Estado</label>
-              <select value={state} onChange={(e) => setState(e.target.value)}>
+            <label>Estado</label>
+            <select value={state} onChange={(e) => setState(e.target.value)} className="editable-select">
               <option value="A">Disponible</option>
-              <option value="B">Ocupada</option>
+              <option value="B">Reservada</option>
               <option value="M">Mantenimiento</option>
             </select>
-            </div>
+          </div>
           </>
         )}
         {type === 'servicio' && (
