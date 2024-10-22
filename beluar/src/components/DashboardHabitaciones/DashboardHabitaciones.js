@@ -25,7 +25,6 @@ function DashboardHabitaciones() {
   useEffect(() => {
     get_rooms(hotel.id)
       .then((res) => {
-        console.log('Rooms:', res);
         setRooms(res || []);
       })
       .catch((err) => {
@@ -50,6 +49,9 @@ function DashboardHabitaciones() {
   const handleDeleteClick = (room) => {
     setSelectedRoom(room);
     setShowConfirmModal(true);
+
+
+
   };
 
   const handleSave = (updatedRoom) => {
@@ -104,7 +106,10 @@ function DashboardHabitaciones() {
       {showAddRoomModal && (
         <AgregarHabitacionModal
           onClose={() => setShowAddRoomModal(false)}
-          onSave={handleAddRoom}
+          onSave={(newRoom) => {
+            handleAddRoom(newRoom);
+            setShowAddRoomModal(false);
+          }}
         />
       )}
       {showConfirmModal && (

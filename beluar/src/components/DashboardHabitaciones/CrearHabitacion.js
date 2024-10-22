@@ -15,26 +15,37 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
   const handleSave = () => {
-
     const room = {
-        hotel: hotel.id,
-        floor: floor,
-        name: name,
-        state: state,
-        price: price
-    }
-
+      hotel: hotel.id,
+      floor: floor,
+      name: name,
+      state: state,
+      price: price
+    };
+  
     create_room(hotel.id, floor, name, price, state)
-    .then((response) => {
+      .then((response) => {
         const id = response.id;
+        room.id = id; 
         if (file) {
-            const formData = new FormData();
-            formData.append('image', file);
-            attach_image_room(id, formData).then(() => {
-                onSave(room); 
+          const formData = new FormData();
+          formData.append('image', file);
+          attach_image_room(id, formData)
+            .then(() => {
+              onSave(room); 
+              onClose(); 
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
             });
-        } 
-    })
+        } else {
+          onSave(room); 
+          onClose(); 
+        }
+      })
+      .catch((error) => {
+        console.error('Error creating room:', error);
+      });
   };
 
   const handleImageChange = (event) => {
