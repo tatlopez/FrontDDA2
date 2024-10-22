@@ -139,7 +139,7 @@ function DashboardHoteles() {
                         <p>No se encontraron hoteles.</p> 
                     ) : (
                         filteredHoteles.map((hotel) => (
-                            <div key={hotel.id} className="hotel-item" onClick={() => handleHotelClick(hotel)}>
+                            <div key={hotel.id} className="hotel-item">
                             <img
                                 src={
                                     hotel.images && hotel.images.length > 0
@@ -150,9 +150,10 @@ function DashboardHoteles() {
                                 }
                                 alt={hotel.name}
                                 className="hotel-image"
+                                onClick={() => handleHotelClick(hotel)}
                             />
                                 {console.log(hotel)}
-                                <div className="hotel-info">
+                                <div className="hotel-info" onClick={() => handleHotelClick(hotel)}>
                                     <h2>{hotel.name}</h2>
                                     <p>{hotel.address + ', ' + hotel.city}</p>
                                     <div className="hotel-stars">
