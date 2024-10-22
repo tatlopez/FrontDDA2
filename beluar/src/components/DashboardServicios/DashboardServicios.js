@@ -24,6 +24,8 @@ function DashboardServicios() {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [showAgregarModal, setShowAgregarModal] = useState(false); // Estado para mostrar el modal de agregar
 
+    const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+
     // Filtrar los servicios según el término de búsqueda
     const filteredServices = services.filter(service =>
         service.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -74,7 +76,7 @@ function DashboardServicios() {
         <div className="page-container">
             <Menu />
             <div className="content-container">
-                <Header />
+                <Header hotelName={hotel.name}/>
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
