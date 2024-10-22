@@ -16,14 +16,19 @@ const Listas = ({ item, type, onEditClick, onRoomClick, image = defaultImage }) 
   return (
     <div className="card" onClick={() => onRoomClick(item)} style={{ cursor: 'pointer' }}>
       <div className="card-left">
-        <img src={
-
-          item.images && item.images.length > 0
-            ? item.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
-              ? item.images[0].image // Usamos directamente la cadena base64
-              : `${API_URL}${item.images[0].image}` // Usamos la URL normal
-            : image
-        } alt={`Item ${type === 'habitacion' ? item.number : item.name}`} className="card-image" />
+      {type === 'habitacion' && (
+          <img
+            src={
+              item.images && item.images.length > 0
+                ? item.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
+                  ? item.images[0].image // Usamos directamente la cadena base64
+                  : `${API_URL}${item.images[0].image}` // Usamos la URL normal
+                : image
+            }
+            alt={`Item ${type === 'habitacion' ? item.number : item.name}`}
+            className="card-image"
+          />
+        )}
         <div className="card-info">
           {type === 'habitacion' ? (
             <p className="card-number">#{item.floor + item.name}</p>
@@ -36,9 +41,9 @@ const Listas = ({ item, type, onEditClick, onRoomClick, image = defaultImage }) 
           </span>
           ) : (
             <div>
-              <span className="card-duration-label">Disponibilidad/duración:</span>
+              <span className="card-duration-label">Detalles:</span>
               <span className="card-duration">
-                {item.duration}
+                {item.detail}
               </span>
             </div>
           )} 

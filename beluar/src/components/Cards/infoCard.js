@@ -17,16 +17,19 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
 
   return (
     <div className="item-detail">
-      <p className="item-number">Número: {item.number || item.floor + item.name}</p>
-      <img src={
+      <p className="item-number">{type === 'habitacion' ? `Habitación ${item.floor + item.name}` : item.name}</p>
+      {type === 'habitacion' && (
+        <img src={
 
-        item.images && item.images.length > 0
-          ? item.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
-            ? item.images[0].image // Usamos directamente la cadena base64
-            : `${API_URL}${item.images[0].image}` // Usamos la URL normal
-          : defaultImage
+          item.images && item.images.length > 0
+            ? item.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
+              ? item.images[0].image // Usamos directamente la cadena base64
+              : `${API_URL}${item.images[0].image}` // Usamos la URL normal
+            : defaultImage
 
-      } alt={`Item ${item.number || item.name}`} className="detail-image" />
+        } alt={`Item ${item.number || item.name}`} className="detail-image" />
+      )
+      }
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
@@ -40,18 +43,12 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
         ) : (
           <div className="editable-fields">
             <label>Detalles</label>
-            <div className="editable-input">{item.details}</div>
+            <div className="editable-input">{item.detail}</div>
           </div>
         )}
         <div className="editable-fields">
           <label>Precio</label>
           <div className="editable-input">{'$' + item.price}</div>
-        </div>
-        <div className="editable-fields">
-          <label>{type === 'habitacion' ? 'Estado' : 'Duración'}</label>
-          <span className={type === 'habitacion' ? `item-status ${roomStateMapping[item.state]}` : `item-duration`}>
-            {type === 'habitacion' ? roomStateMapping[item.state] || item.state : item.duration}
-          </span>
         </div>
       </div>
       <div className='buttons'>

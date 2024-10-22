@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
 import Listas from '../Listas/Lista';
@@ -8,16 +8,17 @@ import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
 import AgregarServicioModal from './CrearServicio';
 import signoMas from '../../assets/signo-mas.png';
+import get_services from '../../services/services/get_services';
 
-const servicesData = [
+/* const servicesData = [
     { name: 'Acceso a salon VIP', duration: '24hs', price: 300, image: 'room1.jpg', type: 'servicio' },
     { name: 'Clase de tenis privada', duration: '60min', price: 250, image: 'room2.jpg', type: 'servicio' },
     { name: 'Traslado al aeropuerto', duration: '24hs', price: 250, image: 'room4.jpg', type: 'servicio' },
     { name: 'Room Service', duration: '24hs', price: 100, image: 'room5.jpg', type: 'servicio' },
-];
+]; */
 
 function DashboardServicios() {
-    const [services, setServices] = useState(servicesData);
+    const [services, setServices] = useState([]);
     const [selectedService, setSelectedService] = useState(null);
     const [editingService, setEditingService] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -26,7 +27,17 @@ function DashboardServicios() {
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
-    
+    useEffect(() => {
+        get_services(hotel.id)
+        .then((res) => {
+            const loadedServices = res || [];
+            setServices(loadedServices);
+
+            if (loadedServices.length > 0) {
+                setSelectedService(loadedServices[0]);
+            }
+        })
+    }, []);
 
     // Filtrar los servicios según el término de búsqueda
     const filteredServices = services.filter(service =>
