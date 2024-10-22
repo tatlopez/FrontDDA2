@@ -17,7 +17,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
 
   return (
     <div className="item-detail">
-      <p className="item-number">Número: {item.number || item.name}</p>
+      <p className="item-number">Número: {item.number || item.floor + item.name}</p>
       <img src={
 
         item.images && item.images.length > 0
