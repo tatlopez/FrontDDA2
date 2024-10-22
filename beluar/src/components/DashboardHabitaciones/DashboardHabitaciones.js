@@ -10,6 +10,7 @@ import Header from '../Header/Header';
 import signoMas from '../../assets/signo-mas.png';
 import AgregarHabitacionModal from './CrearHabitacion';
 import get_rooms from '../../services/rooms/get_rooms';
+import delete_room from '../../services/rooms/delete_room';
 
 
 function DashboardHabitaciones() {
@@ -49,9 +50,6 @@ function DashboardHabitaciones() {
   const handleDeleteClick = (room) => {
     setSelectedRoom(room);
     setShowConfirmModal(true);
-
-
-
   };
 
   const handleSave = (updatedRoom) => {
@@ -62,10 +60,16 @@ function DashboardHabitaciones() {
   };
 
   const handleConfirmDelete = () => {
-    const updatedRooms = rooms.filter(room => room.number !== selectedRoom.number);
-    setRooms(updatedRooms);
-    setSelectedRoom(updatedRooms[0] || null);  
-    setShowConfirmModal(false);
+    delete_room(selectedRoom.id)
+    .then(() => {
+      const updatedRooms = rooms.filter(room => room.id !== selectedRoom.id);
+      setRooms(updatedRooms);
+      setSelectedRoom(updatedRooms[0] || null);  
+      setShowConfirmModal(false);
+    })
+    .catch((err) => {
+      console.error('Error:', err);
+    });
   };
 
   const handleAddRoom = (newRoom) => {
