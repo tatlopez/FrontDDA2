@@ -9,6 +9,7 @@ import Header from '../Header/Header';
 import AgregarServicioModal from './CrearServicio';
 import signoMas from '../../assets/signo-mas.png';
 import get_services from '../../services/services/get_services';
+import delete_service from '../../services/services/delete_service';
 
 /* const servicesData = [
     { name: 'Acceso a salon VIP', duration: '24hs', price: 300, image: 'room1.jpg', type: 'servicio' },
@@ -74,10 +75,14 @@ function DashboardServicios() {
 
     // Confirmar la eliminación del servicio seleccionado
     const handleConfirmDelete = () => {
-        const updatedServices = services.filter(service => service.name !== selectedService.name);
-        setServices(updatedServices);
-        setSelectedService(null); // Deseleccionar el servicio después de eliminarlo
-        setShowConfirmModal(false);
+
+        delete_service(selectedService.id)
+        .then(() => {
+            const updatedServices = services.filter(service => service.name !== selectedService.name);
+            setServices(updatedServices);
+            setSelectedService(null); // Deseleccionar el servicio después de eliminarlo
+            setShowConfirmModal(false);
+        })
     };
 
     // Agregar un nuevo servicio
@@ -116,11 +121,11 @@ function DashboardServicios() {
                     </div>
                     <div className="room-detail-section">
                         {editingService ? (
-                            <EditableCard item={selectedService} type={selectedService.type} onSave={handleSave} />
+                            <EditableCard item={selectedService} type={'servicio'} onSave={handleSave} />
                         ) : (
                             <InfoCard
                                 item={selectedService}
-                                type={selectedService?.type}
+                                type={'servicio'}
                                 onEdit={handleEditClick}
                                 onDelete={() => setShowConfirmModal(true)}
                             />

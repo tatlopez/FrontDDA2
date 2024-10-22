@@ -7,12 +7,6 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
 
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
-  const roomStateMapping = {
-    'A': 'Disponible',
-    'B': 'Reservada',
-    'M': 'Mantenimiento'
-  };
-
   if (!item) return null;
 
   return (

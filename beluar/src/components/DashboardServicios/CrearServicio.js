@@ -1,33 +1,27 @@
 import React, { useState } from 'react';
-import defaultServiceIcon from  '../../assets/default-hotel.jpg';
+import create_service from '../../services/services/create_service';
 
 const AgregarServicioModal = ({ onClose, onSave }) => {
   const [name, setName] = useState('');
-  const [duration, setDuration] = useState('');
+  const [detail, setDetail] = useState('');
+  const [is_available, setIsAvailable] = useState('true');
   const [price, setPrice] = useState('');
-  const [imagen, setImagen] = useState(defaultServiceIcon);
-  const [file, setFile] = useState(null);
+
+  const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
   const handleSave = () => {
     const nuevoServicio = {
-      name,
-      duration,
-      price: parseFloat(price),
-      imagen,
-      type: 'servicio'
+      name: name,
+      detail: detail,
+      is_available: is_available,
+      price: price,
     };
-    onSave(nuevoServicio);
-    onClose();
-  };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setImagen(reader.result);
-      reader.readAsDataURL(file); 
-      setFile(file);
-    }
+    create_service(hotel.id, name, detail, is_available, price)
+      .then((response) => {
+        onSave(nuevoServicio);
+        onClose();
+      });
   };
 
   return (
@@ -36,17 +30,6 @@ const AgregarServicioModal = ({ onClose, onSave }) => {
         <button className="close-modal" onClick={onClose}>X</button>
         <h2 className="modal-title">Agregar Servicio</h2>
         <div className="modal-content">
-            <div className="modal-image-section">
-                <label className="image-label">Imagen</label>
-                <img src={imagen} alt="Hotel" className="hotel-image-preview" />
-                <label htmlFor="imagen-input" className="btn-change-image">Cambiar imagen</label>
-                <input 
-                    type="file"
-                    id="imagen-input"
-                    style={{ display: 'none' }}
-                    onChange={handleImageChange}
-                />
-            </div>
           <div className="modal-field">
             <label>Nombre</label>
             <input
@@ -56,12 +39,19 @@ const AgregarServicioModal = ({ onClose, onSave }) => {
             />
           </div>
           <div className="modal-field">
-            <label>Duración</label>
+            <label>Detalles</label>
             <input
               type="text"
-              value={duration}
-              onChange={(e) => setDuration(e.target.value)}
+              value={detail}
+              onChange={(e) => setDetail(e.target.value)}
             />
+          </div>
+          <div className="modal-field">
+            <label>Disponibilidad</label>
+            <select value={is_available} onChange={(e) => setIsAvailable(e.target.value)} className="editable-select">
+              <option value="true">Habilitado</option>
+              <option value="false">Deshabilitado</option>
+            </select>
           </div>
           <div className="modal-field">
             <label>Precio</label>

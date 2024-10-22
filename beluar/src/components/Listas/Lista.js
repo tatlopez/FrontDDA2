@@ -40,12 +40,12 @@ const Listas = ({ item, type, onEditClick, onRoomClick, image = defaultImage }) 
             {roomStateMapping[item.state] || item.state}
           </span>
           ) : (
-            <div>
-              <span className="card-duration-label">Detalles:</span>
-              <span className="card-duration">
-                {item.detail}
-              </span>
-            </div>
+        <div>
+          <span className="card-duration-label">Disponibilidad:</span>
+          <span className={`card-duration ${item.is_available ? 'Habilitado' : 'Deshabilitado'}`}>
+            {item.is_available ? 'Habilitado' : 'Deshabilitado'}
+          </span>
+        </div>
           )} 
         </div>
       </div>

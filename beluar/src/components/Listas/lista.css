@@ -73,8 +73,16 @@
   font-weight: 400;
   padding: 5px 10px;
   border-radius: 15px;
+}
+
+.card-duration.Habilitado {
   color: #4C8732;
   background-color: rgb(135,191,112,0.5);
+}
+
+.card-duration.Deshabilitado {
+  color: #E01300;
+  background-color: rgb(251,139,129,0.5);
 }
 
 .card-actions {

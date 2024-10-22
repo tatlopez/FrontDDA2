@@ -3,6 +3,7 @@ import './card.css';
 import cargarImagen from '../../assets/cargar-imagen.png';
 import { API_URL } from '../../config.js';
 import modify_room from '../../services/rooms/modify_room.js';
+import modify_service from '../../services/services/modify_service.js';
 
 const EditableCard = ({ item, type, onSave }) => {
   const [floor, setFloor] = useState(item.floor || '');
@@ -10,9 +11,9 @@ const EditableCard = ({ item, type, onSave }) => {
   const [price, setPrice] = useState(item.price || '');
   const [state, setState] = useState(item.state || '');
 
-  const [serviceName, setServiceName] = useState(item.serviceName || '');
-  const [details, setDetails] = useState(item.details || '');
-  const [duration, setDuration] = useState(item.duration || '');
+  const [serviceName, setServiceName] = useState(item.name || '');
+  const [detail, setDetail] = useState(item.detail || '');
+  const [is_available, setIsAvailable] = useState(item.is_available || '');
 
   const [imagen, setImagen] = useState(
     item.images && item.images.length > 0 ? item.images[0].image : cargarImagen
@@ -21,24 +22,37 @@ const EditableCard = ({ item, type, onSave }) => {
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
   const handleSave = () => {
-    modify_room(item.id, hotel.id, floor, name, price, state)
-      .then((response) => {
-        onSave(response);
-      })
-      .catch((err) => {
-        console.error('Error al modificar habitación:', err);
-      });
+    if (type === 'habitacion') {
+      modify_room(item.id, hotel.id, floor, name, price, state)
+        .then((response) => {
+          onSave(response);
+        })
+        .catch((err) => {
+          console.error('Error al modificar habitación:', err);
+        });
+    } else {
+      modify_service(item.id, hotel.id, serviceName, detail, is_available, price)
+        .then((response) => {
+          onSave(response);
+        })
+        .catch((err) => {
+          console.error('Error al modificar servicio:', err);
+        });
+    }
   };
 
   return (
     <div className="item-detail">
-      <img src={
-        imagen.startsWith('data:') ? imagen : `${API_URL}${imagen}`
-      } alt={`Item ${item.number || item.name}`} className="detail-image" />
+
+      {type === 'habitacion' && (
+        <img src={
+          imagen.startsWith('data:') ? imagen : `${API_URL}${imagen}`
+        } alt={`Item ${item.number || item.name}`} className="detail-image" />
+      )}
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
-          <input type="text" value={hotel.name}  className="editable-input" />
+          <input type="text" value={hotel.name} readOnly className="editable-input" />
         </div>
         {type === 'habitacion' && (
           <>
@@ -72,15 +86,18 @@ const EditableCard = ({ item, type, onSave }) => {
             </div>
             <div className="editable-fields">
               <label>Detalles</label>
-              <input type="text" value={details} onChange={(e) => setDetails(e.target.value)} className="editable-input" />
+              <input type="text" value={detail} onChange={(e) => setDetail(e.target.value)} className="editable-input" />
+            </div>
+            <div className="editable-fields">
+            <label>Disponibilidad</label>
+            <select value={is_available} onChange={(e) => setIsAvailable(e.target.value)} className="editable-select">
+              <option value="true">Habilitado</option>
+              <option value="false">Deshabilitado</option>
+            </select>
             </div>
             <div className="editable-fields">
               <label>Precio</label>
               <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} className="editable-input" />
-            </div>
-            <div className="editable-fields">
-              <label>Duración</label>
-              <input type="text" value={duration} onChange={(e) => setDuration(e.target.value)} className="editable-input" />
             </div>
           </>
         )}
