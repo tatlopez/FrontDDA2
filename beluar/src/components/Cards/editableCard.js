@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './card.css';
 import cargarImagen from '../../assets/cargar-imagen.png';
+import { API_URL } from '../../config.js';
+import modify_room from '../../services/rooms/modify_room.js';
 
 const EditableCard = ({ item, type, onSave }) => {
   const [floor, setFloor] = useState(item.floor || '');
@@ -12,16 +14,27 @@ const EditableCard = ({ item, type, onSave }) => {
   const [details, setDetails] = useState(item.details || '');
   const [duration, setDuration] = useState(item.duration || '');
 
+  const [imagen, setImagen] = useState(
+    item.images && item.images.length > 0 ? item.images[0].image : cargarImagen
+  );
+
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
   const handleSave = () => {
-    const updatedItem = { ...item, hotel, floor, name, price, state, serviceName, details, duration };
-    onSave(updatedItem);
+    modify_room(item.id, hotel.id, floor, name, price, state)
+      .then((response) => {
+        onSave(response);
+      })
+      .catch((err) => {
+        console.error('Error al modificar habitación:', err);
+      });
   };
 
   return (
     <div className="item-detail">
-      <img src={cargarImagen} alt={`Item ${item.number || item.name}`} className="detail-image" />
+      <img src={
+        imagen.startsWith('data:') ? imagen : `${API_URL}${imagen}`
+      } alt={`Item ${item.number || item.name}`} className="detail-image" />
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
@@ -43,7 +56,11 @@ const EditableCard = ({ item, type, onSave }) => {
             </div>
             <div className="editable-fields">
               <label>Estado</label>
-              <input type="text" value={state} onChange={(e) => setState(e.target.value)} className="editable-input" />
+              <select value={state} onChange={(e) => setState(e.target.value)}>
+              <option value="A">Disponible</option>
+              <option value="B">Ocupada</option>
+              <option value="M">Mantenimiento</option>
+            </select>
             </div>
           </>
         )}

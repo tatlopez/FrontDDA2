@@ -45,7 +45,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
         )}
         <div className="editable-fields">
           <label>Precio</label>
-          <div className="editable-input">{item.price}</div>
+          <div className="editable-input">{'$' + item.price}</div>
         </div>
         <div className="editable-fields">
           <label>{type === 'habitacion' ? 'Estado' : 'Duración'}</label>

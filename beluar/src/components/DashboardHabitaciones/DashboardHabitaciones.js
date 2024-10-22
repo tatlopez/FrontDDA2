@@ -53,9 +53,7 @@ function DashboardHabitaciones() {
   };
 
   const handleSave = (updatedRoom) => {
-    const updatedRooms = rooms.map(room =>
-      room.number === updatedRoom.number ? updatedRoom : room
-    );
+    const updatedRooms = rooms.map(room => (room.id === updatedRoom.id ? updatedRoom : room));
     setRooms(updatedRooms);
     setSelectedRoom(updatedRoom);
     setEditingRoom(false);
