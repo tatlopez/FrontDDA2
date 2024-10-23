@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import './dashboardHoteles.css';
 import Profile from '../Profile/Profile';
-import logo from '../../assets/logo.png';
+import Logo from '../Logo/logo.js';
 import hotelIcon from '../../assets/default-hotel.jpg';
 import trashIcon from '../../assets/trash-icon.png';
 import editIcon from '../../assets/edit-icon.png';
@@ -108,9 +108,9 @@ function DashboardHoteles() {
     };
 
     return (
-        <div style={{ backgroundColor: '#FEFBFF' }}>
+        <div style={{ backgroundColor: '#FEFBFF' }} className='dashboard'>
             <header className="dashboard-headerHotel">
-                <img src={logo} alt="logo" className="signin-logo" />
+                <Logo />
                 <div className="header-right">
                     <Profile />
                 </div>
