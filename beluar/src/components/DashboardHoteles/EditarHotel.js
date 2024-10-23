@@ -16,6 +16,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [estrellas, setEstrellas] = useState(hotel.stars || 0);
     const [latitud, setLatitud] = useState(hotel.latitude || '');
     const [longitud, setLongitud] = useState(hotel.longitude || '');
+    const [country, setCountry] = useState(hotel.country || '');
     const [imagen, setImagen] = useState(
         hotel.images && hotel.images.length > 0 ? hotel.images[0].image : cargarImagen
     );
@@ -39,7 +40,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
         };
     
         if (esNuevoHotel) {
-            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
+            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country)
                 .then((response) => {
                     const id = response.id;
                     if (file) {
@@ -61,9 +62,9 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     
         } else {
             
-            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
+            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country)
                 .then(() => {
-                    
+                    console.log('datos: ', hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
                     if (file) {
                         const formData = new FormData();
                         formData.append('image', file);
@@ -123,6 +124,14 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                                 type="text"
                                 value={direccion}
                                 onChange={(e) => setDireccion(e.target.value)}
+                            />
+                        </div>
+                        <div className="modal-field">
+                            <label>País</label>
+                            <input
+                                type="text"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
                             />
                         </div>
                         <div className="modal-field">

@@ -152,7 +152,6 @@ function DashboardHoteles() {
                                 className="hotel-image"
                                 onClick={() => handleHotelClick(hotel)}
                             />
-                                {console.log(hotel)}
                                 <div className="hotel-info" onClick={() => handleHotelClick(hotel)}>
                                     <h2>{hotel.name}</h2>
                                     <p>{hotel.address + ', ' + hotel.city}</p>
