@@ -44,12 +44,12 @@ const ReservaCard = ({ item, onCancelReserva }) => {
 
     return (
         <div className="reserva-detail">
-            <h3 className="reserva-number">Reserva #{item.number}</h3>
+            <h3 className="reserva-number">Reserva #{item.id}</h3>
             <div className="reserva-fields">
 
                 <div className="reserva-field">
                     <label>Apellido y nombre</label>
-                    <input type="text" value={item.name} className="reserva-input" readOnly />
+                    <input type="text" value={item.client_info.name + " " +item.client_info.surname} className="reserva-input" readOnly />
                 </div>
 
                 <div className="reserva-field">
@@ -59,12 +59,12 @@ const ReservaCard = ({ item, onCancelReserva }) => {
 
                 <div className="reserva-field">
                     <label>Check-in</label>
-                    <input type="text" value={item.checkIn} className="reserva-input" readOnly />
+                    <input type="text" value={item.start_date} className="reserva-input" readOnly />
                 </div>
 
                 <div className="reserva-field">
                     <label>Check-out</label>
-                    <input type="text" value={item.checkOut} className="reserva-input" readOnly />
+                    <input type="text" value={item.end_date} className="reserva-input" readOnly />
                 </div>
 
                 {services.length > 0 && (
@@ -91,8 +91,8 @@ const ReservaCard = ({ item, onCancelReserva }) => {
             </div>
 
             <div className="reserva-buttons">
-                <button className="btn-reserva abonar" onClick={handleAbonarClick}>Abonar total</button>
-                <button className="btn-reserva agregar-servicio" onClick={handleAgregarServicioClick}>Agregar servicio</button>
+{/*                 <button className="btn-reserva abonar" onClick={handleAbonarClick}>Abonar total</button>
+                <button className="btn-reserva agregar-servicio" onClick={handleAgregarServicioClick}>Agregar servicio</button>  */}
                 <button className="btn-reserva cancelar" onClick={handleCancelarClick}>Cancelar reserva</button>
             </div>
 
