@@ -1,36 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 import Reserva from './Reserva';
 import ReservaCard from './ReservaCard';
-
-const reservaData = [
-    { number: '145', date: '15 Sep', name: 'Fernandez, Martin', price: 120, room: '#3B',
-        services: [{ name: 'Desayuno incluido', price: 20 }, { name: 'Acceso al gimnasio', price: 10 }],
-        abonar: 85, checkIn: '18/09/2024', checkOut: '21/09/2024' },
-    { number: '467', date: '16 Sep', name: 'Rodriguez, Carla', price: 85, room: '#7J',
-        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
-    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
-        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
-    { number: '999', date: '20 Sep', name: 'Suares, Natalia', price: 95, room: '#6A',
-        services: [{ name: 'Traslado al aeropuerto', price: 50 }, { name: 'Desayuno incluido', price: 20 }],
-        abonar: 85 },
-    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
-        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
-    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
-        services: [{ name: 'Spa', price: 40 }], abonar: 85 },
-    { number: '689', date: '18 Sep', name: 'Gomez, Luis', price: 65, room: '#5C',
-        services: [{ name: 'Spa', price: 40 }], abonar: 85 }
-];
+import get_reservations from '../../services/reservations/get_reservations';
 
 function DashboardReservas() {
-    const [reservas, setReservas] = useState(reservaData);
-    const [selectedReserva, setSelectedReserva] = useState(reservaData);
+    const [reservas, setReservas] = useState([]);
+    const [selectedReserva, setSelectedReserva] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
     const filteredReserva = reservas.filter(reserva =>
-        reserva.name.toLowerCase().includes(searchTerm.toLowerCase())
+        reserva.client_info && reserva.client_info.name && 
+        `${reserva.client_info.name} ${reserva.client_info.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const handleReservaClick = (reserva) => {
@@ -38,15 +21,30 @@ function DashboardReservas() {
     };
 
     const handleCancelReserva = (reservaToCancel) => {
-        setReservas(reservas.filter(reserva => reserva.number !== reservaToCancel.number));
+        setReservas(reservas.filter(reserva => reserva.id !== reservaToCancel.id));
         setSelectedReserva(null); // Clear the selected reservation
     };
+
+    const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+
+    useEffect(() => {
+        get_reservations(hotel.id)
+            .then((res) => {
+                const loadedReservas = res || [];
+                console.log(loadedReservas);
+                setReservas(loadedReservas);
+
+                if (loadedReservas.length > 0) {
+                    setSelectedReserva(loadedReservas[0]);
+                }
+            });
+    }, []);
 
     return (
         <div className="page-container">
             <Menu />
             <div className="content-container">
-                <Header />
+                <Header hotelName={hotel.name}/>
                 <div className="dashboard-body">
                     <div className="rooms-section">
                         <div className="rooms-header">
@@ -57,7 +55,7 @@ function DashboardReservas() {
                         </div>
                         <div className="rooms-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
                             {filteredReserva.map((reserva) => (
-                                <Reserva key={reserva.number} item={reserva} onClick={() => handleReservaClick(reserva)} />
+                                <Reserva key={reserva.id} item={reserva} onClick={() => handleReservaClick(reserva)} />
                             ))}
                         </div>
                     </div>
