@@ -16,7 +16,7 @@ const Reserva = ({ item, onClick }) => {
         </div>
         <div className="reserva-info">
           <p className="reserva-name">{item.client_info.surname + ', ' + item.client_info.name}</p>
-          <p className="reserva-room">Habitación: <span className="reserva-room-number">{item.room}</span></p>
+          <p className="reserva-room">Habitación: <span className="reserva-room-number">{'#'+item.room_info.floor + item.room_info.name}</span></p>
         </div>
       </div>
       <div className="reserva-right">

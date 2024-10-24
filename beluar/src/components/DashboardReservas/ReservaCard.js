@@ -54,7 +54,7 @@ const ReservaCard = ({ item, onCancelReserva }) => {
 
                 <div className="reserva-field">
                     <label>Habitación</label>
-                    <input type="text" value={item.room} className="reserva-input" readOnly />
+                    <input type="text" value={item.room_info.floor + item.room_info.name} className="reserva-input" readOnly />
                 </div>
 
                 <div className="reserva-field">
