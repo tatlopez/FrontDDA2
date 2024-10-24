@@ -7,7 +7,7 @@ import InfoCard from '../Cards/infoCard';
 import EditableCard from '../Cards/editableCard';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
-import signoMas from '../../assets/signo-mas.png';
+import addIcon from '../../assets/signo-mas.svg';
 import AgregarHabitacionModal from './CrearHabitacion';
 import get_rooms from '../../services/rooms/get_rooms';
 import delete_room from '../../services/rooms/delete_room';
@@ -94,7 +94,7 @@ function DashboardHabitaciones() {
               <div className="search-and-add">
                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar habitación..." />
                 <button className="add-room-button" onClick={() => setShowAddRoomModal(true)}>
-                  <img src={signoMas} alt="Add Icon" />
+                  <img src={addIcon} alt="Add Icon" />
                 </button>
               </div>
             </div>

@@ -7,7 +7,7 @@ import EditableCard from '../Cards/editableCard';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import Header from '../Header/Header';
 import AgregarServicioModal from './CrearServicio';
-import signoMas from '../../assets/signo-mas.png';
+import addIcon from '../../assets/signo-mas.svg';
 import get_services from '../../services/services/get_services';
 import delete_service from '../../services/services/delete_service';
 
@@ -102,7 +102,7 @@ function DashboardServicios() {
                             <div className="search-and-add">
                                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar servicio..." />
                                 <button className="add-room-button" onClick={() => setShowAgregarModal(true)}>
-                                    <img src={signoMas} alt="Add Icon" />
+                                    <img src={addIcon} alt="Add Icon" />
                                 </button>
                             </div>
                         </div>

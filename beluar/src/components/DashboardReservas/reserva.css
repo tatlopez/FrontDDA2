@@ -91,7 +91,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 300px;
 }
   
 .reserva-number {
@@ -113,6 +112,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 100%;
 }
 
 .reserva-field label {
@@ -129,6 +129,7 @@
   font-size: 14px;
   color: #000;
   font-family: 'DM Sans', sans-serif;
+  width: calc(100% - 16px);
 }
 
 .reserva-services {
