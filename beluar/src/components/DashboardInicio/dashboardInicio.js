@@ -7,25 +7,14 @@ import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
 import get_reservations from "../../services/reservations/get_reservations";
+import dayjs from "dayjs";
 
 function DashboardInicio() {
-
     const [reservations, setReservations] = useState([]);
+    const [todayCheckIns, setTodayCheckIns] = useState(0);
+    const [todayCheckOuts, setTodayCheckOuts] = useState(0);
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
-
-    useEffect(() => {
-
-        get_reservations(hotel.id)
-            .then((res) => {
-                const loadedReservas = res || [];
-                console.log(loadedReservas);
-                setReservations(loadedReservas);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
 
     const rooms = [
         { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
@@ -34,6 +23,38 @@ function DashboardInicio() {
         { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
     ];
 
+    useEffect(() => {
+        get_reservations(hotel.id)
+            .then((res) => {
+                const loadedReservas = res || [];
+                
+                // Get today's date
+                const today = dayjs().format('YYYY-MM-DD');
+
+                // Calculate today's check-ins and check-outs
+                const todayCheckIns = loadedReservas.filter(reservation =>
+                    dayjs(reservation.start_date).format('YYYY-MM-DD') === today
+                );
+
+                const todayCheckOuts = loadedReservas.filter(reservation =>
+                    dayjs(reservation.end_date).format('YYYY-MM-DD') === today
+                );
+
+                // Update the state with the results
+                setReservations(loadedReservas);
+                setTodayCheckIns(todayCheckIns.length);
+                setTodayCheckOuts(todayCheckOuts.length);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [hotel.id]); // Add hotel.id as a dependency to re-fetch when it changes
+
+    // Function to calculate the absolute difference from today
+    const calculateDateDifference = (date) => {
+        return Math.abs(dayjs().diff(dayjs(date), 'day'));
+    };
+
     return (
         <div className="page-container">
             <Menu />
@@ -41,7 +62,7 @@ function DashboardInicio() {
                 <Header hotelName={hotel.name}/>
                 <div className="dashboard-body1">
                     <div className="dashboard-top">
-                        {/* Resumen de tu día*/}
+                        {/* Resumen de tu día */}
                         <div className="dashboard-resume">
                             <p className="title">Resumen de tu día</p>
                             <div className="cards">
@@ -51,27 +72,27 @@ function DashboardInicio() {
                                             <img src={calendarCheck} className="card-icon" alt="Check-ins"/>
                                             <p className="resume-title">Check-ins</p>
                                         </div>
-                                        <p className="resume-number">15</p>
+                                        <p className="resume-number">{todayCheckIns}</p>
                                     </div>
                                     <div className="resume-card" style={{backgroundColor: 'rgba(251,139,129,0.5)', color: '#E01300'}}>
                                         <div className="card-title">
                                             <img src={calendarCross} className="card-icon" alt="Check-outs"/>
                                             <p className="resume-title">Check-outs</p>
                                         </div>
-                                        <p className="resume-number">12</p>
+                                        <p className="resume-number">{todayCheckOuts}</p>
                                     </div>
                                 </div>
                                 <div className="cards-row">
                                     <div className="resume-card" style={{backgroundColor: 'rgba(62,174,226,0.5)', color: '#317CF5'}}>
                                         <div className="card-title">
-                                            <img src={coupon1} className="card-icon" alt="coupon 1"/>
+                                            <img src={coupon1} className="card-icon" alt="Servicios reservados"/>
                                             <p className="resume-title">Servicios reservados</p>
                                         </div>
                                         <p className="resume-number">7</p>
                                     </div>
                                     <div className="resume-card" style={{backgroundColor: 'rgba(226,221,80,0.5)', color: '#E19110'}}>
                                         <div className="card-title">
-                                            <img src={coupon2} className="card-icon" alt="coupon 2"/>
+                                            <img src={coupon2} className="card-icon" alt="Servicios libres"/>
                                             <p className="resume-title">Servicios libres</p>
                                         </div>
                                         <p className="resume-number">13</p>
@@ -79,7 +100,7 @@ function DashboardInicio() {
                                 </div>
                             </div>
                         </div>
-                        {/* Fin resumen de tu día*/}
+                        {/* Fin resumen de tu día */}
                         {/* Habitaciones para limpiar */}
                         <div className="dashboard-rooms">
                             <p className="title">Estado de las habitaciones libres</p>
@@ -105,7 +126,7 @@ function DashboardInicio() {
                                 </table>
                             </div>
                         </div>
-                        {/* Fin check ins rapidos */}
+                        {/* Fin habitaciones */}
                     </div>
                     {/* Tabla de reservas */}
                     <div className="dashboard-reservations">
@@ -123,8 +144,8 @@ function DashboardInicio() {
                             </thead>
                             <tbody>
                                 {reservations
-                                    .sort((a, b) => new Date(a.start_date) - new Date(b.start_date)) // Ordena por fecha de inicio
-                                    .slice(0, 5) // Solo muestra las primeras 5 reservas
+                                    .sort((a, b) => calculateDateDifference(a.start_date) - calculateDateDifference(b.start_date)) // Ordenar por proximidad a la fecha actual
+                                    .slice(0, 5) // Mostrar las 5 reservas más cercanas
                                     .map((reservation, index) => (
                                         <tr key={index}>
                                             <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
@@ -159,14 +180,13 @@ function DashboardInicio() {
                                         </tr>
                                     ))}
                             </tbody>
-
                         </table>
                     </div>
                     {/* Fin tabla de reservas */}
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default DashboardInicio;
