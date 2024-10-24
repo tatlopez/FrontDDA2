@@ -100,7 +100,14 @@ function DashboardHabitaciones() {
             </div>
             <div className="rooms-list" style={{ maxHeight: '530px', overflowY: 'auto' }}>
               {filteredRooms.map((room) => (
-                <Listas key={room.id} item={room} type={'habitacion'} onEditClick={handleEditClick} onRoomClick={handleRoomClick} onDeleteClick={handleDeleteClick} />
+                <Listas
+                  key={room.id}
+                  item={room}
+                  type={'habitacion'}
+                  onEditClick={handleEditClick}
+                  onRoomClick={handleRoomClick}
+                  isSelected={selectedRoom && selectedRoom.id === room.id}
+                />
               ))}
             </div>
           </div>

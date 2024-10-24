@@ -64,7 +64,10 @@ function DashboardReservas() {
                         </div>
                         <div className="reservas-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
                             {filteredReserva.map((reserva) => (
-                                <Reserva key={reserva.id} item={reserva} onClick={() => handleReservaClick(reserva)} />
+                                <Reserva key={reserva.id} 
+                                        item={reserva} 
+                                        onClick={() => handleReservaClick(reserva)}
+                                        isSelected={selectedReserva && selectedReserva.id === reserva.id} />
                             ))}
                         </div>
                     </div>

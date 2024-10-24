@@ -115,6 +115,7 @@ function DashboardServicios() {
                                     onEditClick={handleEditClick}
                                     onRoomClick={handleServiceClick}
                                     onDeleteClick={handleDeleteClick}
+                                    isSelected={selectedService && selectedService.id === service.id}
                                 />
                             ))}
                         </div>

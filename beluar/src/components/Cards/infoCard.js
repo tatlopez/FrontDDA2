@@ -49,7 +49,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
               src={item.beds === 'single' ? singleBed : doubleBed} 
               alt={item.beds === 'single' ? 'single bed' : 'double bed'} 
             />
-            {/* <div className="editable-input">{'$' + item.beds}</div> */}
+            {/* <div className="editable-input">{item.beds === 'single' ? 'Cama simple' : 'Cama doble'}</div> */}
             <p>Cant. camas</p>
           </div>
         </div>
@@ -60,7 +60,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
       </div>
       <div className='buttons'>
         <button className="status-button" onClick={() => onEdit(item)}>
-          {type === 'habitacion' ? 'Cambiar estado' : 'Cambiar precio'}
+          {type === 'habitacion' ? 'Editar habitación' : 'Editar servicio'}
         </button>
         <button className="delete-button" onClick={onDelete}>
           {type === 'habitacion' ? 'Eliminar habitación' : 'Eliminar servicio'}

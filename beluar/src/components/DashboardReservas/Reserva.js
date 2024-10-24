@@ -1,14 +1,14 @@
 import React from 'react';
 import './reserva.css';
 
-const Reserva = ({ item, onClick }) => {
+const Reserva = ({ item, onClick ,isSelected }) => {
 
   const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
     "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
 
   return (
-    <div className="reserva-card" onClick={onClick} style={{ cursor: 'pointer' }}>
+    <div className={`reserva-card ${isSelected ? 'selected' : ''}`} onClick={onClick} style={{ cursor: 'pointer' }}>
       <div className="reserva-left">
         <div className="reserva-date">
           <p className="reserva-day">{item.start_date.split('-')[2]}</p>
@@ -20,7 +20,7 @@ const Reserva = ({ item, onClick }) => {
         </div>
       </div>
       <div className="reserva-right">
-        <p className="reserva-price">USD ${item.total_price}</p>
+        <p className="reserva-price">${item.total_price}</p>
       </div>
     </div>
   );

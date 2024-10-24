@@ -65,6 +65,13 @@ const EditableCard = ({ item, type, onSave }) => {
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="editable-input" />
             </div>
             <div className="editable-fields">
+              <label>Cantidad de camas</label>
+              <select className="editable-select">
+                <option>Cama simple</option>
+                <option>Cama doble</option>
+              </select>
+            </div>
+            <div className="editable-fields">
               <label>Precio</label>
               <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} className="editable-input" />
             </div>
@@ -89,11 +96,11 @@ const EditableCard = ({ item, type, onSave }) => {
               <input type="text" value={detail} onChange={(e) => setDetail(e.target.value)} className="editable-input" />
             </div>
             <div className="editable-fields">
-            <label>Disponibilidad</label>
-            <select value={is_available} onChange={(e) => setIsAvailable(e.target.value)} className="editable-select">
-              <option value="true">Habilitado</option>
-              <option value="false">Deshabilitado</option>
-            </select>
+              <label>Disponibilidad</label>
+              <select value={is_available} onChange={(e) => setIsAvailable(e.target.value)} className="editable-select">
+                <option value="true">Habilitado</option>
+                <option value="false">Deshabilitado</option>
+              </select>
             </div>
             <div className="editable-fields">
               <label>Precio</label>
