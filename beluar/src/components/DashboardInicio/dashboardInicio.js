@@ -7,21 +7,26 @@ import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
 import get_reservations from "../../services/reservations/get_reservations";
+import get_room_status_today from "../../services/statistics/get_room_status_today";
+import get_rooms from "../../services/rooms/get_rooms";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 function DashboardInicio() {
+    const navigate = useNavigate();
     const [reservations, setReservations] = useState([]);
     const [todayCheckIns, setTodayCheckIns] = useState(0);
     const [todayCheckOuts, setTodayCheckOuts] = useState(0);
+    const [roomStatus, setRoomStatus] = useState([]);
+    const [rooms, setRooms] = useState([]);
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
-    const rooms = [
-        { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
-        { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg' },
-        { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
-        { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
-    ];
+    const roomStateMapping = {
+        'A': 'Disponible',
+        'B': 'Ocupada',
+        'M': 'Mantenimiento',
+    }
 
     useEffect(() => {
         get_reservations(hotel.id)
@@ -48,11 +53,37 @@ function DashboardInicio() {
             .catch((err) => {
                 console.log(err);
             });
+        
+        get_room_status_today(hotel.id)
+            .then((res) => {
+                setRoomStatus(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            }
+        );  
+
+        get_rooms(hotel.id)
+            .then((res) => {
+                setRooms(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
     }, [hotel.id]); // Add hotel.id as a dependency to re-fetch when it changes
 
     // Function to calculate the absolute difference from today
     const calculateDateDifference = (date) => {
         return Math.abs(dayjs().diff(dayjs(date), 'day'));
+    };
+
+    const handleReservaButton = () => {
+        navigate('/DashboardReservas');
+    };
+
+    const handleHabitacionButton = () => {
+        navigate('/DashboardHabitaciones');
     };
 
     return (
@@ -86,16 +117,16 @@ function DashboardInicio() {
                                     <div className="resume-card" style={{backgroundColor: 'rgba(62,174,226,0.5)', color: '#317CF5'}}>
                                         <div className="card-title">
                                             <img src={coupon1} className="card-icon" alt="Servicios reservados"/>
-                                            <p className="resume-title">Servicios reservados</p>
+                                            <p className="resume-title">Habitaciones reservadas</p>
                                         </div>
-                                        <p className="resume-number">7</p>
+                                        <p className="resume-number">{roomStatus.occupied_rooms}</p>
                                     </div>
                                     <div className="resume-card" style={{backgroundColor: 'rgba(226,221,80,0.5)', color: '#E19110'}}>
                                         <div className="card-title">
                                             <img src={coupon2} className="card-icon" alt="Servicios libres"/>
-                                            <p className="resume-title">Servicios libres</p>
+                                            <p className="resume-title">Habitaciones libres</p>
                                         </div>
-                                        <p className="resume-number">13</p>
+                                        <p className="resume-number">{roomStatus.unoccupied_rooms}</p>
                                     </div>
                                 </div>
                             </div>
@@ -114,14 +145,17 @@ function DashboardInicio() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {rooms.map((room, index) => (
-                                            <tr key={index}>
-                                                <td>#{room.number}</td>
-                                                <td className="room-status">{room.status}</td>
-                                                <td>${room.price}</td>
-                                                <td><button className="ver-btn">Ver habitación</button></td>
-                                            </tr>
-                                        ))}
+                                    {rooms
+                                    .filter((room) => room.state !== 'B') 
+                                    .slice(0, 4) // Mostrar solo las primeras 4 habitaciones
+                                    .map((room, index) => (
+                                        <tr key={index}>
+                                            <td>#{room.floor + room.name}</td>
+                                            <td className="room-status">{roomStateMapping[room.state]}</td>
+                                            <td>${room.price}</td>
+                                            <td><button className="ver-btn" onClick={handleHabitacionButton}>Ver habitación</button></td>
+                                        </tr>
+                                    ))}
                                     </tbody>
                                 </table>
                             </div>
@@ -176,7 +210,7 @@ function DashboardInicio() {
                                                 )}
                                             </td>
                                             <td>${reservation.total_price}</td>
-                                            <td><button className="ver-btn">Ver reserva</button></td>
+                                            <td><button className="ver-btn" onClick={handleReservaButton}>Ver reserva</button></td>
                                         </tr>
                                     ))}
                             </tbody>

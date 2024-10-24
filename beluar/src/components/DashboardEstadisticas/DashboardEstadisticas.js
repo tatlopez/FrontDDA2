@@ -195,7 +195,7 @@ const DashboardEstadisticas = () => {
                                     <p>Reservas</p>
                                     <div className="mini-cards-container">
                                         <MiniCard
-                                            title="Reservas para Hoy"
+                                            title="Habitaciones ocupadas"
                                             number={roomStatusData.occupied_rooms}
                                             backgroundColor="rgba(135, 191, 112, 0.51)"
                                             titleColor="#4C8732"
