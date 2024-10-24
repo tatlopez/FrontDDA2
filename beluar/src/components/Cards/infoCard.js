@@ -2,6 +2,8 @@ import React from 'react';
 import './card.css';
 import defaultImage from '../../assets/default-hotel.jpg';
 import { API_URL } from '../../config';
+import singleBed from '../../assets/single bed icon.svg';
+import doubleBed from '../../assets/double bed icon.svg';
 
 const InfoCard = ({ item, type, onEdit, onDelete }) => {
 
@@ -40,6 +42,17 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
             <div className="editable-input">{item.detail}</div>
           </div>
         )}
+        <div className="editable-fields">
+          <label>Tipo de habitación</label>
+          <div className='bed-field'>
+            <img className='icon-beds' 
+              src={item.beds === 'single' ? singleBed : doubleBed} 
+              alt={item.beds === 'single' ? 'single bed' : 'double bed'} 
+            />
+            {/* <div className="editable-input">{'$' + item.beds}</div> */}
+            <p>Cant. camas</p>
+          </div>
+        </div>
         <div className="editable-fields">
           <label>Precio</label>
           <div className="editable-input">{'$' + item.price}</div>

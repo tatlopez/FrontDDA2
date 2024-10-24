@@ -87,6 +87,22 @@
   background-color: rgb(135,191,112,0.5);
 }
 
+.bed-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.bed-field p {
+  margin: 0;
+}
+
+.icon-beds {
+  height: 25px;
+
+}
+
 .buttons {
   display: flex;
   flex-direction: column;

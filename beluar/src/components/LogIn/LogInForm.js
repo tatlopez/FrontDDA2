@@ -29,23 +29,27 @@ function LoginForm() {
         <div className="login-container">
             <img src={logo} alt="logo" className="login-logo"/>
             <form onSubmit={handleSubmit} className="login-form">
-                <h1>Log in</h1>
-                <label htmlFor="emailOrUsername">Email o nombre de usuario</label>
-                <input
-                    type="text"
-                    id="emailOrUsername"
-                    placeholder="Ingresa tu email o nombre de usuario."
-                    value={emailOrUsername}
-                    onChange={(e) => setEmailOrUsername(e.target.value)}
-                />
-                <label htmlFor="password">Contraseña</label>
-                <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    placeholder="Ingresa tu contraseña."
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                <p>Log in</p>
+                <div>
+                    <label htmlFor="emailOrUsername">Email o nombre de usuario</label>
+                    <input
+                        type="text"
+                        id="emailOrUsername"
+                        placeholder="Ingresa tu email o nombre de usuario..."
+                        value={emailOrUsername}
+                        onChange={(e) => setEmailOrUsername(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Contraseña</label>
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        placeholder="Ingresa tu contraseña..."
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
                 <button type="submit" className="login-button">Log In</button>
             </form>
             <p><a href="/forgot-password">Olvidé mi contraseña</a></p>
