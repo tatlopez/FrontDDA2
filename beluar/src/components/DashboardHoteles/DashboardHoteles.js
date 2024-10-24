@@ -6,7 +6,7 @@ import Logo from '../Logo/logo.js';
 import hotelIcon from '../../assets/default-hotel.jpg';
 import trashIcon from '../../assets/trash-icon.png';
 import editIcon from '../../assets/edit-icon.png';
-import addIcon from '../../assets/signo-mas.png';
+import addIcon from '../../assets/signo-mas.svg';
 import searchIcon from '../../assets/search-icon-white.svg';
 import EditarHotelModal from './EditarHotel';
 import ConfirmActionModal from '../PopUp/ConfirmActionModal';
@@ -122,14 +122,9 @@ function DashboardHoteles() {
                         <button className="hoteles-circleButton" onClick={addNewHotel}>
                             <img src={addIcon} alt="Agregar hotel" />
                         </button>
-                        <button className="hoteles-circleButton" onClick={toggleSearchBar}>
-                            <img src={searchIcon} alt="Buscar hotel" />
-                        </button>
+                        <SearchBar/>
                     </div>
                 </div>
-                {showSearchBar && (
-                    <SearchBar setSearchTerm={setSearchTerm} style={{ marginBottom: '20px' }} placeholder="Buscar hotel..." />
-                )}
                 <div className="hoteles-list">
                     {loading ? (
                         <p>Cargando hoteles...</p> 

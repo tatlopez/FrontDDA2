@@ -1,6 +1,6 @@
 import React from 'react';
 import './searchBar.css';
-import lupa from '../../assets/search-icon.svg';
+import searchIcon from '../../assets/search-icon-white.svg';
 
 function SearchBar({ setSearchTerm, style, placeholder }) {
     const handleInputChange = (event) => {
@@ -8,13 +8,11 @@ function SearchBar({ setSearchTerm, style, placeholder }) {
     };
 
     return (
-        <div className="searchbar-container" style={style}>
-            <input 
-                type="text" 
-                placeholder={placeholder} 
-                className="searchbar-input" 
-                onChange={handleInputChange} 
-            />
+        <div class="buscar">
+            <input type="text" placeholder="Buscar" required onChange={handleInputChange}/>
+            <div class="btn">
+                <img src={searchIcon} alt='Buscar'/>
+            </div>
         </div>
     );
 }

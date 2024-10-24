@@ -1,28 +1,43 @@
-.searchbar-container {
-    display: flex;
-    align-items: center;
-    background-color: #E4E6E8;
-    border-radius: 20px;
-    padding-inline: 10px;
-    outline: 1px solid #6E28F5;
-}
-
-.searchbar-input {
-    border: none;
+.buscar {
+    position: relative;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .buscar input {
+    width: 0;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 18px;
+    color: #000000;
     outline: none;
-    background-color: transparent;
-    padding: 10px;
+    border: 1px solid #6E28F5;
+    border-radius: 30px;
+    transition: all 0.6s ease;
+    background-color: #E4E6E8;
     font-family: 'DM Sans', sans-serif;
-    flex-grow: 1;
-}
-
-.searchbar-button {
-    background-color: transparent;
-    border: none;
+  }
+  
+  .btn {
+    width: 50px;
+    height: 50px;
+    line-height: 55px;
+    top: 0;
+    right: 0;
+    position: absolute;
+    background: #703FD0;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    border-radius: 50%;
     cursor: pointer;
-}
-
-.searchbar-icon {
-    width: 15px;
-    height: 15px;
-}
+  }
+  
+  .buscar:hover input {
+    width: 240px;
+  }
+  
+  .buscar input:focus {
+    width: 240px;
+  }
+  

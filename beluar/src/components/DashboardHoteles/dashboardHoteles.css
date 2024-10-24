@@ -75,6 +75,15 @@ h1 {
     border-radius: 100%;
     border-width: 0;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hoteles-circleButton img {
+    width: 18px;
+    height: 18px;
+    color: white;
 }
 
 .hoteles-list {
