@@ -7,7 +7,7 @@ const MiniCard = ({ title, number, percentage, backgroundColor, titleColor, perc
       <h4 className="mini-card-title" style={{ color: titleColor }}>{title}</h4>
       <div className="mini-card-percentage" style={{ color: percentageColor }}>{percentage}</div>
       <div className='mini-card-flex'>
-        <div className="mini-card-period">Últimos 7 días</div>
+        <div className="mini-card-period"></div>
         <div className="mini-card-number">{number}</div>
       </div>
     </div>
