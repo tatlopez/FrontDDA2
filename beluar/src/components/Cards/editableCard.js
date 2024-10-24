@@ -43,6 +43,10 @@ const EditableCard = ({ item, type, onSave }) => {
 
   return (
     <div className="item-detail">
+      {/* Mostrar el nombre de la habitación o servicio */}
+      <p className="item-number">
+        {type === 'habitacion' ? `Habitación #${floor + name}` : serviceName}
+      </p>
 
       {type === 'habitacion' && (
         <img src={

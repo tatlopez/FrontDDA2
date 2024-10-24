@@ -24,35 +24,37 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
             : defaultImage
 
         } alt={`Item ${item.number || item.name}`} className="detail-image" />
-      )
-      }
+      )}
       <div className='fields'>
         <div className="editable-fields">
           <label>Hotel</label>
           <div className="editable-input">{hotel.name}</div>
         </div>
+
         {type === 'habitacion' ? (
-          <div className="editable-fields">
-            <label>Piso</label>
-            <div className="editable-input">{item.floor}</div>
-          </div>
+          <>
+            <div className="editable-fields">
+              <label>Piso</label>
+              <div className="editable-input">{item.floor}</div>
+            </div>
+            <div className="editable-fields">
+              <label>Tipo de habitación</label>
+              <div className='bed-field'>
+                <img className='icon-beds' 
+                  src={item.beds === 'single' ? singleBed : doubleBed} 
+                  alt={item.beds === 'single' ? 'single bed' : 'double bed'} 
+                />
+                <p>Cant. camas</p>
+              </div>
+            </div>
+          </>
         ) : (
           <div className="editable-fields">
             <label>Detalles</label>
             <div className="editable-input">{item.detail}</div>
           </div>
         )}
-        <div className="editable-fields">
-          <label>Tipo de habitación</label>
-          <div className='bed-field'>
-            <img className='icon-beds' 
-              src={item.beds === 'single' ? singleBed : doubleBed} 
-              alt={item.beds === 'single' ? 'single bed' : 'double bed'} 
-            />
-            {/* <div className="editable-input">{item.beds === 'single' ? 'Cama simple' : 'Cama doble'}</div> */}
-            <p>Cant. camas</p>
-          </div>
-        </div>
+
         <div className="editable-fields">
           <label>Precio</label>
           <div className="editable-input">{'$' + item.price}</div>
