@@ -1,7 +1,7 @@
 
 import { API_URL } from '../../config';
 
-function modify_hotel(id, hotel, floor, name, price, state) {
+function modify_hotel(id, hotel, floor, name, price, state, single_beds_amount, double_beds_amount) {
 
     return (
 
@@ -11,7 +11,7 @@ function modify_hotel(id, hotel, floor, name, price, state) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
-            body: JSON.stringify({hotel: hotel, floor: floor, name: name, price: price, state: state}),
+            body: JSON.stringify({hotel: hotel, floor: floor, name: name, price: price, state: state, single_beds_amount: single_beds_amount, double_beds_amount: double_beds_amount}),
         })
         .then(response => response.json())
         .then((res) => res)

@@ -11,6 +11,8 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
   const [price, setPrice] = useState('');
   const [imagen, setImagen] = useState(hotelIcon);
   const [file, setFile] = useState(null);
+  const [single_beds_amount, setSingleBedsAmount] = useState('');
+  const [double_beds_amount, setDoubleBedsAmount] = useState('');
 
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
@@ -23,7 +25,7 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
       price: price,
     };
   
-    create_room(hotel.id, floor, name, price, state)
+    create_room(hotel.id, floor, name, price, state, single_beds_amount, double_beds_amount)
       .then((response) => {
         const id = response.id;
         room.id = id; 
@@ -109,6 +111,25 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
             />
           </div>
         </div>
+
+        <div className="modal-field">
+            <label>Camas individuales</label>
+            <input
+              type="text"
+              value={single_beds_amount}
+              onChange={(e) => setSingleBedsAmount(e.target.value)}
+            />
+          </div>
+
+          <div className="modal-field">
+            <label>Camas dobles</label>
+            <input
+              type="text"
+              value={double_beds_amount}
+              onChange={(e) => setDoubleBedsAmount(e.target.value)}
+            />
+          </div>
+        
         <div className="modal-buttons">
           <button className="btn-confirm" onClick={handleSave}>Agregar Habitación</button>
         </div>

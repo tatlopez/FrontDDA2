@@ -37,16 +37,34 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
               <label>Piso</label>
               <div className="editable-input">{item.floor}</div>
             </div>
+
             <div className="editable-fields">
-              <label>Tipo de habitación</label>
-              <div className='bed-field'>
-                <img className='icon-beds' 
-                  src={item.beds === 'single' ? singleBed : doubleBed} 
-                  alt={item.beds === 'single' ? 'single bed' : 'double bed'} 
-                />
-                <p>Cant. camas</p>
-              </div>
+          <label>Tipo de habitación</label>
+
+          <div className='bed-field'>
+          {/* Mostrar camas simples */}
+          {item.single_beds_amount > 0 && (
+            <div className='bed-container'>
+              <img className='icon-beds' 
+                src={singleBed} 
+                alt='single bed' 
+              />
+              <p>{item.single_beds_amount} {item.single_beds_amount > 1 ? 'Camas simples' : 'Cama simple'}</p>
             </div>
+          )}
+
+          {/* Mostrar camas dobles */}
+          {item.double_beds_amount > 0 && (
+            <div className='bed-container'>
+              <img className='icon-beds' 
+                src={doubleBed} 
+                alt='double bed' 
+              />
+              <p>{item.double_beds_amount} {item.double_beds_amount > 1 ? 'Camas dobles' : 'Cama doble'}</p>
+            </div>
+          )}
+        </div>
+        </div>
           </>
         ) : (
           <div className="editable-fields">

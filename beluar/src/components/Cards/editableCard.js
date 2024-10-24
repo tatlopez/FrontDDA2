@@ -10,6 +10,8 @@ const EditableCard = ({ item, type, onSave }) => {
   const [name, setName] = useState(item.name || '');
   const [price, setPrice] = useState(item.price || '');
   const [state, setState] = useState(item.state || '');
+  const [single_beds_amount, setSingleBedsAmount] = useState(item.single_beds_amount || '');
+  const [double_beds_amount, setDoubleBedsAmount] = useState(item.double_beds_amount || '');
 
   const [serviceName, setServiceName] = useState(item.name || '');
   const [detail, setDetail] = useState(item.detail || '');
@@ -23,7 +25,7 @@ const EditableCard = ({ item, type, onSave }) => {
 
   const handleSave = () => {
     if (type === 'habitacion') {
-      modify_room(item.id, hotel.id, floor, name, price, state)
+      modify_room(item.id, hotel.id, floor, name, price, state, single_beds_amount, double_beds_amount)
         .then((response) => {
           onSave(response);
         })
@@ -68,13 +70,17 @@ const EditableCard = ({ item, type, onSave }) => {
               <label>Letra</label>
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="editable-input" />
             </div>
+
             <div className="editable-fields">
-              <label>Cantidad de camas</label>
-              <select className="editable-select">
-                <option>Cama simple</option>
-                <option>Cama doble</option>
-              </select>
+              <label>Cantidad camas simples</label>
+              <input type="text" value={single_beds_amount} onChange={(e) => setSingleBedsAmount(e.target.value)} className="editable-input" />
             </div>
+
+            <div className="editable-fields">
+              <label>Cantidad camas dobles</label>
+              <input type="text" value={double_beds_amount} onChange={(e) => setDoubleBedsAmount(e.target.value)} className="editable-input" />
+            </div>
+
             <div className="editable-fields">
               <label>Precio</label>
               <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} className="editable-input" />
