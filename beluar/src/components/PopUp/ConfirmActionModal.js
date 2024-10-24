@@ -4,8 +4,6 @@ import './modals.css';
 const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
     const getMessage = () => {
         switch (actionType) {
-            case 'abonar':
-                return '¿Está seguro de que desea abonar el total de la reserva?';
             case 'cancelar':
                 return '¿Está seguro de que desea cancelar la reserva?';
             case 'eliminarHotel':
@@ -34,6 +32,21 @@ const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
         }
     };
 
+    const getAction = () => {
+        switch (actionType) {
+            case 'cancelar':
+                return 'reserva'
+            case 'eliminarHotel':
+                return 'hotel'
+            case 'eliminarHabitacion':
+                return 'habitación'
+            case 'eliminarServicio':
+                return 'servicio'
+            default:
+                return '';
+        }
+    }
+
     return (
         <div className="modal-overlay">
             <div className="modal">
@@ -46,13 +59,13 @@ const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
                         className="confirm-btn"
                         onClick={onConfirm}
                     >
-                        Sí, eliminar
+                        Sí, eliminar {getAction()}
                     </button>
                     <button
                         className="cancel-btn"
                         onClick={onClose}
                     >
-                        No, cancelar
+                        No, volver atrás
                     </button>
                 </div>
             </div>
