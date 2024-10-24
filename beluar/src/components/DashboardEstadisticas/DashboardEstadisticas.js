@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend } from 'chart.js';
+import { ScaleLoader } from 'react-spinners'; // Importar el loader
 import './dashboardEstadisticas.css';
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
@@ -10,6 +11,7 @@ import MiniCard from './MiniCard';
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
 
 const DashboardEstadisticas = () => {
+    const [loading, setLoading] = useState(true); // Estado de carga
     const [habitacionesData, setHabitacionesData] = useState({
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
         datasets: [
@@ -51,25 +53,18 @@ const DashboardEstadisticas = () => {
         ],
     });
 
-    const [huespedesData, setHuespedesData] = useState({
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-        datasets: [
-            {
-                label: 'Huéspedes por Mes',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(153,102,255,0.4)',
-                borderColor: 'rgba(153,102,255,1)',
-                pointBorderColor: 'rgba(153,102,255,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                data: [10, 15, 20, 25, 30, 35],
-            },
-        ],
-    });
-
     useEffect(() => {
-        // Future enhancement: Fetch real-time data for the charts
+        const fetchData = async () => {
+            setLoading(true);
+            // Simular una llamada a la API
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simula un retraso de 2 segundos
+            // Aquí puedes realizar la llamada a tu API y actualizar los estados correspondientes
+            // setHabitacionesData(...); // Actualiza con los datos de la API
+            // setServiciosData(...); // Actualiza con los datos de la API
+            // setReservasData(...); // Actualiza con los datos de la API
+            setLoading(false);
+        };
+        fetchData();
     }, []);
 
     return (
@@ -80,92 +75,107 @@ const DashboardEstadisticas = () => {
                 <div className="dashboard-body">
                     <div className="dashboard-estadisticas">
                         <p className="section-title">Estadísticas</p>
-    
-                        {/* Habitaciones Section */}
-                        <div className="stats-card">
-                            <p>Habitaciones</p>
-                            <div className="mini-cards-container">
-                                <MiniCard
-                                    title="Ocupadas hoy"
-                                    number="15"
-                                    percentage="30%"
-                                    backgroundColor="rgba(135, 191, 112, 0.51)"
-                                    titleColor="#4C8732"
-                                    percentageColor="#4C8732"
-                                />
-                                <MiniCard
-                                    title="Desocupadas hoy"
-                                    number="10"
-                                    percentage="15%"
-                                    backgroundColor="rgba(251, 139, 129, 0.50)"
-                                    titleColor="#E01300"
-                                    percentageColor="#E01300"
-                                />
+
+                        {loading ? ( // Mostrar el loader si loading es verdadero
+                            <div className="loader-container">
+                                <ScaleLoader size={50} color={"#6E28F5"} loading={loading} height={65}/>
                             </div>
-                            <div className="charts-container">
-                                <div className="chart">
-                                    <Bar data={habitacionesData} />
+                        ) : (
+                            <>
+                                {/* Tarjeta de estadísticas de reservas */}
+                                <div className="stats-card">
+                                    <p>Reservas</p>
+                                    <div className="mini-cards-container">
+                                        <MiniCard
+                                            title="Reservas para Hoy"
+                                            number="20"
+                                            percentage="10%"
+                                            backgroundColor="rgba(135, 191, 112, 0.51)"
+                                            titleColor="#4C8732"
+                                            percentageColor="#4C8732"
+                                        />
+                                        <MiniCard
+                                            title="Reservas Canceladas"
+                                            number="5"
+                                            percentage="5%"
+                                            backgroundColor="rgba(251, 139, 129, 0.50)"
+                                            titleColor="#E01300"
+                                            percentageColor="#E01300"
+                                        />
+                                    </div>
+                                    <div className="charts-container">
+                                        <div className="chart">
+                                            <Line data={reservasData} />
+                                        </div>
+                                        <div className="chart">
+                                            <Bar
+                                                data={{
+                                                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                                                    datasets: [{
+                                                        label: 'Reservas por Mes',
+                                                        data: [15, 25, 35, 45, 55, 65],
+                                                        backgroundColor: '#FF6384',
+                                                    }]
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="chart">
-                                    <Line data={reservasData} />
+
+                                {/* Contenedor para las dos tarjetas angostas */}
+                                <div className="narrow-cards-container">
+                                    {/* Tarjeta de servicios populares */}
+                                    <div className="narrow-card">
+                                        <p>Servicios Populares</p>
+                                        <div className="mini-cards-container">
+                                            <MiniCard
+                                                title="Servicios Populares"
+                                                number="75"
+                                                percentage="60%"
+                                                backgroundColor="rgba(135, 191, 112, 0.51)"
+                                                titleColor="#4C8732"
+                                                percentageColor="#4C8732"
+                                            />
+                                        </div>
+                                        <div className="chart">
+                                            <Pie data={serviciosData} options={{ maintainAspectRatio: false, responsive: true }} height={200} />
+                                        </div>
+                                    </div>
+
+                                    {/* Tarjeta de reservas canceladas */}
+                                    <div className="narrow-card">
+                                        <p>Reservas Canceladas</p>
+                                        <div className="mini-cards-container">
+                                            <MiniCard
+                                                title="Reservas Canceladas"
+                                                number="5"
+                                                percentage="5%"
+                                                backgroundColor="rgba(251, 139, 129, 0.50)"
+                                                titleColor="#E01300"
+                                                percentageColor="#E01300"
+                                            />
+                                        </div>
+                                        <div className="chart">
+                                            <Bar
+                                                data={{
+                                                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                                                    datasets: [{
+                                                        label: 'Reservas Canceladas',
+                                                        data: [5, 4, 6, 3, 2, 5], // Datos de ejemplo
+                                                        backgroundColor: '#FF6384',
+                                                    }]
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-    
-                        {/* Contenedor para las dos tarjetas angostas */}
-                        <div className="narrow-cards-container">
-                            {/* Tarjeta de servicios populares */}
-                            <div className="narrow-card">
-                                <p>Servicios</p>
-                                <div className="mini-cards-container">
-                                    <MiniCard
-                                        title="Servicios Populares"
-                                        number="75"
-                                        percentage="60%"
-                                        backgroundColor="rgba(135, 191, 112, 0.51)"
-                                        titleColor="#4C8732"
-                                        percentageColor="#4C8732"
-                                    />
-                                </div>
-                                <div className="chart">
-                                    <Pie data={serviciosData} options={{ maintainAspectRatio: false, responsive: true }} height={200} />
-                                </div>
-                            </div>
-    
-                            {/* Tarjeta de reservas canceladas */}
-                            <div className="narrow-card">
-                                <p>Reservas</p>
-                                <div className="mini-cards-container">
-                                    <MiniCard
-                                        title="Reservas Canceladas"
-                                        number="5"
-                                        percentage="5%"
-                                        backgroundColor="rgba(251, 139, 129, 0.50)"
-                                        titleColor="#E01300"
-                                        percentageColor="#E01300"
-                                    />
-                                </div>
-                                <div className="chart">
-                                    <Bar
-                                        data={{
-                                            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-                                            datasets: [{
-                                                label: 'Reservas Canceladas',
-                                                data: [5, 4, 6, 3, 2, 5], // Datos de ejemplo
-                                                backgroundColor: '#FF6384',
-                                            }]
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
         </div>
     );
-    
-    
 };
 
 export default DashboardEstadisticas;

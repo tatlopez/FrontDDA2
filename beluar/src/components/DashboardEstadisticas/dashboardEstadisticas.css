@@ -8,6 +8,13 @@
   border-radius: 15px;
 }
 
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 p.section-title{
   color: #6E28F5;
   font-weight: 600;
