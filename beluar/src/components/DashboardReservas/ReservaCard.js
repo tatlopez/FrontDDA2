@@ -67,12 +67,13 @@ const ReservaCard = ({ item, onCancelReserva }) => {
                     <input type="text" value={item.end_date} className="reserva-input" readOnly />
                 </div>
 
-                {services.length > 0 && (
+                {item.services.length > 0 && (
                     <div className="reserva-field">
                         <label>Servicios contratados</label>
                         <ul className="reserva-services">
-                            {services.map((service, index) => (
-                                <li key={index}>{service.name} <span className="service-price">USD {service.price}</span></li>
+                            {item.services.map((service, index) => (
+                                
+                                <li key={index}>{service.service.name} <span className="service-price">${service.service.price}</span></li>
                             ))}
                         </ul>
                     </div>
@@ -81,12 +82,14 @@ const ReservaCard = ({ item, onCancelReserva }) => {
                 <hr className="divider-line" /> 
 
                 <div className="reserva-total">
-                    <span>Total</span> <span className="reserva-total-price">${item.price}</span>
+                    <span>Total</span> <span className="reserva-total-price">${item.total_price}</span>
                 </div>
 
             </div>
 
             <div className="reserva-buttons">
+{/*                 <button className="btn-reserva abonar" onClick={handleAbonarClick}>Abonar total</button>
+                <button className="btn-reserva agregar-servicio" onClick={handleAgregarServicioClick}>Agregar servicio</button>  */}
                 <button className="btn-reserva cancelar" onClick={handleCancelarClick}>Cancelar reserva</button>
             </div>
 
