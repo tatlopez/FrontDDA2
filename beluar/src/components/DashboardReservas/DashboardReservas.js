@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Reserva from './Reserva';
 import ReservaCard from './ReservaCard';
 import get_reservations from '../../services/reservations/get_reservations';
+import cancel_reservation from '../../services/reservations/cancel_reservation';
 
 function DashboardReservas() {
     const [reservas, setReservas] = useState([]);
@@ -22,8 +23,15 @@ function DashboardReservas() {
     };
 
     const handleCancelReserva = (reservaToCancel) => {
-        setReservas(reservas.filter(reserva => reserva.id !== reservaToCancel.id));
-        setSelectedReserva(null); // Clear the selected reservation
+        
+        setSelectedReserva(reservas[0]); 
+
+        cancel_reservation(reservaToCancel.id)
+        .then()
+        .catch((err) => {
+            console.error('Error al cancelar la reserva:', err);
+        });
+
     };
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
