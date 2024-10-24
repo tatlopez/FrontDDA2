@@ -80,37 +80,29 @@ function DashboardInicio() {
                             </div>
                         </div>
                         {/* Fin resumen de tu día*/}
-                        {/* Check ins rapidos */}
-                        <div className="dashboard-checkIn">
-                            <p className="title">Check-in/check out</p>
-                            <div className="buttons">
-                                <button className="button" style={{backgroundColor: '#E4E6E8', color: '#000000', border: '1px solid #BB84E8'}}>Check-in</button>
-                                <button className="button" style={{backgroundColor: '#E4E6E8', color: '#000000', border: '1px solid #BB84E8'}}>Check-out</button>
-                            </div>
-                            <div className="fields">
-                                <div className="field">
-                                    <label htmlFor="room">N° habitación</label>
-                                    <select name="habitaciones" id="room">
+                        {/* Habitaciones para limpiar */}
+                        <div className="dashboard-rooms">
+                            <p className="title">Estado de las habitaciones libres</p>
+                            <div className="rooms">
+                                <table className="reservations-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Habitación</th>
+                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         {rooms.map((room, index) => (
-                                            <option key={index} value={room.number}>
-                                                {room.number} - {room.status}
-                                            </option>
+                                            <tr key={index}>
+                                                <td>#{room.number}</td>
+                                                <td className="room-status">{room.status}</td>
+                                                <td>${room.price}</td>
+                                                <td><button className="ver-btn">Ver habitación</button></td>
+                                            </tr>
                                         ))}
-                                    </select>
-                                </div>
-                                <div className="field">
-                                    <label htmlFor="room">Apellido y nombre</label>
-                                    <input type="text" id="name" name="name"/>
-                                </div>
-                                <div className="divisor"></div>
-                                <div className="balance">
-                                    <p className="balance-title">Saldo restante</p>
-                                    <p className="balance-number">$$$$</p>
-                                </div>
-                                <div className="buttons">
-                                    <button className="button" style={{backgroundColor: '#6E28F5', color: '#FEFBFF', border: 'none'}}>Abonar total</button>
-                                    <button className="button" style={{backgroundColor: '#BB84E8', color: '#FEFBFF', border: 'none'}}>Descargar factura</button>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         {/* Fin check ins rapidos */}
@@ -126,7 +118,7 @@ function DashboardInicio() {
                                     <th>Check-out</th>
                                     <th>Habitación</th>
                                     <th>Servicios extra</th>
-                                    <th>A abonar</th>
+                                    <th>Total de la reserva</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -138,7 +130,7 @@ function DashboardInicio() {
                                             <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
                                             <td>{reservation.start_date}</td>
                                             <td>{reservation.end_date}</td>
-                                            <td className="room-number">{'#' + reservation.room_info.floor + reservation.room_info.name}</td>
+                                            <td className="room-number"><p>{'#' + reservation.room_info.floor + reservation.room_info.name}</p></td>
 
                                             <td>
                                                 {reservation.services.length > 0 ? (
@@ -162,7 +154,8 @@ function DashboardInicio() {
                                                     'Sin servicios contratados'
                                                 )}
                                             </td>
-                                            <td>{reservation.total_price}</td>
+                                            <td>${reservation.total_price}</td>
+                                            <td><button className="ver-btn">Ver reserva</button></td>
                                         </tr>
                                     ))}
                             </tbody>

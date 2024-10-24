@@ -13,21 +13,22 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    flex: 1; 
 }
 
 .dashboard-top {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    align-items: stretch;
+
     gap: 20px;
 }
 
+/* Resumen de tu día - cards de estadísticas */
 
 .dashboard-resume,
-.dashboard-checkIn {
+.dashboard-rooms {
     height: auto;
     flex: 1;
     padding: 40px;
@@ -36,6 +37,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-width: 100%;
 }
 
 .title {
@@ -49,20 +51,20 @@
 .cards {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     gap: 25px;
     margin: 0;
     padding: 0;
-    width: 100%;
+    max-width: fit-content;
 }
 
 .cards-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 25px;
     margin: 0;
     box-sizing: border-box;
-    width: fit-content;
+    max-width: fit-content;
 }
 
 .resume-card {
@@ -105,73 +107,9 @@
     align-self: self-end;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+/* Fin resumen de tu día - cards de estadísticas */
 
-.button {
-    font-size: 18px;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    padding: 5px 20px;
-    border-radius: 20px;
-    width: 240px;
-    cursor: pointer;
-}
-
-.fields {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.field label {
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.field input, .field select {
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #6E28F5;
-    font-family: 'DM Sans', sans-serif;
-    padding: 5px;
-}
-
-.divisor {
-    width: 100%;
-    height: 1px;
-    background-color: #BB84E8;
-    margin: 0;
-}
-
-.balance {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.balance-title {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.balance-number {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: #BB84E8;
-}
+/* Tabla de habitaciones libres y reservas */
 
 .dashboard-reservations {
     padding: 30px;
@@ -199,7 +137,7 @@
 }
 
 .reservations-table th, .reservations-table td {
-    padding: 15px 10px;
+    padding: 15px;
     font-size: 16px;
 }
 
@@ -208,17 +146,15 @@
     font-size: 16px;
 }
 
-.reservations-table tbody tr:hover {
-    background-color: rgba(187,132,232,0.3);
-}
-
-.room-number{
-    font-size: 16px;
+.reservations-table td.room-number p{
     font-weight: 500;
-    text-align: center;
-    display: inline-block;
-    box-sizing: border-box;
+    font-size: 16px;
     color: #6E28F5;
+    background-color: rgba(187,132,232,0.3);
+    border-radius: 30px;
+    padding: 8px 5px;
+    margin: 0;
+    text-align: center;
 }
 
 .dropdown-icon {
@@ -226,3 +162,14 @@
     color: #6E28F5;
     cursor: pointer;
 }
+
+.ver-btn {
+    background-color: #6E28F5;
+    color: white;
+    font-size: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Fin tabla de habitaciones libres y reservas */
