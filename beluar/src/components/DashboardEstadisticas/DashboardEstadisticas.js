@@ -79,14 +79,14 @@ const DashboardEstadisticas = () => {
                 <Header />
                 <div className="dashboard-body">
                     <div className="dashboard-estadisticas">
-                        <h2 className="section-title">Estadísticas</h2>
-
+                        <p className="section-title">Estadísticas</p>
+    
                         {/* Habitaciones Section */}
-                        <div className="card-habitaciones">
-                            <h3>Habitaciones</h3>
+                        <div className="stats-card">
+                            <p>Habitaciones</p>
                             <div className="mini-cards-container">
                                 <MiniCard
-                                    title="Reservadas hoy"
+                                    title="Ocupadas hoy"
                                     number="15"
                                     percentage="30%"
                                     backgroundColor="rgba(135, 191, 112, 0.51)"
@@ -111,119 +111,47 @@ const DashboardEstadisticas = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Servicios Section */}
-                        <div className="card-servicios">
-                            <h3>Servicios</h3>
-                            <div className="mini-cards-container">
-                                <MiniCard
-                                    title="Servicios Populares"
-                                    number="75"
-                                    percentage="60%"
-                                    backgroundColor="rgba(135, 191, 112, 0.51)"
-                                    titleColor="#4C8732"
-                                    percentageColor="#4C8732"
-                                />
-                                <MiniCard
-                                    title="Nuevos Servicios"
-                                    number="25"
-                                    percentage="40%"
-                                    backgroundColor="rgba(226,221,80,0.5)"
-                                    titleColor="#E19110"
-                                    percentageColor="#E19110"
-                                />
-                            </div>
-                            <div className="charts-container">
+    
+                        {/* Contenedor para las dos tarjetas angostas */}
+                        <div className="narrow-cards-container">
+                            {/* Tarjeta de servicios populares */}
+                            <div className="narrow-card">
+                                <p>Servicios</p>
+                                <div className="mini-cards-container">
+                                    <MiniCard
+                                        title="Servicios Populares"
+                                        number="75"
+                                        percentage="60%"
+                                        backgroundColor="rgba(135, 191, 112, 0.51)"
+                                        titleColor="#4C8732"
+                                        percentageColor="#4C8732"
+                                    />
+                                </div>
                                 <div className="chart">
                                     <Pie data={serviciosData} options={{ maintainAspectRatio: false, responsive: true }} height={200} />
                                 </div>
-                                <div className="chart">
-                                    <Bar
-                                        data={{
-                                            labels: ['Spa', 'Restaurante', 'Gym', 'Tours', 'Bar'],
-                                            datasets: [{
-                                                label: 'Uso de Servicios',
-                                                data: [40, 30, 50, 60, 45],
-                                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
-                                            }]
-                                        }}
+                            </div>
+    
+                            {/* Tarjeta de reservas canceladas */}
+                            <div className="narrow-card">
+                                <p>Reservas</p>
+                                <div className="mini-cards-container">
+                                    <MiniCard
+                                        title="Reservas Canceladas"
+                                        number="5"
+                                        percentage="5%"
+                                        backgroundColor="rgba(251, 139, 129, 0.50)"
+                                        titleColor="#E01300"
+                                        percentageColor="#E01300"
                                     />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Huespedes Section */}
-                        <div className="card-huespedes">
-                            <h3>Huéspedes</h3>
-                            <div className="mini-cards-container">
-                                <MiniCard
-                                    title="Total de Huéspedes"
-                                    number="100"
-                                    percentage="50%"
-                                    backgroundColor="rgba(135, 191, 112, 0.51)"
-                                    titleColor="#4C8732"
-                                    percentageColor="#4C8732"
-                                />
-                                <MiniCard
-                                    title="Huéspedes Nuevos"
-                                    number="25"
-                                    percentage="25%"
-                                    backgroundColor="rgba(226,221,80,0.5)"
-                                    titleColor="#E19110"
-                                    percentageColor="#E19110"
-                                />
-                            </div>
-                            <div className="charts-container">
-                                <div className="chart">
-                                    <Line data={huespedesData} />
-                                </div>
-                                <div className="chart">
-                                    <Bar
-                                        data={{
-                                            labels: ['Adultos', 'Niños', 'Mayores'],
-                                            datasets: [{
-                                                label: 'Tipos de Huéspedes',
-                                                data: [30, 10, 5],
-                                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                                            }]
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Reservas Section */}
-                        <div className="card-reservas">
-                            <h3>Reservas</h3>
-                            <div className="mini-cards-container">
-                                <MiniCard
-                                    title="Reservas para Hoy"
-                                    number="20"
-                                    percentage="10%"
-                                    backgroundColor="rgba(135, 191, 112, 0.51)"
-                                    titleColor="#4C8732"
-                                    percentageColor="#4C8732"
-                                />
-                                <MiniCard
-                                    title="Reservas Canceladas"
-                                    number="5"
-                                    percentage="5%"
-                                    backgroundColor="rgba(251, 139, 129, 0.50)"
-                                    titleColor="#E01300"
-                                    percentageColor="#E01300"
-                                />
-                            </div>
-                            <div className="charts-container">
-                                <div className="chart">
-                                    <Line data={reservasData} />
                                 </div>
                                 <div className="chart">
                                     <Bar
                                         data={{
                                             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
                                             datasets: [{
-                                                label: 'Reservas por Mes',
-                                                data: [15, 25, 35, 45, 55, 65],
+                                                label: 'Reservas Canceladas',
+                                                data: [5, 4, 6, 3, 2, 5], // Datos de ejemplo
                                                 backgroundColor: '#FF6384',
                                             }]
                                         }}
@@ -236,6 +164,8 @@ const DashboardEstadisticas = () => {
             </div>
         </div>
     );
+    
+    
 };
 
 export default DashboardEstadisticas;

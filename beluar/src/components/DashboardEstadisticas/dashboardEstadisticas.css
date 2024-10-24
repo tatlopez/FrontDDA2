@@ -1,29 +1,35 @@
 .dashboard-estadisticas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   background-color: #F0F2F6;
   padding: 20px;
   width: 100%;
   border-radius: 15px;
 }
 
-.section-title {
+p.section-title{
   color: #6E28F5;
+  font-weight: 600;
   font-size: 28px;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
-.row {
+.stats-card {
   display: flex;
-  align-items: flex-start; /* Align items at the start */
-  gap: 25px;
-  margin-bottom: 30px;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1; /* Permite que las tarjetas tomen espacio igual */
+  background-color: #E4E6E8;
+  padding: 20px;
+  border-radius: 30px;
 }
 
-.card-habitaciones, .card-servicios, .card-huespedes, .card-reservas {
-  flex: 1; /* Allow cards to take equal space */
-  background-color: #E4E6E8;
-  padding: 10px;
-  border-radius: 30px;
-  margin-bottom: 20px;
+
+.stats-card p , .narrow-card p{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .mini-cards-container {
@@ -89,4 +95,24 @@
 .ingresos-valor {
   font-size: 36px;
   color: #703FD0;
+}
+
+
+.narrow-cards-container {
+  display: flex;
+  gap: 20px; /* Espacio entre las tarjetas angostas */
+}
+
+.narrow-card {
+  flex: 1; /* Permitir que ambas tarjetas ocupen el mismo espacio */
+  background-color: #E4E6E8;
+  padding: 20px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.narrow-card .chart {
+  flex: 1; /* Permite que el gráfico ocupe el espacio disponible */
 }
