@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboardInicio.css";
 import Menu from "../Menu/Menu";
 import Header from "../Header/Header";
@@ -6,61 +6,26 @@ import calendarCheck from "../../assets/calendar-check.svg";
 import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
+import get_reservations from "../../services/reservations/get_reservations";
 
 function DashboardInicio() {
 
+    const [reservations, setReservations] = useState([]);
+
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
-    const reservations = [
-        {
-          name: 'Fernández, Martín',
-          checkIn: '15/09/2024',
-          checkOut: '20/09/2024',
-          room: '#3B',
-          extraServices: 'Desayuno, Traslado al hotel',
-          amount: 'USD $120',
-        },
-        {
-          name: 'Rodríguez, Catalina',
-          checkIn: '16/09/2024',
-          checkOut: '19/09/2024',
-          room: '#7J',
-          extraServices: 'Spa, Almuerzo buffet',
-          amount: 'USD $85',
-        },
-        {
-          name: 'Gómez, Luis',
-          checkIn: '18/09/2024',
-          checkOut: '21/09/2024',
-          room: '#5C',
-          extraServices: 'Wi-Fi premium, Cena a la habitación',
-          amount: 'USD $65',
-        },
-        {
-          name: 'Torres, Julia',
-          checkIn: '14/09/2024',
-          checkOut: '17/09/2024',
-          room: '#9L',
-          extraServices: 'Gimnasio, Desayuno buffet',
-          amount: 'USD $40',
-        },
-        {
-          name: 'Pereyra, Esteban',
-          checkIn: '19/09/2024',
-          checkOut: '23/09/2024',
-          room: '#8D',
-          extraServices: 'Spa, Wi-Fi premium',
-          amount: 'USD $110',
-        },
-        {
-          name: 'Suárez, Natalia',
-          checkIn: '20/09/2024',
-          checkOut: '25/09/2024',
-          room: '#6A',
-          extraServices: 'Desayuno, Estacionamiento',
-          amount: 'USD $95',
-        }
-    ];
+    useEffect(() => {
+
+        get_reservations(hotel.id)
+            .then((res) => {
+                const loadedReservas = res || [];
+                console.log(loadedReservas);
+                setReservations(loadedReservas);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     const rooms = [
         { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
@@ -167,12 +132,34 @@ function DashboardInicio() {
                             <tbody>
                                 {reservations.map((reservation, index)=> (
                                     <tr key={index}>
-                                        <td>{reservation.name}</td>
-                                        <td>{reservation.checkIn}</td>
-                                        <td>{reservation.checkOut}</td>
-                                        <td className="room-number">{reservation.room}</td>
-                                        <td>{reservation.extraServices} <span className="dropdown-icon">▾</span></td>
-                                        <td>{reservation.amount}</td>
+                                        <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
+                                        <td>{reservation.start_date}</td>
+                                        <td>{reservation.end_date}</td>
+                                        <td className="room-number">{'#'+ reservation.room_info.floor + reservation.room_info.name}</td>
+
+                                        <td>
+                                            {reservation.services.length > 0 ? (
+                                                <>
+                                                    {reservation.services.slice(0, 2).map((service, index) => (
+                                                        <span key={index}>
+                                                            {service.service.name}
+                                                            {index < Math.min(1, reservation.services.length - 1) && ', '}
+                                                        </span>
+                                                    ))}
+                                                    {reservation.services.length > 2 && (
+                                                        <details>
+                                                            <summary></summary>
+                                                            {reservation.services.slice(2).map((service, index) => (
+                                                                <div key={index + 2}>{service.service.name + ' '}</div>
+                                                            ))}
+                                                        </details>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                'Sin servicios contratados'
+                                            )}
+                                        </td>
+                                        <td>{reservation.total_price}</td>
                                     </tr>
                                 ))}
                             </tbody>
