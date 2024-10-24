@@ -37,7 +37,7 @@
   border: none;
   cursor: pointer;
   color: #703FD0;
-  font-size: 1.2rem;
+  padding: 0;
 }
 
 .profile-container {

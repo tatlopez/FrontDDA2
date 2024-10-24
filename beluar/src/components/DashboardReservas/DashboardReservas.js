@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './dashboardReservas.css';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
@@ -46,20 +47,20 @@ function DashboardReservas() {
             <div className="content-container">
                 <Header hotelName={hotel.name}/>
                 <div className="dashboard-body">
-                    <div className="rooms-section">
-                        <div className="rooms-header">
+                    <div className="reservas-section">
+                        <div className="reservas-header">
                             <p>Reservas</p>
                             <div className="search-bar-and-add">
                                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar reserva..." />
                             </div>
                         </div>
-                        <div className="rooms-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+                        <div className="reservas-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
                             {filteredReserva.map((reserva) => (
                                 <Reserva key={reserva.id} item={reserva} onClick={() => handleReservaClick(reserva)} />
                             ))}
                         </div>
                     </div>
-                    <div className="room-detail-section">
+                    <div className="reserva-detail-section">
                         {selectedReserva && (
                             <ReservaCard item={selectedReserva} onCancelReserva={handleCancelReserva} />
                         )}

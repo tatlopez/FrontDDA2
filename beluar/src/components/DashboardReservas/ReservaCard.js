@@ -81,18 +81,12 @@ const ReservaCard = ({ item, onCancelReserva }) => {
                 <hr className="divider-line" /> 
 
                 <div className="reserva-total">
-                    <span>Total</span> <span className="reserva-total-price">USD {item.price}</span>
-                </div>
-
-                <div className="reserva-remaining">
-                    <span>Falta abonar</span> <span className="reserva-remaining-price">USD {item.abonar}</span>
+                    <span>Total</span> <span className="reserva-total-price">${item.price}</span>
                 </div>
 
             </div>
 
             <div className="reserva-buttons">
-{/*                 <button className="btn-reserva abonar" onClick={handleAbonarClick}>Abonar total</button>
-                <button className="btn-reserva agregar-servicio" onClick={handleAgregarServicioClick}>Agregar servicio</button>  */}
                 <button className="btn-reserva cancelar" onClick={handleCancelarClick}>Cancelar reserva</button>
             </div>
 

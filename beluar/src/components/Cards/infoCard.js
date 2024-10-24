@@ -11,7 +11,7 @@ const InfoCard = ({ item, type, onEdit, onDelete }) => {
 
   return (
     <div className="item-detail">
-      <p className="item-number">{type === 'habitacion' ? `Habitación ${item.floor + item.name}` : item.name}</p>
+      <p className="item-number">{type === 'habitacion' ? `Habitación #${item.floor + item.name}` : item.name}</p>
       {type === 'habitacion' && (
         <img src={
 

@@ -21,49 +21,38 @@ const ConfirmActionModal = ({ actionType, onClose, onConfirm }) => {
 
     const getTitle = () => {
         switch (actionType) {
-            case 'abonar':
-                return 'Confirmar Abono';
             case 'cancelar':
-                return 'Cancelar Reserva';
+                return 'Cancelar reserva';
             case 'eliminarHotel':
-                return 'Eliminar Hotel';
+                return 'Eliminar hotel';
             case 'eliminarHabitacion':
-                return 'Eliminar Habitación';
+                return 'Eliminar habitación';
             case 'eliminarServicio':
-                return 'Eliminar Servicio';
+                return 'Eliminar servicio';
             default:
                 return '';
-        }
-    };
-
-    const getButtonClass = () => {
-        switch (actionType) {
-            case 'abonar':
-                return 'btn-confirm';
-            case 'cancelar':
-            case 'eliminarHotel':
-            case 'eliminarHabitacion':
-            case 'eliminarServicio':
-                return 'btn-confirm cancelar';
-            default:
-                return 'btn-confirm';
         }
     };
 
     return (
         <div className="modal-overlay">
             <div className="modal">
-                <button className="close-modal" onClick={onClose}>X</button>
                 <h2 className="modal-title">{getTitle()}</h2>
                 <div className="modal-content">
                     <p>{getMessage()}</p>
                 </div>
                 <div className="modal-buttons">
                     <button
-                        className={getButtonClass()}
+                        className="confirm-btn"
                         onClick={onConfirm}
                     >
-                        Confirmar
+                        Sí, eliminar
+                    </button>
+                    <button
+                        className="cancel-btn"
+                        onClick={onClose}
+                    >
+                        No, cancelar
                     </button>
                 </div>
             </div>

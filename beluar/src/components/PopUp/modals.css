@@ -144,16 +144,23 @@
     margin-top: 30px;
 }
 
-.btn-confirm {
-    background-color: var(--primary-color);
+button {
     color: white;
     padding: 12px 20px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
     font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     transition: background-color 0.3s;
+}
+
+.confirm-btn {
+    background-color: #E01300;
+}
+
+.cancel-btn {
+    background-color: #703FD0;
 }
 
 .btn-confirm:hover {
