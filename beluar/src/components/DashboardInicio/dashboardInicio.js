@@ -130,39 +130,43 @@ function DashboardInicio() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {reservations.map((reservation, index)=> (
-                                    <tr key={index}>
-                                        <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
-                                        <td>{reservation.start_date}</td>
-                                        <td>{reservation.end_date}</td>
-                                        <td className="room-number">{'#'+ reservation.room_info.floor + reservation.room_info.name}</td>
+                                {reservations
+                                    .sort((a, b) => new Date(a.start_date) - new Date(b.start_date)) // Ordena por fecha de inicio
+                                    .slice(0, 5) // Solo muestra las primeras 5 reservas
+                                    .map((reservation, index) => (
+                                        <tr key={index}>
+                                            <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
+                                            <td>{reservation.start_date}</td>
+                                            <td>{reservation.end_date}</td>
+                                            <td className="room-number">{'#' + reservation.room_info.floor + reservation.room_info.name}</td>
 
-                                        <td>
-                                            {reservation.services.length > 0 ? (
-                                                <>
-                                                    {reservation.services.slice(0, 2).map((service, index) => (
-                                                        <span key={index}>
-                                                            {service.service.name}
-                                                            {index < Math.min(1, reservation.services.length - 1) && ', '}
-                                                        </span>
-                                                    ))}
-                                                    {reservation.services.length > 2 && (
-                                                        <details>
-                                                            <summary></summary>
-                                                            {reservation.services.slice(2).map((service, index) => (
-                                                                <div key={index + 2}>{service.service.name + ' '}</div>
-                                                            ))}
-                                                        </details>
-                                                    )}
-                                                </>
-                                            ) : (
-                                                'Sin servicios contratados'
-                                            )}
-                                        </td>
-                                        <td>{reservation.total_price}</td>
-                                    </tr>
-                                ))}
+                                            <td>
+                                                {reservation.services.length > 0 ? (
+                                                    <>
+                                                        {reservation.services.slice(0, 2).map((service, index) => (
+                                                            <span key={index}>
+                                                                {service.service.name}
+                                                                {index < Math.min(1, reservation.services.length - 1) && ', '}
+                                                            </span>
+                                                        ))}
+                                                        {reservation.services.length > 2 && (
+                                                            <details>
+                                                                <summary></summary>
+                                                                {reservation.services.slice(2).map((service, index) => (
+                                                                    <div key={index + 2}>{service.service.name + ' '}</div>
+                                                                ))}
+                                                            </details>
+                                                        )}
+                                                    </>
+                                                ) : (
+                                                    'Sin servicios contratados'
+                                                )}
+                                            </td>
+                                            <td>{reservation.total_price}</td>
+                                        </tr>
+                                    ))}
                             </tbody>
+
                         </table>
                     </div>
                     {/* Fin tabla de reservas */}
