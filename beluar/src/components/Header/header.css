@@ -1,37 +1,66 @@
 .dashboard-header {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: flex-end; 
-    padding: 5px;
-    border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end; 
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.hotel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: default;
+}
+
+.edit-icon {
+  margin: 0; 
+  margin-left: 20px;
+  cursor: default;
+}
+
+.hotel-name {
+  margin: 0; 
+  line-height: 24px; 
+  display: flex;
+  align-items: center; 
+  font-size: large;
+  color: black;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+/* Responsive header styling */
+.responsive-header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #F0F2F6;
+  border-radius: 20px;
+}
+
+.responsive-header-container img {
+  height: 20px;
+  margin: 0;
+}
+
+/* Media query to show ResponsiveHeader only on small screens */
+@media (min-width: 768px) {
+  .responsive-header-container {
+      display: none;
   }
-  
-  .hotel-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: default;
+}
+
+/* Ocultar el menú de dashboard en pantallas móviles */
+@media (max-width: 768px) {
+  .menu-component {
+      display: none;
   }
-  
-  .edit-icon {
-    margin: 0; 
-    margin-left: 20px;
-    cursor: default;
-  }
-  
-  .hotel-name {
-    margin: 0; 
-    line-height: 24px; 
-    display: flex;
-    align-items: center; 
-    font-size: large;
-    color: black;
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-    margin: 0;
-  }
-  
+}
