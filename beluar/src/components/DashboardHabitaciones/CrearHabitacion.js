@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './dashboardHabitaciones.css';
 import hotelIcon from '../../assets/default-hotel.jpg';
 import create_room from '../../services/rooms/create_room.js';
 import attach_image_room from '../../services/rooms/attach_image_room.js';
+import uploadPhoto from '../../assets/cargar-imagen.svg';
 
 const AgregarHabitacionModal = ({ onClose, onSave }) => {
   const [floor, setFloor] = useState('');
   const [name, setName] = useState('');
   const [state, setState] = useState('A');
   const [price, setPrice] = useState('');
-  const [imagen, setImagen] = useState(hotelIcon);
+  const [imagen, setImagen] = useState('');
   const [file, setFile] = useState(null);
   const [single_beds_amount, setSingleBedsAmount] = useState('');
   const [double_beds_amount, setDoubleBedsAmount] = useState('');
+
+  const inputRef = useRef(null);
 
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
@@ -51,87 +54,102 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
       });
   };
 
+  const handleImageClick = () => {
+    inputRef.current.click();
+  };
+
   const handleImageChange = (event) => {
+    // const file = event.target.files[0];
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.onload = () => setImagen(reader.result);
+    //   reader.readAsDataURL(file); 
+    //   setFile(file);
+    // }
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setImagen(reader.result);
-      reader.readAsDataURL(file); 
-      setFile(file);
+      setFile(file); // Guarda el archivo para el manejo posterior (como subirlo al backend)
+      setImagen(URL.createObjectURL(file));
     }
   };
 
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <button className="close-modal" onClick={onClose}>X</button>
-        <h2 className="modal-title">Agregar Habitación</h2>
+        <p className="modal-title">Agregar habitación</p>
         <div className="modal-content">
-            <div className="modal-image-section">
-                <label className="image-label">Imagen</label>
-                <img src={imagen} alt="Hotel" className="hotel-image-preview" />
-                <label htmlFor="imagen-input" className="btn-change-image">Cambiar imagen</label>
-                <input 
-                    type="file"
-                    id="imagen-input"
-                    style={{ display: 'none' }}
-                    onChange={handleImageChange}
+          <div className="modal-image-section" onClick={handleImageClick}>
+            <label>Imagen</label>
+            {imagen ? (
+              <img src={imagen} alt="Imagen de la habitación" className="uploaded-image" />
+            ) : (
+              <img src={uploadPhoto} alt="Cargar imagen" className="upload-icon" />
+            )}
+            <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={handleImageChange} />
+          </div>
+          <div className='modal-fields'>
+            <div className='modal-line'>
+              <div className="modal-field">
+                <label>Piso</label>
+                <input
+                  type="text"
+                  value={floor}
+                  onChange={(e) => setFloor(e.target.value)}
                 />
+              </div>
+              <div className="modal-field">
+                <label>Letra</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
             </div>
-          <div className="modal-field">
-            <label>Piso</label>
-            <input
-              type="text"
-              value={floor}
-              onChange={(e) => setFloor(e.target.value)}
-            />
-          </div>
-          <div className="modal-field">
-            <label>Letra</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="modal-field">
-            <label>Estado</label>
-            <select value={state} onChange={(e) => setState(e.target.value)} className="editable-select">
-              <option value="A">Disponible</option>
-              <option value="B">Ocupada</option>
-              <option value="M">Mantenimiento</option>
-            </select>
-          </div>
-          <div className="modal-field">
-            <label>Precio</label>
-            <input
-              type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
+            <div className='modal-line'>
+              <div className="modal-field">
+                <label>Camas individuales</label>
+                <input
+                  type="text"
+                  value={single_beds_amount}
+                  onChange={(e) => setSingleBedsAmount(e.target.value)}
+                />
+              </div>
+              <div className="modal-field">
+                <label>Camas dobles</label>
+                <input
+                  type="text"
+                  value={double_beds_amount}
+                  onChange={(e) => setDoubleBedsAmount(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className='modal-line'>
+              <div className="modal-field">
+                <label>Estado</label>
+                <div className='select-wrapper'>
+                  <select value={state} onChange={(e) => setState(e.target.value)} className="editable-select">
+                    <option value="A">Disponible</option>
+                    <option value="B">Ocupada</option>
+                    <option value="M">Mantenimiento</option>
+                  </select>
+                </div>
+              </div>
+              <div className="modal-field">
+                <label>Precio</label>
+                <input
+                  type="number"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  placeholder='$...'
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="modal-field">
-            <label>Camas individuales</label>
-            <input
-              type="text"
-              value={single_beds_amount}
-              onChange={(e) => setSingleBedsAmount(e.target.value)}
-            />
-          </div>
-
-          <div className="modal-field">
-            <label>Camas dobles</label>
-            <input
-              type="text"
-              value={double_beds_amount}
-              onChange={(e) => setDoubleBedsAmount(e.target.value)}
-            />
-          </div>
-        
         <div className="modal-buttons">
           <button className="btn-confirm" onClick={handleSave}>Agregar Habitación</button>
+          <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
         </div>
       </div>
     </div>
