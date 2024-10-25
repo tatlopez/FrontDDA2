@@ -7,32 +7,84 @@ import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
 import get_reservations from "../../services/reservations/get_reservations";
+import get_room_status_today from "../../services/statistics/get_room_status_today";
+import get_rooms from "../../services/rooms/get_rooms";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 function DashboardInicio() {
-
+    const navigate = useNavigate();
     const [reservations, setReservations] = useState([]);
+    const [todayCheckIns, setTodayCheckIns] = useState(0);
+    const [todayCheckOuts, setTodayCheckOuts] = useState(0);
+    const [roomStatus, setRoomStatus] = useState([]);
+    const [rooms, setRooms] = useState([]);
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
-    useEffect(() => {
+    const roomStateMapping = {
+        'A': 'Disponible',
+        'B': 'Ocupada',
+        'M': 'Mantenimiento',
+    }
 
+    useEffect(() => {
         get_reservations(hotel.id)
             .then((res) => {
                 const loadedReservas = res || [];
-                console.log(loadedReservas);
+                
+                // Get today's date
+                const today = dayjs().format('YYYY-MM-DD');
+
+                // Calculate today's check-ins and check-outs
+                const todayCheckIns = loadedReservas.filter(reservation =>
+                    dayjs(reservation.start_date).format('YYYY-MM-DD') === today
+                );
+
+                const todayCheckOuts = loadedReservas.filter(reservation =>
+                    dayjs(reservation.end_date).format('YYYY-MM-DD') === today
+                );
+
+                // Update the state with the results
                 setReservations(loadedReservas);
+                setTodayCheckIns(todayCheckIns.length);
+                setTodayCheckOuts(todayCheckOuts.length);
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+        
+        get_room_status_today(hotel.id)
+            .then((res) => {
+                setRoomStatus(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            }
+        );  
 
-    const rooms = [
-        { number: '3A', status: 'Disponible', price: 300, image: 'room1.jpg' },
-        { number: '7B', status: 'Limpieza', price: 250, image: 'room2.jpg' },
-        { number: '5A', status: 'Disponible', price: 250, image: 'room4.jpg' },
-        { number: '6H', status: 'Ocupada', price: 100, image: 'room5.jpg' },
-    ];
+        get_rooms(hotel.id)
+            .then((res) => {
+                setRooms(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+    }, [hotel.id]); // Add hotel.id as a dependency to re-fetch when it changes
+
+    // Function to calculate the absolute difference from today
+    const calculateDateDifference = (date) => {
+        return Math.abs(dayjs().diff(dayjs(date), 'day'));
+    };
+
+    const handleReservaButton = () => {
+        navigate('/DashboardReservas');
+    };
+
+    const handleHabitacionButton = () => {
+        navigate('/DashboardHabitaciones');
+    };
 
     return (
         <div className="page-container">
@@ -41,7 +93,7 @@ function DashboardInicio() {
                 <Header hotelName={hotel.name}/>
                 <div className="dashboard-body1">
                     <div className="dashboard-top">
-                        {/* Resumen de tu día*/}
+                        {/* Resumen de tu día */}
                         <div className="dashboard-resume">
                             <p className="title">Resumen de tu día</p>
                             <div className="cards">
@@ -51,35 +103,35 @@ function DashboardInicio() {
                                             <img src={calendarCheck} className="card-icon" alt="Check-ins"/>
                                             <p className="resume-title">Check-ins</p>
                                         </div>
-                                        <p className="resume-number">15</p>
+                                        <p className="resume-number">{todayCheckIns}</p>
                                     </div>
                                     <div className="resume-card" style={{backgroundColor: 'rgba(251,139,129,0.5)', color: '#E01300'}}>
                                         <div className="card-title">
                                             <img src={calendarCross} className="card-icon" alt="Check-outs"/>
                                             <p className="resume-title">Check-outs</p>
                                         </div>
-                                        <p className="resume-number">12</p>
+                                        <p className="resume-number">{todayCheckOuts}</p>
                                     </div>
                                 </div>
                                 <div className="cards-row">
                                     <div className="resume-card" style={{backgroundColor: 'rgba(62,174,226,0.5)', color: '#317CF5'}}>
                                         <div className="card-title">
-                                            <img src={coupon1} className="card-icon" alt="coupon 1"/>
-                                            <p className="resume-title">Servicios reservados</p>
+                                            <img src={coupon1} className="card-icon" alt="Servicios reservados"/>
+                                            <p className="resume-title">Habitaciones reservadas</p>
                                         </div>
-                                        <p className="resume-number">7</p>
+                                        <p className="resume-number">{roomStatus.occupied_rooms}</p>
                                     </div>
                                     <div className="resume-card" style={{backgroundColor: 'rgba(226,221,80,0.5)', color: '#E19110'}}>
                                         <div className="card-title">
-                                            <img src={coupon2} className="card-icon" alt="coupon 2"/>
-                                            <p className="resume-title">Servicios libres</p>
+                                            <img src={coupon2} className="card-icon" alt="Servicios libres"/>
+                                            <p className="resume-title">Habitaciones libres</p>
                                         </div>
-                                        <p className="resume-number">13</p>
+                                        <p className="resume-number">{roomStatus.unoccupied_rooms}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {/* Fin resumen de tu día*/}
+                        {/* Fin resumen de tu día */}
                         {/* Habitaciones para limpiar */}
                         <div className="dashboard-rooms">
                             <p className="title">Estado de las habitaciones libres</p>
@@ -93,19 +145,22 @@ function DashboardInicio() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {rooms.map((room, index) => (
-                                            <tr key={index}>
-                                                <td>#{room.number}</td>
-                                                <td className="room-status">{room.status}</td>
-                                                <td>${room.price}</td>
-                                                <td><button className="ver-btn">Ver habitación</button></td>
-                                            </tr>
-                                        ))}
+                                    {rooms
+                                    .filter((room) => room.state !== 'B') 
+                                    .slice(0, 4) // Mostrar solo las primeras 4 habitaciones
+                                    .map((room, index) => (
+                                        <tr key={index}>
+                                            <td>#{room.floor + room.name}</td>
+                                            <td className="room-status">{roomStateMapping[room.state]}</td>
+                                            <td>${room.price}</td>
+                                            <td><button className="ver-btn" onClick={handleHabitacionButton}>Ver habitación</button></td>
+                                        </tr>
+                                    ))}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        {/* Fin check ins rapidos */}
+                        {/* Fin habitaciones */}
                     </div>
                     {/* Tabla de reservas */}
                     <div className="dashboard-reservations">
@@ -123,8 +178,8 @@ function DashboardInicio() {
                             </thead>
                             <tbody>
                                 {reservations
-                                    .sort((a, b) => new Date(a.start_date) - new Date(b.start_date)) // Ordena por fecha de inicio
-                                    .slice(0, 5) // Solo muestra las primeras 5 reservas
+                                    .sort((a, b) => calculateDateDifference(a.start_date) - calculateDateDifference(b.start_date)) // Ordenar por proximidad a la fecha actual
+                                    .slice(0, 5) // Mostrar las 5 reservas más cercanas
                                     .map((reservation, index) => (
                                         <tr key={index}>
                                             <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
@@ -155,18 +210,17 @@ function DashboardInicio() {
                                                 )}
                                             </td>
                                             <td>${reservation.total_price}</td>
-                                            <td><button className="ver-btn">Ver reserva</button></td>
+                                            <td><button className="ver-btn" onClick={handleReservaButton}>Ver reserva</button></td>
                                         </tr>
                                     ))}
                             </tbody>
-
                         </table>
                     </div>
                     {/* Fin tabla de reservas */}
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default DashboardInicio;

@@ -6,21 +6,27 @@ import './dashboardEstadisticas.css';
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 import MiniCard from './MiniCard';
+import get_cancelled_reservations from '../../services/statistics/get_cancelled_reservations';
+import get_reservations_per_month from '../../services/statistics/get_reservations_per_month';
+import get_room_status_today from '../../services/statistics/get_room_status_today';
+import get_popular_services from '../../services/statistics/get_popular_services';
 
 // Register required Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Tooltip, Legend);
 
 const DashboardEstadisticas = () => {
     const [loading, setLoading] = useState(true); // Estado de carga
-    const [habitacionesData, setHabitacionesData] = useState({
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+
+    const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+    const [roomStatusData, setRoomStatusData] = useState([]);
+
+    const [cancelledReservationsData, setCancelledReservationsData] = useState({
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [
             {
-                label: 'Ocupación de Habitaciones',
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                data: [60, 75, 70, 90, 85, 80],
+                label: 'Reservas Canceladas',
+                data: new Array(12).fill(0), // Inicializa con 12 valores en 0
+                backgroundColor: '#FF6384',
             },
         ],
     });
@@ -37,7 +43,7 @@ const DashboardEstadisticas = () => {
     });
 
     const [reservasData, setReservasData] = useState({
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [
             {
                 label: 'Reservas',
@@ -48,30 +54,132 @@ const DashboardEstadisticas = () => {
                 pointBorderColor: 'rgba(75,192,192,1)',
                 pointBackgroundColor: '#fff',
                 pointBorderWidth: 1,
-                data: [65, 59, 80, 81, 56, 55],
+                data: new Array(12).fill(0), // Inicializa con 12 valores en 0
             },
         ],
     });
 
+    // Mapa de meses en español
+    const monthMap = {
+        'January': 0,
+        'February': 1,
+        'March': 2,
+        'April': 3,
+        'May': 4,
+        'June': 5,
+        'July': 6,
+        'August': 7,
+        'September': 8,
+        'October': 9,
+        'November': 10,
+        'December': 11,
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            // Simular una llamada a la API
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simula un retraso de 2 segundos
-            // Aquí puedes realizar la llamada a tu API y actualizar los estados correspondientes
-            // setHabitacionesData(...); // Actualiza con los datos de la API
-            // setServiciosData(...); // Actualiza con los datos de la API
-            // setReservasData(...); // Actualiza con los datos de la API
+
+            // Llamada a la API para obtener las reservas por mes
+            get_reservations_per_month(hotel.id)
+                .then((res) => {
+                    // Crear un array de 12 meses con los datos devueltos por la API
+                    const updatedData = new Array(12).fill(0);
+                    
+                    // Mapear los datos de la API a los índices de los meses
+                    Object.entries(res).forEach(([month, value]) => {
+                        const monthIndex = monthMap[month];
+                        if (monthIndex !== undefined) {
+                            updatedData[monthIndex] = value;
+                        }
+                    });
+
+                    // Actualizar el estado del gráfico de reservas
+                    setReservasData((prevData) => ({
+                        ...prevData,
+                        datasets: [
+                            {
+                                ...prevData.datasets[0],
+                                data: updatedData, // Asignar los datos mapeados
+                            },
+                        ],
+                    }));
+                })
+                .catch((err) => {
+                    console.error('Error:', err);
+                });
+
+            get_popular_services(hotel.id)
+                .then((res) => {
+                    // Crear un array de objetos con los servicios populares
+                    const updatedData = Object.entries(res).map(([service, value]) => ({
+                        service,
+                        value,
+                    }));
+
+                    // Actualizar el estado del gráfico de servicios
+                    setServiciosData((prevData) => ({
+                        ...prevData,
+                        datasets: [
+                            {
+                                ...prevData.datasets[0],
+                                data: updatedData.map((item) => item.value),
+                            },
+                        ],
+                        labels: updatedData.map((item) => item.service),
+                    }));
+                })
+                .catch((err) => {
+                    console.error('Error:', err);
+                });
+
+
+                get_cancelled_reservations(hotel.id)
+                .then((res) => {
+                    // Crear un array de 12 meses con los datos devueltos por la API
+                    const updatedData = new Array(12).fill(0);
+            
+                    // Mapear los datos de la API a los índices de los meses
+                    Object.entries(res).forEach(([month, value]) => {
+                        const monthIndex = monthMap[month];
+                        if (monthIndex !== undefined) {
+                            updatedData[monthIndex] = value;
+                        }
+                    });
+            
+                    // Actualizar el estado del gráfico de reservas canceladas
+                    setCancelledReservationsData((prevData) => ({
+                        ...prevData,
+                        datasets: [
+                            {
+                                ...prevData.datasets[0],
+                                data: updatedData, // Asignar los datos mapeados
+                            },
+                        ],
+                    }));
+                })
+                .catch((err) => {
+                    console.error('Error:', err);
+                });
+
+                get_room_status_today(hotel.id)
+                .then((res) => {
+                    setRoomStatusData(res);
+                    console.log('room status data: ',roomStatusData)
+                })
+                .catch((err) => {
+                    console.error('Error:', err);
+                });
+
             setLoading(false);
         };
         fetchData();
-    }, []);
+    }, [hotel.id]);
 
     return (
         <div className="page-container">
             <Menu />
             <div className="content-container">
-                <Header />
+                <Header hotelName={hotel.name}/>
                 <div className="dashboard-body">
                     <div className="dashboard-estadisticas">
                         <p className="section-title">Estadísticas</p>
@@ -87,17 +195,15 @@ const DashboardEstadisticas = () => {
                                     <p>Reservas</p>
                                     <div className="mini-cards-container">
                                         <MiniCard
-                                            title="Reservas para Hoy"
-                                            number="20"
-                                            percentage="10%"
+                                            title="Habitaciones ocupadas"
+                                            number={roomStatusData.occupied_rooms}
                                             backgroundColor="rgba(135, 191, 112, 0.51)"
                                             titleColor="#4C8732"
                                             percentageColor="#4C8732"
                                         />
                                         <MiniCard
-                                            title="Reservas Canceladas"
-                                            number="5"
-                                            percentage="5%"
+                                            title="Habitaciones libres"
+                                            number={roomStatusData.unoccupied_rooms}
                                             backgroundColor="rgba(251, 139, 129, 0.50)"
                                             titleColor="#E01300"
                                             percentageColor="#E01300"
@@ -109,14 +215,7 @@ const DashboardEstadisticas = () => {
                                         </div>
                                         <div className="chart">
                                             <Bar
-                                                data={{
-                                                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-                                                    datasets: [{
-                                                        label: 'Reservas por Mes',
-                                                        data: [15, 25, 35, 45, 55, 65],
-                                                        backgroundColor: '#FF6384',
-                                                    }]
-                                                }}
+                                                data={reservasData}
                                             />
                                         </div>
                                     </div>
@@ -130,8 +229,7 @@ const DashboardEstadisticas = () => {
                                         <div className="mini-cards-container">
                                             <MiniCard
                                                 title="Servicios Populares"
-                                                number="75"
-                                                percentage="60%"
+                                                number={serviciosData.labels.length}
                                                 backgroundColor="rgba(135, 191, 112, 0.51)"
                                                 titleColor="#4C8732"
                                                 percentageColor="#4C8732"
@@ -148,8 +246,7 @@ const DashboardEstadisticas = () => {
                                         <div className="mini-cards-container">
                                             <MiniCard
                                                 title="Reservas Canceladas"
-                                                number="5"
-                                                percentage="5%"
+                                                number={cancelledReservationsData.datasets[0].data.reduce((acc, curr) => acc + curr, 0)}
                                                 backgroundColor="rgba(251, 139, 129, 0.50)"
                                                 titleColor="#E01300"
                                                 percentageColor="#E01300"
@@ -157,14 +254,7 @@ const DashboardEstadisticas = () => {
                                         </div>
                                         <div className="chart">
                                             <Bar
-                                                data={{
-                                                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-                                                    datasets: [{
-                                                        label: 'Reservas Canceladas',
-                                                        data: [5, 4, 6, 3, 2, 5], // Datos de ejemplo
-                                                        backgroundColor: '#FF6384',
-                                                    }]
-                                                }}
+                                                data={cancelledReservationsData}
                                             />
                                         </div>
                                     </div>
