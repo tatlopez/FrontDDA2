@@ -53,7 +53,6 @@ function LoginForm() {
                 <button type="submit" className="login-button">Log In</button>
             </form>
             <p><a href="/forgot-password">Olvidé mi contraseña</a></p>
-            <p>¿No tenés cuenta? <a href="/signup">Crear cuenta</a></p>
         </div>
     );
 }
