@@ -9,8 +9,8 @@ function ResponsiveHeader({onMenuToggle}) {
     return (
         <div className="responsive-header-container">
             <img src={menuIcon} alt="Menu Icon" className="menu-icon" onClick={onMenuToggle}/>
+            <img src={logoResponsive} alt="Logo" className="logo" />
             <SearchBar />
-            <img src={logoResponsive} alt="Logo" className="logo" />  
         </div>
     );
 }

@@ -35,32 +35,25 @@
   margin: 0;
 }
 
-/* Responsive header styling */
 .responsive-header-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   background-color: #F0F2F6;
-  border-radius: 20px;
+  border-radius: 30px;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.responsive-header-container img {
+img.menu-icon{
   height: 20px;
   margin: 0;
 }
 
-/* Media query to show ResponsiveHeader only on small screens */
-@media (min-width: 768px) {
-  .responsive-header-container {
-      display: none;
-  }
-}
-
-/* Ocultar el menú de dashboard en pantallas móviles */
-@media (max-width: 768px) {
-  .menu-component {
-      display: none;
-  }
+img.logo {
+  height: 35px;
+  max-width: 35px;
+  margin: 0;
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./dashboardInicio.css";
 import Menu from "../Menu/Menu";
 import Header from "../Header/Header";
+import ResponsiveHeader from "../Header/responsiveHeader.js";
 import calendarCheck from "../../assets/calendar-check.svg";
 import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
@@ -88,9 +89,10 @@ function DashboardInicio() {
 
     return (
         <div className="page-container">
-            <Menu />
+            <Menu className="menu" />
             <div className="content-container1">
-                <Header hotelName={hotel.name}/>
+                <Header hotelName={hotel.name} className="header"/>
+                <ResponsiveHeader hotelName={hotel.name} className="header-responsive"/>
                 <div className="dashboard-body1">
                     <div className="dashboard-top">
                         {/* Resumen de tu día */}
@@ -150,9 +152,9 @@ function DashboardInicio() {
                                     .slice(0, 4) // Mostrar solo las primeras 4 habitaciones
                                     .map((room, index) => (
                                         <tr key={index}>
-                                            <td>#{room.floor + room.name}</td>
-                                            <td className="room-status">{roomStateMapping[room.state]}</td>
-                                            <td>${room.price}</td>
+                                            <td data-label="N° de habitación">#{room.floor + room.name}</td>
+                                            <td data-label="Estado" className="room-status">{roomStateMapping[room.state]}</td>
+                                            <td data-label="Precio">${room.price}</td>
                                             <td><button className="ver-btn" onClick={handleHabitacionButton}>Ver habitación</button></td>
                                         </tr>
                                     ))}
@@ -182,12 +184,12 @@ function DashboardInicio() {
                                     .slice(0, 5) // Mostrar las 5 reservas más cercanas
                                     .map((reservation, index) => (
                                         <tr key={index}>
-                                            <td>{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
-                                            <td>{reservation.start_date}</td>
-                                            <td>{reservation.end_date}</td>
-                                            <td className="room-number"><p>{'#' + reservation.room_info.floor + reservation.room_info.name}</p></td>
+                                            <td data-label="Nombre">{reservation.client_info.surname + ', ' + reservation.client_info.name}</td>
+                                            <td data-label="Check-in">{reservation.start_date}</td>
+                                            <td data-label="Check-out">{reservation.end_date}</td>
+                                            <td data-label="Habitación" className="room-number"><p>{'#' + reservation.room_info.floor + reservation.room_info.name}</p></td>
 
-                                            <td>
+                                            <td data-label="Servicios extra">
                                                 {reservation.services.length > 0 ? (
                                                     <>
                                                         {reservation.services.slice(0, 2).map((service, index) => (
@@ -209,7 +211,7 @@ function DashboardInicio() {
                                                     'Sin servicios contratados'
                                                 )}
                                             </td>
-                                            <td>${reservation.total_price}</td>
+                                            <td data-label="Total de la reserva">${reservation.total_price}</td>
                                             <td><button className="ver-btn" onClick={handleReservaButton}>Ver reserva</button></td>
                                         </tr>
                                     ))}

@@ -48,7 +48,7 @@ const Menu = () => {
       )}
       
       <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="belu-logo" />
         <div className="menu-stackItems">
           <Link to="/DashboardInicio" className="menu-item">
             <img src={homeIcon} alt="Home Icon" className="icon" />
