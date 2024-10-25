@@ -59,13 +59,6 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
   };
 
   const handleImageChange = (event) => {
-    // const file = event.target.files[0];
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => setImagen(reader.result);
-    //   reader.readAsDataURL(file); 
-    //   setFile(file);
-    // }
     const file = event.target.files[0];
     if (file) {
       setFile(file); // Guarda el archivo para el manejo posterior (como subirlo al backend)

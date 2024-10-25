@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './hotel.css';
-import cargarImagen from '../../assets/cargar-imagen.png';
+import uploadPhoto from '../../assets/cargar-imagen.svg';
 import create_hotel from '../../services/hotels/create_hotel.js';
 import attach_image from '../../services/hotels/attach_image.js';
 import modify_hotel from '../../services/hotels/modify_hotel.js';
@@ -18,12 +18,14 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [longitud, setLongitud] = useState(hotel.longitude || '');
     const [country, setCountry] = useState(hotel.country || '');
     const [imagen, setImagen] = useState(
-        hotel.images && hotel.images.length > 0 ? hotel.images[0].image : cargarImagen
+        hotel.images && hotel.images.length > 0 ? hotel.images[0].image : uploadPhoto
     );
     const [file, setFile] = useState(null);
     const [imageResponse, setImageResponse] = useState(null);
 
-    const esNuevoHotel = !hotel.name; 
+    const esNuevoHotel = !hotel.name;
+
+    const inputRef = useRef(null);
 
     const handleSave = () => {
         const updatedHotel = { 
@@ -82,126 +84,134 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
         onClose(); // Cerramos el modal
     };
 
+    const handleImageClick = () => {
+        inputRef.current.click();
+      };
+    
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = () => setImagen(reader.result);
-            reader.readAsDataURL(file); 
-            setFile(file);
+            setFile(file); // Guarda el archivo para el manejo posterior (como subirlo al backend)
+            setImagen(URL.createObjectURL(file));
         }
     };
 
     return (
         <div className="modal-overlay">
             <div className="modal">
-                <button className="close-modal" onClick={onClose}>X</button>
-                <h2 className="modal-title">{esNuevoHotel ? 'Agregar hotel' : 'Editar hotel'}</h2>
+                <p className="modal-title">{esNuevoHotel ? 'Agregar hotel' : 'Editar hotel'}</p>
                 <div className="modal-content">
-                    <div className="modal-image-section">
-                        <label className="image-label">Imagen</label>
-                        <img src={imagen.startsWith('data:') ? imagen : `${API_URL}${imagen}`} alt="Hotel" className="hotel-image-preview" />
-                        <label htmlFor="imagen-input" className="btn-change-image">Cambiar imagen</label>
-                        <input 
-                            type="file"
-                            id="imagen-input"
-                            style={{ display: 'none' }}
-                            onChange={handleImageChange}
-                        />
+                    <div className="modal-image-section" onClick={handleImageClick}>
+                        <label>Imagen</label>
+                        {imagen ? (
+                        <img src={imagen} alt="Imagen de la habitación" className="uploaded-image" />
+                        ) : (
+                        <img src={uploadPhoto} alt="Cargar imagen" className="upload-icon" />
+                        )}
+                        <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={handleImageChange} />
                     </div>
-                    <div className="modal-form-section">
-                        <div className="modal-field">
-                            <label>Nombre</label>
-                            <input
-                                type="text"
-                                value={nombre}
-                                onChange={(e) => setNombre(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>Dirección</label>
-                            <input
-                                type="text"
-                                value={direccion}
-                                onChange={(e) => setDireccion(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>País</label>
-                            <input
-                                type="text"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>Ciudad</label>
-                            <input
-                                type="text"
-                                value={ciudad}
-                                onChange={(e) => setCiudad(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>Teléfono</label>
-                            <input
-                                type="text"
-                                value={telefono}
-                                onChange={(e) => setTelefono(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>Email</label>
-                            <input
-                                type="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>Descripción</label>
-                            <input
-                                type="text"
-                                value={descripcion}
-                                onChange={(e) => setDescripcion(e.target.value)}
-                            />
-                        </div>
-                        <div className="modal-field">
-                            <label>Estrellas</label>
-                            <div className="star-rating">
-                                {[...Array(5)].map((_, index) => (
-                                    <span
-                                        key={index}
-                                        className={`star ${index < estrellas ? 'filled' : ''}`}
-                                        onClick={() => setEstrellas(index + 1)}
-                                    >
-                                        ★
-                                    </span>
-                                ))}
+                    <div className="modal-fields">
+                        <div className='modal-line'>
+                            <div className="modal-field">
+                                <label>Nombre</label>
+                                <input
+                                    type="text"
+                                    value={nombre}
+                                    onChange={(e) => setNombre(e.target.value)}
+                                />
+                            </div>
+                            <div className="modal-field">
+                                <label>Dirección</label>
+                                <input
+                                    type="text"
+                                    value={direccion}
+                                    onChange={(e) => setDireccion(e.target.value)}
+                                />
                             </div>
                         </div>
-                        <div className="modal-field">
-                            <label>Latitud</label>
-                            <input
-                                type="text"
-                                value={latitud}
-                                onChange={(e) => setLatitud(e.target.value)}
-                            />
+                        <div className='modal-line'>
+                            <div className="modal-field">
+                                <label>País</label>
+                                <input
+                                    type="text"
+                                    value={country}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                />
+                            </div>
+                            <div className="modal-field">
+                                <label>Ciudad</label>
+                                <input
+                                    type="text"
+                                    value={ciudad}
+                                    onChange={(e) => setCiudad(e.target.value)}
+                                />
+                            </div>
                         </div>
-                        <div className="modal-field">
-                            <label>Longitud</label>
-                            <input
-                                type="text"
-                                value={longitud}
-                                onChange={(e) => setLongitud(e.target.value)}
-                            />
+                        <div className='modal-line'>
+                            <div className="modal-field">
+                                <label>Teléfono</label>
+                                <input
+                                    type="text"
+                                    value={telefono}
+                                    onChange={(e) => setTelefono(e.target.value)}
+                                />
+                            </div>
+                            <div className="modal-field">
+                                <label>Email</label>
+                                <input
+                                    type="text"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className='modal-line'>
+                            <div className="modal-field">
+                                <label>Descripción</label>
+                                <input
+                                    type="text"
+                                    value={descripcion}
+                                    onChange={(e) => setDescripcion(e.target.value)}
+                                />
+                            </div>
+                            <div className="modal-field">
+                                <label>Estrellas</label>
+                                <div className="star-rating">
+                                    {[...Array(5)].map((_, index) => (
+                                        <span
+                                            key={index}
+                                            className={`star ${index < estrellas ? 'filled' : ''}`}
+                                            onClick={() => setEstrellas(index + 1)}
+                                        >
+                                            ★
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='modal-line'>
+                            <div className="modal-field">
+                                <label>Latitud</label>
+                                <input
+                                    type="text"
+                                    value={latitud}
+                                    onChange={(e) => setLatitud(e.target.value)}
+                                />
+                            </div>
+                            <div className="modal-field">
+                                <label>Longitud</label>
+                                <input
+                                    type="text"
+                                    value={longitud}
+                                    onChange={(e) => setLongitud(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="modal-buttons">
-                <button className="btn-confirm" onClick={handleSave}>
-                        {esNuevoHotel ? 'Agregar Hotel' : 'Guardar Cambios'}
-                </button>
+                    <button className="btn-confirm" onClick={handleSave}>Agregar hotel</button>
+                    <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
                 </div>
             </div>
         </div>
