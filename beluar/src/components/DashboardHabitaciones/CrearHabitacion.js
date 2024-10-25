@@ -52,6 +52,8 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
       .catch((error) => {
         console.error('Error creating room:', error);
       });
+
+      window.location.reload();
   };
 
   const handleImageClick = () => {
