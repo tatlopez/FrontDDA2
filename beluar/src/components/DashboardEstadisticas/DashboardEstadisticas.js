@@ -192,7 +192,7 @@ const DashboardEstadisticas = () => {
                             <>
                                 {/* Tarjeta de estadísticas de reservas */}
                                 <div className="stats-card">
-                                    <p>Reservas</p>
+                                    <p>Habitaciones</p>
                                     <div className="mini-cards-container">
                                         <MiniCard
                                             title="Habitaciones ocupadas"

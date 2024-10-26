@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import './dashboardHoteles.css';
 import Profile from '../Profile/Profile';
 import Logo from '../Logo/logo.js';
@@ -7,30 +7,31 @@ import hotelIcon from '../../assets/default-hotel.jpg';
 import trashIcon from '../../assets/trash-icon.png';
 import editIcon from '../../assets/edit-icon.png';
 import addIcon from '../../assets/signo-mas.svg';
-import searchIcon from '../../assets/search-icon-white.svg';
-import EditarHotelModal from './EditarHotel';
-import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 import cargarImagen from '../../assets/cargar-imagen.png';
 import delete_hotel from '../../services/hotels/delete_hotel';
 import SearchBar from '../SearchBar/SearchBar';
 import get_hotels from '../../services/hotels/get_hotels';
 import { API_URL } from '../../config';
+import Header from "../Header/Header";
+import ResponsiveHeader from "../Header/responsiveHeader.js";
+import EditarHotelModal from './EditarHotel';
+import ConfirmActionModal from '../PopUp/ConfirmActionModal';
 
 function DashboardHoteles() {
-    const [hoteles, setHoteles] = useState([]); // Inicializado como array vacío
+    const [hoteles, setHoteles] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [showSearchBar, setShowSearchBar] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
     const navigate = useNavigate();
 
     useEffect(() => {
         get_hotels()
             .then((res) => {
-                setHoteles(res || []); 
+                setHoteles(res || []);
                 setLoading(false);
             })
             .catch((err) => {
@@ -39,23 +40,34 @@ function DashboardHoteles() {
             });
     }, []);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const openModal = (hotel) => {
         setSelectedHotel(hotel);
         setShowModal(true);
     };
 
     const addNewHotel = () => {
-        const emptyHotel = { 
-            id: Date.now(), 
-            name: '', 
-            address: '', 
-            stars: 0, 
-            phone: '', 
-            email: '', 
-            description: '', 
-            latitude: '', 
-            longitude: '', 
-            imagen: cargarImagen 
+        const emptyHotel = {
+            id: Date.now(),
+            name: '',
+            address: '',
+            stars: 0,
+            phone: '',
+            email: '',
+            description: '',
+            latitude: '',
+            longitude: '',
+            imagen: cargarImagen
         };
         setSelectedHotel(emptyHotel);
         setShowModal(true);
@@ -94,27 +106,19 @@ function DashboardHoteles() {
             });
     };
 
-    const toggleSearchBar = () => {
-        setShowSearchBar(!showSearchBar);
-    };
-
     const filteredHoteles = Array.isArray(hoteles) ? hoteles.filter((hotel) =>
         hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) : [];
 
     const handleHotelClick = (hotel) => {
         localStorage.setItem('selectedHotel', JSON.stringify(hotel));
-        navigate('/DashboardInicio'); 
+        navigate('/DashboardInicio');
     };
 
     return (
         <div style={{ backgroundColor: '#FEFBFF' }} className='dashboard'>
-            <header className="dashboard-headerHotel">
-                <Logo />
-                <div className="header-right">
-                    <Profile />
-                </div>
-            </header>
+            <Header className="header" />
+            <ResponsiveHeader className="header-responsive" />
             <main className="dashboard-container">
                 <div className="hoteles-title">
                     <h1 style={{ textAlign: 'left' }}>Tus hoteles</h1>
@@ -122,31 +126,31 @@ function DashboardHoteles() {
                         <button className="hoteles-circleButton" onClick={addNewHotel}>
                             <img src={addIcon} alt="Agregar hotel" />
                         </button>
-                        <SearchBar/>
+                        {isDesktop && <SearchBar />} {/* Solo muestra la SearchBar si es escritorio */}
                     </div>
                 </div>
                 <div className="hoteles-list">
                     {loading ? (
-                        <p>Cargando hoteles...</p> 
+                        <p>Cargando hoteles...</p>
                     ) : error ? (
-                        <p className="error-message">{error}</p> 
+                        <p className="error-message">{error}</p>
                     ) : filteredHoteles.length === 0 ? (
-                        <p>No se encontraron hoteles.</p> 
+                        <p>No se encontraron hoteles.</p>
                     ) : (
                         filteredHoteles.map((hotel) => (
                             <div key={hotel.id} className="hotel-item">
-                            <img
-                                src={
-                                    hotel.images && hotel.images.length > 0
-                                        ? hotel.images[0].image.startsWith('data:image/') // Verificamos si es un formato base64
-                                            ? hotel.images[0].image // Usamos directamente la cadena base64
-                                            : `${API_URL}${hotel.images[0].image}` // Usamos la URL normal
-                                        : hotelIcon
-                                }
-                                alt={hotel.name}
-                                className="hotel-image"
-                                onClick={() => handleHotelClick(hotel)}
-                            />
+                                <img
+                                    src={
+                                        hotel.images && hotel.images.length > 0
+                                            ? hotel.images[0].image.startsWith('data:image/')
+                                                ? hotel.images[0].image
+                                                : `${API_URL}${hotel.images[0].image}`
+                                            : hotelIcon
+                                    }
+                                    alt={hotel.name}
+                                    className="hotel-image"
+                                    onClick={() => handleHotelClick(hotel)}
+                                />
                                 <div className="hotel-info" onClick={() => handleHotelClick(hotel)}>
                                     <h2>{hotel.name}</h2>
                                     <p>{hotel.address + ', ' + hotel.city}</p>
