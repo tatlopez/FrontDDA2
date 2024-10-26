@@ -3,6 +3,7 @@ import "./dashboardInicio.css";
 import Menu from "../Menu/Menu";
 import Header from "../Header/Header";
 import ResponsiveHeader from "../Header/responsiveHeader.js";
+import HamburgerMenu from "../Menu/hamburgerMenu.js";
 import calendarCheck from "../../assets/calendar-check.svg";
 import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
@@ -20,6 +21,10 @@ function DashboardInicio() {
     const [todayCheckOuts, setTodayCheckOuts] = useState(0);
     const [roomStatus, setRoomStatus] = useState([]);
     const [rooms, setRooms] = useState([]);
+
+    // Responsive hamburger menu
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
@@ -92,7 +97,8 @@ function DashboardInicio() {
             <Menu className="menu" />
             <div className="content-container1">
                 <Header hotelName={hotel.name} className="header"/>
-                <ResponsiveHeader hotelName={hotel.name} className="header-responsive"/>
+                <ResponsiveHeader className="header-responsive" onMenuToggle={toggleMenu}/>
+                <HamburgerMenu isOpen={isMenuOpen} onClose={toggleMenu} />
                 <div className="dashboard-body1">
                     <div className="dashboard-top">
                         {/* Resumen de tu día */}

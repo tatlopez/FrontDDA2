@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./hamburgerMenu.css";
-import logo from '../../assets/logo-no-background.png';
+import logo from '../../assets/logo-no-background-top.png';
 import estadisticasIcon from '../../assets/estadisticas-icon.svg';
 import habitacionesIcon from '../../assets/habitaciones-icon.svg';
 import reservasIcon from '../../assets/reservas-icon.svg';
@@ -16,7 +16,7 @@ function HamburgerMenu({ isOpen, onClose }) {
     return (
         <div className={`hamburger-menu ${isOpen ? "open" : ""}`}>
             <div className="hamburger-menu-container">
-                <img src={logo} alt="Logo" className="logo" />
+                <img src={logo} alt="Logo" className="hamburger-logo" />
                 <div className="hamburger-stackButtons">
                     <Link to="/DashboardInicio" className="hamburger-item">
                         <img src={homeIcon} alt="Home Icon" className="icon" />

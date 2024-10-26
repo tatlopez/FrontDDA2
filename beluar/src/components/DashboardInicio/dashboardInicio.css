@@ -216,6 +216,10 @@
         min-height: 125px;
     }
 
+    .cards-row {
+        box-sizing: border-box;
+    }
+
     tr {
         box-sizing: border-box;
         margin: 0;

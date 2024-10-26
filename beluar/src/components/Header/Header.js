@@ -9,7 +9,7 @@ const Header = ({ hotelName }) => {
     <header className="dashboard-header">
       <div className="hotel-title">
         <img src={hotelIcon} alt="Hotel" className="edit-icon" />
-        <h1 className="hotel-name">{hotelName}</h1>
+        <h1 className="hotel-name">Hotel {hotelName}</h1>
       </div>
       <div className="header-right">
         <Profile />
