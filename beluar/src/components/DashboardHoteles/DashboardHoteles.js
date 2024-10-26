@@ -117,8 +117,22 @@ function DashboardHoteles() {
 
     return (
         <div style={{ backgroundColor: '#FEFBFF' }} className='dashboard'>
-            <Header className="header" />
-            <ResponsiveHeader className="header-responsive" />
+            <header className="dashboard-headerHotel">
+                {isDesktop ? (
+                    <>
+                        <Logo />
+                        <div className="header-right">
+                            <Header className="header" />
+                            <ResponsiveHeader className="header-responsive" />
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <Header className="header" />
+                        <ResponsiveHeader className="header-responsive" />
+                    </>
+                )}
+            </header>
             <main className="dashboard-container">
                 <div className="hoteles-title">
                     <h1 style={{ textAlign: 'left' }}>Tus hoteles</h1>
@@ -126,7 +140,7 @@ function DashboardHoteles() {
                         <button className="hoteles-circleButton" onClick={addNewHotel}>
                             <img src={addIcon} alt="Agregar hotel" />
                         </button>
-                        {isDesktop && <SearchBar />} {/* Solo muestra la SearchBar si es escritorio */}
+                        {isDesktop && <SearchBar />} 
                     </div>
                 </div>
                 <div className="hoteles-list">
