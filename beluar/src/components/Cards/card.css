@@ -42,7 +42,7 @@
 }
 
 .editable-input {
-  width: calc(100% - 16px);
+  max-width: calc(100% - 16px);
   height: 40px; 
   padding: 0 8px; 
   line-height: 40px;
@@ -172,5 +172,13 @@
   .status-button,
   .delete-button {
     width: 100%;
+  }
+}
+
+
+@media (max-width:690px) {
+  .item-detail {
+    display: flex;
+    flex-direction: column;
   }
 }

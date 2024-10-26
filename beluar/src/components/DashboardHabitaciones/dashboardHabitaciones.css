@@ -3,7 +3,7 @@
   background-color: #FEFBFF;
 }
 
-.content-container {
+.content-container2 {
   width: 100%;
   height: 100vh;
   background-color: #FEFBFF;
@@ -16,13 +16,13 @@
   box-sizing: border-box;
 }
 
-.content-container::-webkit-scrollbar {
+.content-container2::-webkit-scrollbar {
   width: 10px;
   border-radius: 10px;
   background-color: white;
 }
 
-.content-container::-webkit-scrollbar-thumb{
+.content-container2::-webkit-scrollbar-thumb{
   width: 10px;
   background-color: #703FD0;
   border-radius: 10px;
@@ -31,7 +31,7 @@
 .dashboard-body {
   display: flex;
   gap: 20px;
-  flex-direction: row !important;
+  flex-direction: row;
 }
 
 .rooms-section {
@@ -228,17 +228,82 @@ label.btn-change-image {
   width: 100%;
 }
 
-@media (max-width: 768px) {
-  .content-container {
-    margin-left: 0;
-    width: 100%;
+@media (min-width:1100px) {
+
+  .responsive-header-container {
+      display: none;
   }
 
-  .dashboard-body {
+  div.sidebar.open.logo {
+      min-width: 250px;
+  }
+}
+
+@media (max-width:1100px) {
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  div.sidebar.open {
+    display: none;
+  }
+
+  header.dashboard-header {
+    display: none;
+  }
+
+  .header-responsive {
+    display: block;
+  }
+
+  div.menu-toggle {
+    display: none;
+  }
+
+  .content-container2 {
+    padding: 0;
+  }
+
+  .page-container {
+    display: flex;
     flex-direction: column;
+    padding: 20px;
+    gap: 5px;
+  }
+  
+  /* Asegura que ResponsiveHeader esté visible y en la parte superior */
+  .header-responsive {
+    display: block;
+    width: 100%;
   }
 
-  .rooms-section, .room-detail-section {
+  /* Organiza los elementos en una sola columna */
+  .dashboard-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 100%;
+  }
+
+  .rooms-section,
+  .room-detail-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Asegura que rooms-list ocupe el ancho completo */
+  .rooms-list {
+    width: 100%;
+  }
+  
+  /* Oculta el header y menú lateral en pantallas pequeñas */
+  .menu-component, .header {
+    display: none;
+  }
+
+  .rooms-header {
+    margin: 0;
   }
 }

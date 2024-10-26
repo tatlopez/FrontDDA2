@@ -55,16 +55,6 @@ const Listas = ({ item, type, onEditClick, onRoomClick, image = defaultImage, is
       </div>
       <div className="card-actions">
         <p className="card-price">${item.price}</p>
-        <img
-          src={editIcon}
-          alt="Edit"
-          className="edit-icon"
-          onClick={(e) => {
-            e.stopPropagation();
-            onEditClick(item);
-          }}
-          style={{ cursor: 'pointer' }}
-        />
       </div>
     </div>
   );

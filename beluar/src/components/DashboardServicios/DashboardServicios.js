@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
+import ResponsiveHeader from "../Header/responsiveHeader.js";
+import HamburgerMenu from "../Menu/hamburgerMenu.js";
 import Listas from '../Listas/Lista';
 import InfoCard from '../Cards/infoCard';
 import EditableCard from '../Cards/editableCard';
@@ -27,6 +29,10 @@ function DashboardServicios() {
     const [showAgregarModal, setShowAgregarModal] = useState(false); // Estado para mostrar el modal de agregar
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
+
+    // Responsive hamburger menu
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     useEffect(() => {
         get_services(hotel.id)
@@ -92,6 +98,10 @@ function DashboardServicios() {
 
     return (
         <div className="page-container">
+
+            <ResponsiveHeader className="header-responsive" onMenuToggle={toggleMenu}/>
+            <HamburgerMenu isOpen={isMenuOpen} onClose={toggleMenu} />
+            
             <Menu />
             <div className="content-container">
                 <Header hotelName={hotel.name}/>
