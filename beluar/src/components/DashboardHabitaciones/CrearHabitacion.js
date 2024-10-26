@@ -143,8 +143,8 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
           </div>
         </div>
         <div className="modal-buttons">
+          <button className="btn-confirm" onClick={handleSave}>Agregar Habitación</button>
           <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
-          <button className="btn-confirm" onClick={handleSave}>Agregar habitación</button>
         </div>
       </div>
     </div>

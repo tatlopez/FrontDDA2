@@ -212,8 +212,8 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                     </div>
                 </div>
                 <div className="modal-buttons">
-                    <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
                     <button className="btn-confirm" onClick={handleSave}>{esNuevoHotel ? 'Agregar hotel' : 'Editar hotel'}</button>
+                    <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
                 </div>
             </div>
         </div>

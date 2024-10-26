@@ -72,8 +72,8 @@ const AgregarServicioModal = ({ onClose, onSave }) => {
           </div>
         </div>
         <div className="modal-buttons">
-          <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
           <button className="btn-confirm" onClick={handleSave}>Agregar servicio</button>
+          <button className="btn-confirm" onClick={onClose}>Volver atrás</button>
         </div>
       </div>
     </div>
