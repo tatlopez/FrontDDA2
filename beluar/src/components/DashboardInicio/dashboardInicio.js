@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./dashboardInicio.css";
-import Menu from "../Menu/Menu";
-import Header from "../Header/Header";
+import Menu from "../Menu/Menu.js";
+import Header from "../Header/Header.js";
 import ResponsiveHeader from "../Header/responsiveHeader.js";
 import HamburgerMenu from "../Menu/hamburgerMenu.js";
 import calendarCheck from "../../assets/calendar-check.svg";
 import calendarCross from "../../assets/calendar-cross.svg";
 import coupon1 from "../../assets/coupon 1.svg";
 import coupon2 from "../../assets/coupon 2.svg";
-import get_reservations from "../../services/reservations/get_reservations";
-import get_room_status_today from "../../services/statistics/get_room_status_today";
-import get_rooms from "../../services/rooms/get_rooms";
+import get_reservations from "../../services/reservations/get_reservations.js";
+import get_room_status_today from "../../services/statistics/get_room_status_today.js";
+import get_rooms from "../../services/rooms/get_rooms.js";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
