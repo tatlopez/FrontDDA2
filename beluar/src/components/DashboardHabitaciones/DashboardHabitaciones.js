@@ -34,7 +34,6 @@ function DashboardHabitaciones() {
       .then((res) => {
         const loadedRooms = res || []
         setRooms(loadedRooms);
-        console.log('DEL BACK', loadedRooms);
         if (loadedRooms.length > 0) {
           setSelectedRoom(loadedRooms[0]);
         }

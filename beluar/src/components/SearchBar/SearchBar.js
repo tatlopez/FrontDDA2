@@ -8,9 +8,9 @@ function SearchBar({ setSearchTerm, style, placeholder }) {
     };
 
     return (
-        <div class="buscar">
+        <div className="buscar">
             <input type="text" placeholder="Buscar" required onChange={handleInputChange}/>
-            <div class="btn">
+            <div className="btn">
                 <img src={searchIcon} alt='Buscar'/>
             </div>
         </div>

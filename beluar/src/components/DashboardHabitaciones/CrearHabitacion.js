@@ -20,6 +20,8 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
   const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
   const handleSave = () => {
+    console.log("holaaaa desde antes de la llamada");
+
     const room = {
       hotel: hotel.id,
       floor: floor,
@@ -52,8 +54,6 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
       .catch((error) => {
         console.error('Error creating room:', error);
       });
-
-      window.location.reload();
   };
 
   const handleImageClick = () => {

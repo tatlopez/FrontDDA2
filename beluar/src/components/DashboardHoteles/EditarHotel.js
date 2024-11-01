@@ -80,8 +80,6 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                     console.error('Error al modificar hotel:', err);
                 });
         }
-
-        window.location.reload();
     
         onClose(); // Cerramos el modal
     };

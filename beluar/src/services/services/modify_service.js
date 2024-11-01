@@ -2,6 +2,9 @@ import { API_URL } from '../../config';
 
 function modify_service(id, hotel, name, detail, is_available, price) {
     return (
+
+        console.log('datos', id, hotel, name, detail, is_available, price),
+
         fetch(`${API_URL}/modify-service/${id}/`, {
             method: 'PUT',
             headers: {

@@ -22,8 +22,6 @@ const AgregarServicioModal = ({ onClose, onSave }) => {
         onSave(nuevoServicio);
         onClose();
       });
-
-    window.location.reload();
   };
 
   return (

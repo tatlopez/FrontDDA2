@@ -72,7 +72,7 @@ function DashboardServicios() {
     // Guardar los cambios en el servicio editado
     const handleSave = (updatedService) => {
         const updatedServices = services.map(service =>
-            service.name === updatedService.name ? updatedService : service
+            service.id === updatedService.id ? updatedService : service
         );
         setServices(updatedServices);
         setSelectedService(updatedService);

@@ -3,8 +3,6 @@ import { API_URL } from '../../config';
 
 function create_service(hotel, name, detail, is_available, price) {
 
-    console.log('datos: ', hotel, name, detail, is_available, price);
-
     return (
 
         fetch(`${API_URL}/create-service/`, {
