@@ -6,7 +6,7 @@ function create_hotel(name, address, city, phone, email, description, stars, lat
     return (
 
 
-        fetch(`${API_URL}/create-hotel/`, {
+        fetch(`${API_URL}/api/create-hotel/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -4,7 +4,7 @@ function get_popular_services(id_hotel) {
 
     return (
 
-        fetch(`${API_URL}/services-reservations/${id_hotel}`, {
+        fetch(`${API_URL}/stats/services-reservations/${id_hotel}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

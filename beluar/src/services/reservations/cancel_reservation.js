@@ -5,7 +5,7 @@ function cancel_reservation(id) {
 
     return (
 
-        fetch(`${API_URL}/cancel-reservation/${id}/`, {
+        fetch(`${API_URL}/reservations/cancel-reservation/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

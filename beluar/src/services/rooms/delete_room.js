@@ -5,7 +5,7 @@ function delete_room(id) {
 
     return (
 
-        fetch(`${API_URL}/delete-room/${id}/`, {
+        fetch(`${API_URL}/api/delete-room/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

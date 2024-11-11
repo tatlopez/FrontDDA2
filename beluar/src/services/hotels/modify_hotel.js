@@ -4,7 +4,7 @@ import { API_URL } from '../../config';
 function modify_hotel(id, name, address, city, phone, email, description, stars, latitude, longitude, country) {
 
     return (
-        fetch(`${API_URL}/modify-hotel/${id}/`, {
+        fetch(`${API_URL}/api/modify-hotel/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

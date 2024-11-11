@@ -5,7 +5,7 @@ function create_room(hotel, floor, name, price, state, single_beds_amount, doubl
 
     return (
 
-        fetch(`${API_URL}/create-room/`, {
+        fetch(`${API_URL}/api/create-room/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ function modify_hotel(id, hotel, floor, name, price, state, single_beds_amount, 
 
     return (
 
-        fetch(`${API_URL}/modify-room/${id}/`, {
+        fetch(`${API_URL}/api/modify-room/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

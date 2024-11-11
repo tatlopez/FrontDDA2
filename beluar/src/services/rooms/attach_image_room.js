@@ -5,7 +5,7 @@ function attach_image_room(id, formData) {
 
     return (
 
-        fetch(`${API_URL}/attach-image-room/${id}/`, {
+        fetch(`${API_URL}/api/attach-image-room/${id}/`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,

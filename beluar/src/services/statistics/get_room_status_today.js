@@ -4,7 +4,7 @@ function get_room_status_today(id_hotel) {
 
     return (
 
-        fetch(`${API_URL}/room-status-today/${id_hotel}`, {
+        fetch(`${API_URL}/stats/room-status-today/${id_hotel}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

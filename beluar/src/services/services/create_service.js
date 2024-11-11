@@ -5,7 +5,7 @@ function create_service(hotel, name, detail, is_available, price) {
 
     return (
 
-        fetch(`${API_URL}/create-service/`, {
+        fetch(`${API_URL}/services/create-service/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

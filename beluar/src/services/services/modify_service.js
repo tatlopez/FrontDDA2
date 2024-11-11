@@ -5,7 +5,7 @@ function modify_service(id, hotel, name, detail, is_available, price) {
 
         console.log('datos', id, hotel, name, detail, is_available, price),
 
-        fetch(`${API_URL}/modify-service/${id}/`, {
+        fetch(`${API_URL}/services/modify-service/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

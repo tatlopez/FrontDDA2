@@ -4,7 +4,7 @@ function get_services(id_hotel) {
 
     return (
 
-        fetch(`${API_URL}/services/${id_hotel}`, {
+        fetch(`${API_URL}/services/get-services/${id_hotel}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

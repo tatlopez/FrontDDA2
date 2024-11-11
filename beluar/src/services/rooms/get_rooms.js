@@ -4,7 +4,7 @@ function get_rooms(id_hotel) {
 
     return (
 
-        fetch(`${API_URL}/rooms/${id_hotel}`, {
+        fetch(`${API_URL}/api/rooms/${id_hotel}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

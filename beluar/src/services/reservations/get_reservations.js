@@ -4,7 +4,7 @@ function get_reservations(id) {
 
     return (
 
-        fetch(`${API_URL}/reservations/${id}`, {
+        fetch(`${API_URL}/reservations/get-reservations/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

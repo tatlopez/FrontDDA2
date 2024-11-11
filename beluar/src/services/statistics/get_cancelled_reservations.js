@@ -4,7 +4,7 @@ function get_cancelled_reservations(id_hotel) {
 
     return (
 
-        fetch(`${API_URL}/cancelled-reservations/${id_hotel}`, {
+        fetch(`${API_URL}/stats/cancelled-reservations/${id_hotel}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

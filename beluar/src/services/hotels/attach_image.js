@@ -5,7 +5,7 @@ function attach_image(id, formData) {
 
     return (
 
-        fetch(`${API_URL}/attach-image-hotel/${id}/`, {
+        fetch(`${API_URL}/api/attach-image-hotel/${id}/`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,

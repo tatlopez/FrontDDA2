@@ -5,7 +5,7 @@ function signup(email, name, password) {
 
     return (
 
-        fetch(`${API_URL}/signup/`, {
+        fetch(`${API_URL}/api/signup/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

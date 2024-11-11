@@ -5,7 +5,7 @@ function delete_service(id) {
 
     return (
 
-        fetch(`${API_URL}/delete-service/${id}/`, {
+        fetch(`${API_URL}/services/delete-service/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

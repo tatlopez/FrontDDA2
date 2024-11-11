@@ -4,7 +4,7 @@ function get_reservations_per_month(id_hotel) {
 
     return (
 
-        fetch(`${API_URL}/reservations-per-month/${id_hotel}`, {
+        fetch(`${API_URL}/stats/reservations-per-month/${id_hotel}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
