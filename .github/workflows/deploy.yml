@@ -3,11 +3,11 @@ name: CI/CD Pipeline - Frontend
 on:
   push:
     branches:
-      - main  # O la rama que uses para producción
+      - main
 
 concurrency:
-    group: main
-    cancel-in-progress: true
+  group: main
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3  # Este paso clona el repositorio
 
     - name: Configure SSH
       env:
@@ -35,11 +37,11 @@ jobs:
 
     - name: Install dependencies and build
       run: |
-        cd beluar
+        cd beluar  
         npm install
         npm run build
 
     - name: Deploy to EC2
       run: |
-        scp -r ./build/* target:/var/www/html/  
+        scp -r ./beluar/build/* target:/var/www/html/
         ssh target "sudo systemctl restart nginx"
