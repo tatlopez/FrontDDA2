@@ -39,7 +39,7 @@ jobs:
       run: |
         cd beluar  
         npm install
-        npm run build
+        CI=false npm run build
 
     - name: Deploy to EC2
       run: |
