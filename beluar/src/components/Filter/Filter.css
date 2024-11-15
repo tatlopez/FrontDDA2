@@ -1,0 +1,11 @@
+.filter-container {
+    padding: 0 20px;
+    font-size: 18px;
+    border: 1px solid #6E28F5;
+    color: #000000;
+    outline: none;
+    border: 1px solid #6E28F5;
+    border-radius: 30px;
+    font-family: 'DM Sans', sans-serif;
+    height: 40px;
+}

@@ -5,7 +5,12 @@ const Reserva = ({ item, onClick ,isSelected }) => {
 
   const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
     "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-
+  
+  const reservationStateMapping = {
+    'pending': 'Pendiente',
+    'confirmed': 'Confirmada',
+    'cancelled': 'Cancelada'
+  }
 
   return (
     <div className={`reserva-card ${isSelected ? 'selected' : ''}`} onClick={onClick} style={{ cursor: 'pointer' }}>
@@ -14,9 +19,14 @@ const Reserva = ({ item, onClick ,isSelected }) => {
           <p className="reserva-day">{item.start_date.split('-')[2]}</p>
           <p className="reserva-month">{monthNames[item.end_date.split('-')[1]-1]}</p>
         </div>
-        <div className="reserva-info">
-          <p className="reserva-name">{item.client_info.surname + ', ' + item.client_info.name}</p>
+        <p className="reserva-name">{item.client_info.surname + ', ' + item.client_info.name}</p>
+        <div className='reserva-info'>
           <p className="reserva-room">Habitación: <span className="reserva-room-number">{'#'+item.room_info.floor + item.room_info.name}</span></p>
+{/*           <p className='reserva-state'>Estado:
+            <span className={`reserva-status ${item.state}`}>
+                {reservationStateMapping[item.state] || item.state}
+            </span>
+          </p> */}
         </div>
       </div>
       <div className="reserva-right">

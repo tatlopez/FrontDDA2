@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './dashboardReservas.css';
 import SearchBar from '../SearchBar/SearchBar';
+import Filter from '../Filter/Filter';
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 import Reserva from './Reserva';
@@ -12,11 +13,18 @@ function DashboardReservas() {
     const [reservas, setReservas] = useState([]);
     const [selectedReserva, setSelectedReserva] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [filter, setFilter] = useState('all');
 
-    const filteredReserva = reservas.filter(reserva =>
-        reserva.client_info && reserva.client_info.name && 
-        `${reserva.client_info.name} ${reserva.client_info.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredReserva = reservas
+        .filter(reserva => 
+            reserva.client_info && reserva.client_info.name &&
+            `${reserva.client_info.name} ${reserva.client_info.surname}`.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .filter(reserva => {
+            if (filter === 'all') return true;
+            return reserva.state === filter;
+    });
+
 
     const handleReservaClick = (reserva) => {
         setSelectedReserva(reserva);
@@ -32,6 +40,10 @@ function DashboardReservas() {
             console.error('Error al cancelar la reserva:', err);
         });
 
+    };
+
+    const handleFilterChange = (newFilter) => {
+        setFilter(newFilter);
     };
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
@@ -59,6 +71,7 @@ function DashboardReservas() {
                         <div className="reservas-header">
                             <p>Reservas</p>
                             <div className="search-bar-and-add">
+                                {/* <Filter onFilterChange={handleFilterChange} /> */}
                                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar reserva..." />
                             </div>
                         </div>
