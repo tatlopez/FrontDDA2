@@ -1,33 +1,20 @@
 import React from 'react';
 import './Filter.css';
 
-function Filter({ onFilterChange}) {
+function Filter({ onFilterChange, actionType}) {
 
     const handleChange = (event) => {
         onFilterChange(event.target.value);
     };
 
-/*     const getAll = () => {
-        switch (actionType) {
-            case 'reserva':
-                return 'las reservas';
-            case 'habitacion':
-                return 'las habitaciones';
-            case 'servicio':
-                return 'los servicios';
-            default:
-                return '';
-        }
-    };
-
     const getActivas = () => {
         switch (actionType) {
             case 'reserva':
-                return 'Reservas confirmadas'
-            case 'habitación':
-                return 'Habitaciones libres'
+                return 'Confirmadas';
+            case 'habitacion':
+                return 'Libres';
             case 'servicio':
-                return 'Servicios activos'
+                return 'Activos';
             default:
                 return '';
         }
@@ -36,11 +23,11 @@ function Filter({ onFilterChange}) {
     const getCanceladas = () => {
         switch (actionType) {
             case 'reserva':
-                return 'Reservas canceladas'
-            case 'habitación':
-                return 'Habitaciones ocupadas'
+                return 'Canceladas';
+            case 'habitacion':
+                return 'Ocupadas';
             case 'servicio':
-                return 'Servicios deshabilitados'
+                return 'Deshabilitados'
             default:
                 return '';
         }
@@ -49,20 +36,21 @@ function Filter({ onFilterChange}) {
     const getPendientes = () => {
         switch (actionType) {
             case 'reserva':
-                return 'Reservas pendientes'
-            case 'habitación':
-                return 'Habitaciones en mantenimiento'
+                return 'Pendientes';
+            case 'habitacion':
+                return 'En mantenimiento';
             default:
                 return '';
         }
-    } */
+    }
+
 
     return (
         <select className='filter-container' onChange={handleChange}>
-            <option value="all">Todas las resevas</option>
-            <option value="active">Confirmadas</option>
-            <option value="cancelled">Pendientes</option>
-            <option value="cancelled">Canceladas</option>
+            <option value="all">Todas</option>
+            <option value="confirmed">{getActivas()}</option>
+            <option value="pending">{getPendientes()}</option>
+            <option value="cancelled">{getCanceladas()}</option>
         </select>
     );
 }

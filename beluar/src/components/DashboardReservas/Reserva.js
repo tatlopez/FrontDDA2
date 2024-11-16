@@ -19,14 +19,16 @@ const Reserva = ({ item, onClick ,isSelected }) => {
           <p className="reserva-day">{item.start_date.split('-')[2]}</p>
           <p className="reserva-month">{monthNames[item.end_date.split('-')[1]-1]}</p>
         </div>
-        <p className="reserva-name">{item.client_info.surname + ', ' + item.client_info.name}</p>
-        <div className='reserva-info'>
-          <p className="reserva-room">Habitación: <span className="reserva-room-number">{'#'+item.room_info.floor + item.room_info.name}</span></p>
-{/*           <p className='reserva-state'>Estado:
-            <span className={`reserva-status ${item.state}`}>
-                {reservationStateMapping[item.state] || item.state}
-            </span>
-          </p> */}
+        <div className='reserva-text'>
+          <p className="reserva-name">{item.client_info.surname + ', ' + item.client_info.name}</p>
+          <div className='reserva-info'>
+            <p className="reserva-room">Habitación: <span className="reserva-room-number">{'#'+item.room_info.floor + item.room_info.name}</span></p>
+            <p className='reserva-state'>
+              <span className={`reserva-status ${item.status}`}>
+                  {reservationStateMapping[item.status] || item.status}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
       <div className="reserva-right">

@@ -22,7 +22,9 @@ function DashboardReservas() {
         )
         .filter(reserva => {
             if (filter === 'all') return true;
-            return reserva.state === filter;
+            else if (filter === 'pending') return reserva.status === 'pending';
+            else if (filter === 'confirmed') return reserva.status === 'confirmed';
+            else if (filter === 'cancelled') return reserva.status === 'cancelled';
     });
 
 
@@ -60,7 +62,6 @@ function DashboardReservas() {
                 }
             });
     }, []);
-
     return (
         <div className="page-container">
             <Menu />
@@ -71,7 +72,7 @@ function DashboardReservas() {
                         <div className="reservas-header">
                             <p>Reservas</p>
                             <div className="search-bar-and-add">
-                                {/* <Filter onFilterChange={handleFilterChange} /> */}
+                                <Filter onFilterChange={handleFilterChange} actionType='reserva'/>
                                 <SearchBar setSearchTerm={setSearchTerm} placeholder="Buscar reserva..." />
                             </div>
                         </div>

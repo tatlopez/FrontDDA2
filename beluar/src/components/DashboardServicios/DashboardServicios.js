@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import Menu from '../Menu/Menu';
+import Filter from '../Filter/Filter.js';
 import ResponsiveHeader from "../Header/responsiveHeader.js";
 import HamburgerMenu from "../Menu/hamburgerMenu.js";
 import Listas from '../Listas/Lista';
@@ -27,6 +28,7 @@ function DashboardServicios() {
     const [searchTerm, setSearchTerm] = useState('');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [showAgregarModal, setShowAgregarModal] = useState(false); // Estado para mostrar el modal de agregar
+    const [filter, setFilter] = useState('all');
 
     const hotel = JSON.parse(localStorage.getItem('selectedHotel'));
 
@@ -48,8 +50,13 @@ function DashboardServicios() {
 
     // Filtrar los servicios según el término de búsqueda
     const filteredServices = services.filter(service =>
-        service.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+        service.name.toLowerCase().includes(searchTerm.toLowerCase()))
+
+        .filter(service => {
+            if (filter === 'all') return true;
+            else if (filter === 'confirmed') return service.is_available === true;
+            else if (filter === 'cancelled') return service.is_available === false;
+    });
 
     // Seleccionar servicio al hacer clic
     const handleServiceClick = (service) => {
@@ -91,6 +98,10 @@ function DashboardServicios() {
         })
     };
 
+    const handleFilterChange = (newFilter) => {
+        setFilter(newFilter);
+    };
+
     // Agregar un nuevo servicio
     const handleAgregarServicio = (nuevoServicio) => {
         setServices([...services, nuevoServicio]);
@@ -115,6 +126,10 @@ function DashboardServicios() {
                                     <img src={addIcon} alt="Add Icon" />
                                 </button>
                             </div>
+                        </div>
+                        <div className='rooms-filter'>
+                            <p>Filtrar por:</p>
+                            <Filter onFilterChange={handleFilterChange} actionType="servicio"/>
                         </div>
                         <div className="rooms-list" style={{ maxHeight: '530px', overflowY: 'auto' }}>
                             {filteredServices.map((service) => (

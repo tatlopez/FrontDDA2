@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'; 
 import './dashboardHabitaciones.css';
 import SearchBar from '../SearchBar/SearchBar';
+import Filter from '../Filter/Filter.js';
 import Menu from '../Menu/Menu';
 import ResponsiveHeader from "../Header/responsiveHeader.js";
 import HamburgerMenu from "../Menu/hamburgerMenu.js";
@@ -28,6 +29,7 @@ function DashboardHabitaciones() {
   // Responsive hamburger menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const [filter, setFilter] = useState('all');
   
   useEffect(() => {
     get_rooms(hotel.id)
@@ -45,8 +47,18 @@ function DashboardHabitaciones() {
   }, []);
 
   const filteredRooms = rooms.filter(room =>
-    String(room.floor).toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    String(room.floor).toLowerCase().includes(searchTerm.toLowerCase()))
+
+    .filter(room => {
+            if (filter === 'all') return true;
+            else if (filter === 'pending') return room.state === 'M';
+            else if (filter === 'confirmed') return room.state === 'A';
+            else if (filter === 'cancelled') return room.state === 'B';
+  });
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
 
   const handleRoomClick = (room) => {
     setSelectedRoom(room);
@@ -106,6 +118,10 @@ function DashboardHabitaciones() {
                   <img src={addIcon} alt="Add Icon" />
                 </button>
               </div>
+            </div>
+            <div className='rooms-filter'>
+              <p>Filtrar por:</p>
+              <Filter onFilterChange={handleFilterChange} actionType="habitacion"/>
             </div>
             <div className="rooms-list" style={{ maxHeight: '530px', overflowY: 'auto' }}>
               {filteredRooms.map((room) => (

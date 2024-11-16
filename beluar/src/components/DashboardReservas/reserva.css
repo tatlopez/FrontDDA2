@@ -48,6 +48,12 @@
     margin: 0; 
 }
 
+.reserva-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .reserva-info {
     display: flex;
     flex-direction: row;
@@ -78,29 +84,32 @@
 .reserva-state {
     font-size: 14px;
     color: #000000;
-    margin: 0; 
+    margin: 0;
+    display: flex;
+    gap: 5px;
+    align-items: center;
 }
 
 .reserva-status {
   display: inline-block;
   margin: auto;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   padding: 5px 10px;
   border-radius: 15px;
 }
 
-.reserva-state.Pendiente {
+.reserva-status.pending {
   color: #E19110;
   background-color: rgb(226,221,80,0.5);
 }
 
-.reserva-state.Confirmada {
+.reserva-status.confirmed {
   color: #4C8732;
   background-color: rgb(135,191,112,0.5);
 }
 
-.reserva-state.Cancelada {
+.reserva-status.cancelled {
   color: #E01300;
   background-color: rgb(251,139,129,0.5);
 }
