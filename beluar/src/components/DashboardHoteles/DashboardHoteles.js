@@ -172,6 +172,19 @@ function DashboardHoteles() {
                                         {'★'.repeat(hotel.stars)}
                                         {'☆'.repeat(5 - hotel.stars)}
                                     </div>
+                                    <div className='hotel-near-to'>
+                                        <p>Cercano a:</p>
+                                        <div className='hotel-locations'>
+                                            {hotel.close_locations.map(location => (
+                                                <span
+                                                    key={location.id}
+                                                    className='hotel-location'
+                                                >
+                                                    {location.name}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="hotel-actions">
                                     <button className="edit-btn" onClick={() => openModal(hotel)}>

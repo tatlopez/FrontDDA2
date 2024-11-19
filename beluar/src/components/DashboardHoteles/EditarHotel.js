@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Select from 'react-select';
 import './hotel.css';
 import uploadPhoto from '../../assets/cargar-imagen.svg';
 import create_hotel from '../../services/hotels/create_hotel.js';
 import attach_image from '../../services/hotels/attach_image.js';
 import modify_hotel from '../../services/hotels/modify_hotel.js';
 import { API_URL } from '../../config.js';
+import get_locations from '../../services/hotels/get_locations.js';
 
 const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [nombre, setNombre] = useState(hotel.name || '');
@@ -22,10 +24,26 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     );
     const [file, setFile] = useState(null);
     const [imageResponse, setImageResponse] = useState(null);
+    const [locationsOptions, setLocationsOptions] = useState([]);
+    const [selectedLocations, setSelectedLocations] = useState(
+        hotel.close_locations?.map(loc => ({ value: loc.id, label: loc.name })) || []
+    );
 
     const esNuevoHotel = !hotel.name;
 
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        get_locations().then((res) => {
+            if (res) {
+                const mappedLocations = res.map(location => ({
+                    value: location.id,
+                    label: location.name
+                }));
+                setLocationsOptions(mappedLocations);
+            }
+        });
+    }, []);
 
     const handleSave = () => {
         const updatedHotel = { 
@@ -38,11 +56,12 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
             description: descripcion, 
             stars: estrellas, 
             latitude: latitud, 
-            longitude: longitud, 
+            longitude: longitud,
+            close_locations: selectedLocations.map(location => location.value),
         };
     
         if (esNuevoHotel) {
-            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country)
+            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, selectedLocations.map(location => location.value))
                 .then((response) => {
                     const id = response.id;
                     if (file) {
@@ -64,9 +83,9 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     
         } else {
             
-            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country)
+            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, selectedLocations.map(location => location.value))
                 .then(() => {
-                    console.log('datos: ', hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud)
+                    console.log('datos: ', hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, selectedLocations.map(location => location.value))
                     if (file) {
                         const formData = new FormData();
                         formData.append('image', file);
@@ -204,6 +223,19 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                                     type="text"
                                     value={longitud}
                                     onChange={(e) => setLongitud(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className='modal-line' style={{ width: '100%' }}>
+                            <div className="custom-select-container">
+                                <label htmlFor='locations'>Cercano a:</label>
+                                <Select
+                                    id='locations'
+                                    isMulti 
+                                    options={locationsOptions} 
+                                    value={selectedLocations}
+                                    onChange={setSelectedLocations}
+                                    classNamePrefix="custom-select"
                                 />
                             </div>
                         </div>

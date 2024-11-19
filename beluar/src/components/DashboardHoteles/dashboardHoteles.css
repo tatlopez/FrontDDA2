@@ -145,6 +145,34 @@ h1 {
     color: #703FD0;
 }
 
+.hotel-near-to {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.hotel-locations {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+.hotel-location {
+    background-color: rgba(187, 132, 232, 0.54); 
+    color: #703FD0; 
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 15px;
+    display: flex; /* Usamos flexbox */
+    justify-content: center; /* Centramos horizontalmente */
+    align-items: center; /* Centramos verticalmente */
+    text-align: center;
+}
+
+span.hotel-location{
+    margin: 0;
+}
+
 .hotel-actions {
     display: flex;
     flex-direction: row; 
