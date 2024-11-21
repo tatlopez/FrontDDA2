@@ -38,8 +38,8 @@ const AgregarHabitacionModal = ({ onClose, onSave }) => {
           const formData = new FormData();
           formData.append('image', file);
           attach_image_room(id, formData)
-            .then(() => {
-              room.images = [{ image: imagen }];
+            .then((response) => {
+              room.images = [response];
               onSave(room); 
               onClose(); 
             })

@@ -71,9 +71,10 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                     if (file) {
                         const formData = new FormData();
                         formData.append('image', file);
-                        attach_image(id, formData).then(() => {
+                        attach_image(id, formData).then((response) => {
+                            
                             updatedHotel.id = id;
-                            updatedHotel.images = [{ image: imagen }]; 
+                            updatedHotel.images = [response]; 
                             onSave(updatedHotel); 
                         });
                     } else {
@@ -95,7 +96,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                         const formData = new FormData();
                         formData.append('image', file);
                         attach_image(updatedHotel.id, formData).then((imageResponse) => {setImageResponse(imageResponse)});
-                        updatedHotel.images = [{ image: imageResponse.image }];
+                        updatedHotel.images = [imageResponse]; 
                     } else {
                         onSave(updatedHotel); 
                     }
