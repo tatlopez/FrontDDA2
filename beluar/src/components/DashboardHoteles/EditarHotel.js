@@ -61,7 +61,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
         };
     
         if (esNuevoHotel) {
-            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, selectedLocations.map(location => location.value))
+            create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, updatedHotel.close_locations)
                 .then((response) => {
                     const id = response.id;
                     if (file) {

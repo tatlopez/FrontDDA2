@@ -1,18 +1,16 @@
 
 import { API_URL } from '../../config';
 
-function create_hotel(name, address, city, phone, email, description, stars, latitude, longitude, country) {
+function create_hotel(name, address, city, phone, email, description, stars, latitude, longitude, country, close_locations) {
 
     return (
-
-
         fetch(`${API_URL}/api/create-hotel/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
-            body: JSON.stringify({name: name, address: address, city: city, phone: phone, email: email, description: description, stars: stars, latitude: latitude, longitude: longitude, country: country}),
+            body: JSON.stringify({name: name, address: address, city: city, phone: phone, email: email, description: description, stars: stars, latitude: latitude, longitude: longitude, country: country, close_locations: close_locations}),
         })
         .then(response => response.json())
         .then((res) => res)

@@ -175,7 +175,7 @@ function DashboardHoteles() {
                                     <div className='hotel-near-to'>
                                         <p>Cercano a:</p>
                                         <div className='hotel-locations'>
-                                            {hotel.close_locations.map(location => (
+                                            {hotel.close_locations_info.map(location => (
                                                 <span
                                                     key={location.id}
                                                     className='hotel-location'
