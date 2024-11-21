@@ -67,7 +67,8 @@ function DashboardHoteles() {
             description: '',
             latitude: '',
             longitude: '',
-            imagen: cargarImagen
+            imagen: cargarImagen,
+            close_locations_info: []
         };
         setSelectedHotel(emptyHotel);
         setShowModal(true);
@@ -93,6 +94,8 @@ function DashboardHoteles() {
             setHoteles([...hoteles, updatedHotel]);
         }
     };
+
+    
 
     const handleDeleteHotel = (hotelToDelete) => {
         delete_hotel(hotelToDelete.id)
@@ -140,7 +143,7 @@ function DashboardHoteles() {
                         <button className="hoteles-circleButton" onClick={addNewHotel}>
                             <img src={addIcon} alt="Agregar hotel" />
                         </button>
-                        {isDesktop && <SearchBar />} 
+                        {isDesktop && <SearchBar setSearchTerm={setSearchTerm} />} 
                     </div>
                 </div>
                 <div className="hoteles-list">

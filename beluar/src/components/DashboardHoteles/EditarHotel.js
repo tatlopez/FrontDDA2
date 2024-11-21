@@ -5,7 +5,6 @@ import uploadPhoto from '../../assets/cargar-imagen.svg';
 import create_hotel from '../../services/hotels/create_hotel.js';
 import attach_image from '../../services/hotels/attach_image.js';
 import modify_hotel from '../../services/hotels/modify_hotel.js';
-import { API_URL } from '../../config.js';
 import get_locations from '../../services/hotels/get_locations.js';
 
 const EditarHotelModal = ({ hotel, onClose, onSave }) => {
@@ -26,7 +25,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     const [imageResponse, setImageResponse] = useState(null);
     const [locationsOptions, setLocationsOptions] = useState([]);
     const [selectedLocations, setSelectedLocations] = useState(
-        hotel.close_locations?.map(loc => ({ value: loc.id, label: loc.name })) || []
+        hotel.close_locations_info.map(loc => ({ value: loc.id, label: loc.name })) || []
     );
 
     const esNuevoHotel = !hotel.name;
@@ -58,9 +57,14 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
             latitude: latitud, 
             longitude: longitud,
             close_locations: selectedLocations.map(location => location.value),
+            close_locations_info: selectedLocations.map(location => ({
+                id: location.value, // El id de la ubicación seleccionada
+                name: location.label // El nombre de la ubicación seleccionada
+            }))
         };
     
         if (esNuevoHotel) {
+
             create_hotel(nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, updatedHotel.close_locations)
                 .then((response) => {
                     const id = response.id;
@@ -74,6 +78,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
                         });
                     } else {
                         updatedHotel.id = id;
+                        console.log('updatedHotel: ', updatedHotel);
                         onSave(updatedHotel);
                     }
                 })
@@ -83,7 +88,7 @@ const EditarHotelModal = ({ hotel, onClose, onSave }) => {
     
         } else {
             
-            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, selectedLocations.map(location => location.value))
+            modify_hotel(hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, country, updatedHotel.close_locations)
                 .then(() => {
                     console.log('datos: ', hotel.id, nombre, direccion, ciudad, telefono, email, descripcion, estrellas, latitud, longitud, selectedLocations.map(location => location.value))
                     if (file) {
